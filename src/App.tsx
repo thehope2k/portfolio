@@ -5,7 +5,7 @@ import React from "react";
 
 function App() {
   return (
-    <div>The Hope<div/>
+    <div>The Hope</div>
   )
 }
 

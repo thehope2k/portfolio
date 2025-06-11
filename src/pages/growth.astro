@@ -1,0 +1,249 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="The Hope - Growth & Learning" description="Learning notes, reflections, tutorials, and knowledge sharing">
+  <div class="growth-header">
+    <h1>Growth & Learning</h1>
+    <p class="lead">A collection of my learning notes, reflections, and tutorials</p>
+  </div>
+  
+  <section class="learning-philosophy">
+    <h2>My Learning Philosophy</h2>
+    <p>
+      I believe that continuous learning is essential for personal and professional growth. 
+      This section is dedicated to sharing what I learn along the way, from technical tutorials 
+      to reflections on books, courses, and experiences.
+    </p>
+    <p>
+      My approach to learning is based on curiosity, experimentation, and sharing knowledge. 
+      I learn best by doing, teaching others, and reflecting on both successes and failures.
+    </p>
+  </section>
+  
+  <section class="posts-section">
+    <h2>Latest Posts</h2>
+    <div class="posts-grid">
+      <article class="post-card">
+        <div class="post-content">
+          <h3>Understanding React Hooks</h3>
+          <div class="post-meta">
+            <span class="post-date">April 5, 2023</span>
+            <div class="post-tags">
+              <span class="post-tag">React</span>
+              <span class="post-tag">JavaScript</span>
+              <span class="post-tag">Frontend</span>
+            </div>
+          </div>
+          <p class="post-excerpt">
+            A deep dive into React Hooks and how they've changed the way we write React components.
+            This tutorial covers useState, useEffect, useContext, and custom hooks with practical examples.
+          </p>
+          <a href="/portfolio/growth/understanding-react-hooks" class="read-more">Read More →</a>
+        </div>
+      </article>
+      
+      <article class="post-card">
+        <div class="post-content">
+          <h3>System Design Basics</h3>
+          <div class="post-meta">
+            <span class="post-date">March 20, 2023</span>
+            <div class="post-tags">
+              <span class="post-tag">System Design</span>
+              <span class="post-tag">Architecture</span>
+              <span class="post-tag">Backend</span>
+            </div>
+          </div>
+          <p class="post-excerpt">
+            An introduction to system design concepts for developers looking to level up their skills.
+            Learn about scalability, reliability, availability, and the trade-offs involved in designing
+            large-scale systems.
+          </p>
+          <a href="/portfolio/growth/system-design-basics" class="read-more">Read More →</a>
+        </div>
+      </article>
+      
+      <article class="post-card">
+        <div class="post-content">
+          <h3>Book Notes: Atomic Habits</h3>
+          <div class="post-meta">
+            <span class="post-date">February 15, 2023</span>
+            <div class="post-tags">
+              <span class="post-tag">Books</span>
+              <span class="post-tag">Productivity</span>
+              <span class="post-tag">Personal Growth</span>
+            </div>
+          </div>
+          <p class="post-excerpt">
+            My notes and takeaways from James Clear's "Atomic Habits." Learn how small changes
+            can lead to remarkable results, and how to build systems that make good habits inevitable
+            and bad habits impossible.
+          </p>
+          <a href="/portfolio/growth/atomic-habits-notes" class="read-more">Read More →</a>
+        </div>
+      </article>
+      
+      <article class="post-card">
+        <div class="post-content">
+          <h3>Getting Started with TypeScript</h3>
+          <div class="post-meta">
+            <span class="post-date">January 25, 2023</span>
+            <div class="post-tags">
+              <span class="post-tag">TypeScript</span>
+              <span class="post-tag">JavaScript</span>
+              <span class="post-tag">Tutorial</span>
+            </div>
+          </div>
+          <p class="post-excerpt">
+            A beginner-friendly guide to TypeScript. Learn how to set up a TypeScript project,
+            understand basic types, interfaces, and how TypeScript can help catch errors before
+            they happen in production.
+          </p>
+          <a href="/portfolio/growth/typescript-getting-started" class="read-more">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+  
+  <section class="topics-section">
+    <h2>Topics</h2>
+    <div class="topics-list">
+      <a href="#" class="topic-tag">JavaScript</a>
+      <a href="#" class="topic-tag">TypeScript</a>
+      <a href="#" class="topic-tag">React</a>
+      <a href="#" class="topic-tag">System Design</a>
+      <a href="#" class="topic-tag">Books</a>
+      <a href="#" class="topic-tag">Productivity</a>
+      <a href="#" class="topic-tag">Frontend</a>
+      <a href="#" class="topic-tag">Backend</a>
+      <a href="#" class="topic-tag">Career</a>
+      <a href="#" class="topic-tag">Personal Growth</a>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .growth-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .lead {
+    font-size: 1.25rem;
+    color: var(--color-secondary);
+  }
+  
+  section {
+    margin-bottom: 4rem;
+  }
+  
+  h2 {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+  
+  .learning-philosophy {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    line-height: 1.8;
+  }
+  
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .post-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-content {
+    padding: 1.5rem;
+  }
+  
+  .post-meta {
+    margin-bottom: 1rem;
+  }
+  
+  .post-date {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+  }
+  
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .post-tag {
+    background-color: #e9ecef;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+  
+  .post-excerpt {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .read-more {
+    display: inline-block;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  
+  .topics-section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .topic-tag {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--color-text);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+  }
+  
+  .topic-tag:hover {
+    background-color: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

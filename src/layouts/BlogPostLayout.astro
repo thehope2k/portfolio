@@ -1,0 +1,219 @@
+---
+import MainLayout from './MainLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    date: string;
+    category: string;
+    description: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<MainLayout title={`${frontmatter.title} | The Hope`} description={frontmatter.description}>
+  <article class="blog-post">
+    <div class="post-header">
+      <a href="/portfolio/personal" class="back-link">← Back to All Writings</a>
+      <h1>{frontmatter.title}</h1>
+      <div class="post-meta">
+        <span class="post-date">{formattedDate}</span>
+        <span class="post-category">{frontmatter.category}</span>
+      </div>
+    </div>
+    
+    <div class="post-content">
+      <slot />
+    </div>
+    
+    <div class="post-footer">
+      <div class="post-nav">
+        <a href="/portfolio/personal" class="btn btn-secondary">Back to All Writings</a>
+      </div>
+      
+      <div class="share-section">
+        <h3>Share this post</h3>
+        <div class="share-links">
+          <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(frontmatter.title)}&url=${encodeURIComponent(Astro.url.href)}`} target="_blank" rel="noopener noreferrer" class="share-link">
+            Twitter
+          </a>
+          <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.href)}`} target="_blank" rel="noopener noreferrer" class="share-link">
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</MainLayout>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+  
+  .post-header {
+    margin-bottom: 2rem;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .back-link:hover {
+    color: var(--color-primary);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+  }
+  
+  .post-category {
+    background-color: #e9ecef;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  
+  .post-content :global(h2) {
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .post-content :global(h3) {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+  }
+  
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-content :global(ul), .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  
+  .post-content :global(blockquote) {
+    border-left: 4px solid var(--color-primary);
+    padding-left: 1rem;
+    margin-left: 0;
+    color: var(--color-secondary);
+    font-style: italic;
+  }
+  
+  .post-content :global(code) {
+    background-color: #f1f3f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  
+  .post-content :global(pre) {
+    background-color: #f1f3f5;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-content :global(pre code) {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .post-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .post-nav {
+    margin-bottom: 2rem;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5c636a;
+  }
+  
+  .share-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .share-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .share-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #f1f3f5;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.2s ease;
+  }
+  
+  .share-link:hover {
+    background-color: #e9ecef;
+    color: var(--color-primary);
+  }
+  
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: 1rem;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>

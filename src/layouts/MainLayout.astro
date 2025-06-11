@@ -34,11 +34,24 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         --shadow-glow: 0 0 15px rgba(0, 191, 255, 0.15);
 
         /* Responsive font sizes using clamp */
-        --fs-h1: clamp(2rem, 5vw, 3.5rem);
-        --fs-h2: clamp(1.8rem, 4vw, 2.5rem);
-        --fs-h3: clamp(1.3rem, 3vw, 1.8rem);
-        --fs-body: clamp(0.9rem, 2vw, 1rem);
-        --fs-small: clamp(0.8rem, 1.5vw, 0.9rem);
+        --fs-h1: clamp(1.75rem, 5vw, 3.5rem);
+        --fs-h2: clamp(1.5rem, 4vw, 2.5rem);
+        --fs-h3: clamp(1.2rem, 3vw, 1.8rem);
+        --fs-body: clamp(0.875rem, 2vw, 1rem);
+        --fs-small: clamp(0.75rem, 1.5vw, 0.9rem);
+
+        /* Spacing variables */
+        --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+        --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+        --space-md: clamp(1rem, 2vw, 1.5rem);
+        --space-lg: clamp(1.5rem, 3vw, 2.5rem);
+        --space-xl: clamp(2rem, 4vw, 3.5rem);
+
+        /* Layout variables */
+        --container-width: 90%;
+        --container-max-width: 1200px;
+        --header-height: 4rem;
+        --mobile-menu-width: min(80%, 300px);
       }
 
       body {
@@ -51,10 +64,10 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
       }
 
       .container {
-        width: 90%;
-        max-width: 1200px;
+        width: var(--container-width);
+        max-width: var(--container-max-width);
         margin: 0 auto;
-        padding: 0 1rem;
+        padding: 0 var(--space-md);
       }
 
       header {
@@ -65,13 +78,16 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         position: sticky;
         top: 0;
         z-index: 100;
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
       }
 
       nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 0;
+        width: 100%;
       }
 
       .logo {
@@ -102,7 +118,7 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
 
       .nav-links {
         display: flex;
-        gap: 1.5rem;
+        gap: var(--space-lg);
       }
 
       .nav-links a {
@@ -111,7 +127,11 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         font-weight: 500;
         transition: all 0.2s ease;
         position: relative;
-        padding: 0.25rem 0;
+        padding: var(--space-sm) 0;
+        /* Ensure minimum tap target size of 44px */
+        min-height: 44px;
+        display: flex;
+        align-items: center;
       }
 
       .nav-links a::after {
@@ -120,7 +140,7 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 1px;
+        height: 2px;
         background-color: var(--color-primary);
         transform: scaleX(0);
         transform-origin: right;
@@ -140,39 +160,41 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
       .hamburger {
         display: none;
         cursor: pointer;
-        width: 24px;
-        height: 24px;
+        width: 44px;
+        height: 44px;
         position: relative;
         z-index: 110;
+        padding: 10px;
+        box-sizing: border-box;
       }
 
       .hamburger span {
         display: block;
         position: absolute;
         height: 2px;
-        width: 100%;
+        width: 24px;
         background: var(--color-text);
         border-radius: 2px;
         opacity: 1;
-        left: 0;
+        left: 10px;
         transform: rotate(0deg);
         transition: .25s ease-in-out;
       }
 
       .hamburger span:nth-child(1) {
-        top: 4px;
+        top: 14px;
       }
 
       .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
-        top: 12px;
+        top: 22px;
       }
 
       .hamburger span:nth-child(4) {
-        top: 20px;
+        top: 30px;
       }
 
       .hamburger.open span:nth-child(1) {
-        top: 12px;
+        top: 22px;
         width: 0%;
         left: 50%;
       }
@@ -186,14 +208,14 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
       }
 
       .hamburger.open span:nth-child(4) {
-        top: 12px;
+        top: 22px;
         width: 0%;
         left: 50%;
       }
 
       main {
-        min-height: calc(100vh - 160px);
-        padding: 2rem 0;
+        min-height: calc(100vh - var(--header-height) - 80px);
+        padding: var(--space-lg) 0;
       }
 
       footer {
@@ -243,18 +265,17 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         position: fixed;
         top: 0;
         right: -100%;
-        width: 80%;
-        max-width: 300px;
+        width: var(--mobile-menu-width);
         height: 100vh;
         background-color: var(--color-bg-alt);
-        padding: 5rem 2rem 2rem;
+        padding: calc(var(--header-height) + var(--space-lg)) var(--space-lg) var(--space-lg);
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
         transition: right 0.3s ease;
         z-index: 100;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: var(--space-md);
       }
 
       .mobile-menu.open {
@@ -265,10 +286,13 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         color: var(--color-text);
         text-decoration: none;
         font-weight: 500;
-        font-size: 1.2rem;
-        padding: 0.75rem 0;
+        font-size: clamp(1.1rem, 4vw, 1.3rem);
+        padding: var(--space-md) 0;
+        min-height: 44px;
         border-bottom: 1px solid var(--color-border);
         transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
       }
 
       .mobile-menu a:hover, .mobile-menu a.active {
@@ -294,6 +318,19 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         visibility: visible;
       }
 
+      /* Responsive breakpoints */
+      @media (min-width: 1440px) {
+        :root {
+          --container-max-width: 1320px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .nav-links {
+          gap: var(--space-md);
+        }
+      }
+
       @media (max-width: 768px) {
         .hamburger {
           display: block;
@@ -305,6 +342,51 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
 
         body.menu-open {
           overflow: hidden;
+        }
+
+        footer {
+          padding: var(--space-lg) 0;
+        }
+      }
+
+      @media (max-width: 480px) {
+        :root {
+          --header-height: 3.5rem;
+        }
+
+        .logo {
+          font-size: 1.3rem;
+        }
+
+        .mobile-menu {
+          padding: calc(var(--header-height) + var(--space-md)) var(--space-md) var(--space-md);
+        }
+
+        footer p::before, footer p::after {
+          width: 20px;
+        }
+      }
+
+      @media (max-width: 320px) {
+        :root {
+          --header-height: 3rem;
+        }
+
+        .container {
+          width: 95%;
+          padding: 0 var(--space-sm);
+        }
+
+        .logo {
+          font-size: 1.2rem;
+        }
+
+        .mobile-menu {
+          width: 85%;
+        }
+
+        footer p::before, footer p::after {
+          display: none;
         }
       }
     </style>

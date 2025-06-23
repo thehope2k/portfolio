@@ -4,6 +4,7 @@ import SectionHeader from '../components/SectionHeader.astro';
 import Button from '../components/Button.astro';
 import Tag from '../components/Tag.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import ResumeModal from '../components/ResumeModal.astro';
 ---
 
 <MainLayout title="The Hope - Professional Life" description="Professional profile, skills, projects, and contact information">
@@ -17,25 +18,28 @@ import ProjectCard from '../components/ProjectCard.astro';
     <div class="about-content">
       <div class="about-text">
         <p>
-          I'm a passionate developer with expertise in web technologies. I love building
-          user-friendly applications and solving complex problems. With a background in
-          both frontend and backend development, I enjoy creating full-stack solutions
-          that deliver great user experiences.
+          I'm a passionate software developer with a love for web technologies.
+          I enjoy building user-friendly applications and solving real-world problems—well,
+          sometimes I build software for problems that don’t exist... but hey, who doesn’t?
         </p>
         <p>
-          My approach to development focuses on writing clean, maintainable code and
-          staying up-to-date with the latest technologies and best practices. I'm always
-          eager to learn new skills and take on challenging projects.
+          My approach to development centers around writing clean,
+          maintainable code while staying aligned with the latest technologies and best practices.
+          I focus on understanding real business needs and building solutions that create value for clients.
+          I'm always eager to learn new skills and take on meaningful, challenging projects.
         </p>
         <div class="resume-download">
           <Button
-            text="Download Resume (PDF)"
-            href="/portfolio/resume.pdf"
+            text="Get My Resume (PDF)"
+            href="#"
             variant="primary"
-            download={true}
-            ariaLabel="Download my resume as a PDF file"
+            ariaLabel="View my resume"
+            class="resume-button"
           />
         </div>
+
+        <!-- Resume Modal -->
+        <ResumeModal />
       </div>
     </div>
   </section>
@@ -63,6 +67,7 @@ import ProjectCard from '../components/ProjectCard.astro';
           <Tag text="Spring" variant="secondary" />
           <Tag text="RESTful APIs" variant="secondary" />
           <Tag text="Microservices" variant="secondary" />
+          <Tag text="Kafka" variant="secondary" />
           <Tag text="OAuth2 / OIDC" variant="secondary" />
         </div>
       </div>
@@ -95,26 +100,26 @@ import ProjectCard from '../components/ProjectCard.astro';
     <SectionHeader title="Projects" />
     <div class="projects-grid">
       <ProjectCard
-        title="Project 1"
-        description="A full-stack web application for managing personal tasks and projects. Built with React, Node.js, and MongoDB."
-        technologies={["React", "Node.js", "MongoDB", "Express"]}
-        githubUrl="https://github.com/yourusername/project1"
+        title="Chinese Chess Online"
+        description="An online platform for playing Chinese Chess with real-time multiplayer support. Built with React, Java, and PostgreSQL."
+        technologies={["React", "Java", "PostgreSQL", "WebSocket"]}
+        githubUrl="https://github.com/thehope2k/cchess-online"
         demoUrl="https://project1-demo.example.com"
       />
 
       <ProjectCard
-        title="Project 2"
-        description="A responsive e-commerce website with product filtering, cart functionality, and payment processing. Built with Vue.js and Firebase."
-        technologies={["Vue.js", "Firebase", "Vuex", "Stripe"]}
-        githubUrl="https://github.com/yourusername/project2"
+        title="Chinese Chess AI Engine"
+        description="A powerful AI engine for Chinese Chess that uses advanced algorithms to analyze and play the game."
+        technologies={["Java", "AI", "Algorithms", "Game Theory"]}
+        githubUrl="https://github.com/thehope2k/cchess-ai"
         demoUrl="https://project2-demo.example.com"
       />
 
       <ProjectCard
-        title="Project 3"
-        description="A mobile-first web application for tracking fitness activities and goals. Built with React Native and a Python backend."
-        technologies={["React Native", "Python", "Django", "PostgreSQL"]}
-        githubUrl="https://github.com/yourusername/project3"
+        title="Unnamed Project"
+        description="Something that I worked on that is not yet public."
+        technologies={["Mystery"]}
+        githubUrl="https://github.com/thehope2k/unnamed-project"
         demoUrl="https://project3-demo.example.com"
       />
     </div>
@@ -147,6 +152,24 @@ import ProjectCard from '../components/ProjectCard.astro';
     </div>
   </section>
 </MainLayout>
+
+<script>
+  // Wait for the DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get the resume button
+    const resumeButton = document.querySelector('.resume-button');
+
+    // Add click event listener to open the modal
+    if (resumeButton) {
+      resumeButton.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default anchor behavior
+        if (typeof window.openResumeModal === 'function') {
+          window.openResumeModal();
+        }
+      });
+    }
+  });
+</script>
 
 <style>
   .professional-header {

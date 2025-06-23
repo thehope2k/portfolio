@@ -15,6 +15,8 @@
   --color-secondary-rgb: 0, 255, 204;
   --color-accent: #ff6600;
   --color-accent-rgb: 255, 102, 0;
+  --color-neutral: #c084fc;
+  --color-neutral-rgb: 192, 132, 252;
   --color-border: #2a2f35;
   --color-card-bg: rgba(255, 255, 255, 0.05);
   --shadow-glow: 0 0 15px rgba(0, 191, 255, 0.15);
@@ -180,6 +182,11 @@ h3 {
 .tag-accent {
   background-color: rgba(var(--color-accent-rgb), 0.15);
   border-color: rgba(var(--color-accent-rgb), 0.3);
+}
+
+.tag-neutral {
+  background-color: rgba(var(--color-neutral-rgb), 0.15);
+  border-color: rgba(var(--color-neutral-rgb), 0.3);
 }
 
 /* Utility classes */

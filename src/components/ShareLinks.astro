@@ -1,0 +1,90 @@
+---
+interface Props {
+  title: string;
+  url: string;
+  platforms?: ('twitter' | 'linkedin' | 'facebook' | 'email')[];
+  class?: string;
+}
+
+const { 
+  title, 
+  url,
+  platforms = ['twitter', 'linkedin'],
+  class: className = ''
+} = Astro.props;
+
+// Ensure URL is absolute
+const absoluteUrl = url.startsWith('http') ? url : Astro.url.origin + url;
+
+// Generate sharing URLs
+const shareUrls = {
+  twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(absoluteUrl)}`,
+  linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(absoluteUrl)}`,
+  facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(absoluteUrl)}`,
+  email: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this article: ${absoluteUrl}`)}`
+};
+
+// Platform display names
+const platformNames = {
+  twitter: 'Twitter',
+  linkedin: 'LinkedIn',
+  facebook: 'Facebook',
+  email: 'Email'
+};
+---
+
+<div class={`share-section ${className}`}>
+  <h3>Share this post</h3>
+  <div class="share-links">
+    {platforms.map(platform => (
+      <a 
+        href={shareUrls[platform]} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="share-link"
+        aria-label={`Share on ${platformNames[platform]}`}
+      >
+        {platformNames[platform]}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .share-section {
+    margin-top: var(--space-lg);
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+  }
+  
+  .share-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+  
+  .share-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xs) var(--space-md);
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all var(--transition-fast);
+    min-height: 44px; /* Ensure minimum tap target size */
+  }
+  
+  .share-link:hover {
+    background-color: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+</style>

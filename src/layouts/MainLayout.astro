@@ -1,21 +1,57 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  canonicalUrl?: string;
+  publishDate?: string;
 }
 
-const { title, description = "The Hope's personal portfolio - developer, writer, and lifelong learner" } = Astro.props;
+const { 
+  title, 
+  description = "The Hope's personal portfolio - developer, writer, and lifelong learner",
+  image = "/portfolio/social-image.jpg", // Default social image
+  type = "website",
+  canonicalUrl = Astro.url.href,
+  publishDate
+} = Astro.props;
+
+// Format publish date if provided
+const formattedPublishDate = publishDate 
+  ? new Date(publishDate).toISOString()
+  : new Date().toISOString();
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site || Astro.url.origin).href} />
+    {publishDate && <meta property="article:published_time" content={formattedPublishDate} />}
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site || Astro.url.origin).href} />
+
     <title>{title}</title>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -25,10 +61,13 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         --font-alt: 'Poppins', sans-serif;
         --color-bg: #0d1117;
         --color-bg-alt: #10151a;
+        --color-bg-alt-rgb: 16, 21, 26;
         --color-text: #f4f4f4;
         --color-text-muted: #a0a0a0;
         --color-primary: #00bfff;
+        --color-primary-rgb: 0, 191, 255;
         --color-secondary: #00ffcc;
+        --color-secondary-rgb: 0, 255, 204;
         --color-border: #2a2f35;
         --color-card-bg: rgba(255, 255, 255, 0.05);
         --shadow-glow: 0 0 15px rgba(0, 191, 255, 0.15);
@@ -160,57 +199,85 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
       .hamburger {
         display: none;
         cursor: pointer;
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         position: relative;
         z-index: 110;
-        padding: 10px;
+        padding: 8px;
         box-sizing: border-box;
+        background: transparent;
+        border: none;
+        outline: none;
+        transition: all 0.3s ease;
+        border-radius: var(--radius-sm);
+      }
+
+      .hamburger:hover {
+        background-color: rgba(var(--color-primary-rgb), 0.1);
+      }
+
+      .hamburger:focus-visible {
+        box-shadow: 0 0 0 2px var(--color-primary);
+        border-radius: var(--radius-sm);
       }
 
       .hamburger span {
         display: block;
         position: absolute;
-        height: 2px;
-        width: 24px;
-        background: var(--color-text);
-        border-radius: 2px;
+        height: 3px;
+        width: 28px;
+        background: var(--color-primary);
+        border-radius: 3px;
         opacity: 1;
         left: 10px;
         transform: rotate(0deg);
-        transition: .25s ease-in-out;
+        transition: .3s ease-in-out;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
       }
 
       .hamburger span:nth-child(1) {
-        top: 14px;
+        top: 13px;
+        transform-origin: left center;
       }
 
       .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
         top: 22px;
+        transform-origin: center center;
       }
 
       .hamburger span:nth-child(4) {
-        top: 30px;
+        top: 31px;
+        transform-origin: left center;
+      }
+
+      /* Animated X transformation */
+      .hamburger.open {
+        background-color: rgba(var(--color-primary-rgb), 0.15);
       }
 
       .hamburger.open span:nth-child(1) {
-        top: 22px;
-        width: 0%;
-        left: 50%;
+        transform: rotate(45deg);
+        top: 11px;
+        left: 13px;
+        width: 26px;
       }
 
       .hamburger.open span:nth-child(2) {
-        transform: rotate(45deg);
+        width: 0%;
+        opacity: 0;
       }
 
       .hamburger.open span:nth-child(3) {
         transform: rotate(-45deg);
+        width: 26px;
       }
 
       .hamburger.open span:nth-child(4) {
-        top: 22px;
+        transform: rotate(-45deg);
+        top: 31px;
+        left: 13px;
         width: 0%;
-        left: 50%;
+        opacity: 0;
       }
 
       main {
@@ -260,57 +327,84 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         font-family: var(--font-heading);
       }
 
-      /* Mobile menu */
+      /* Mobile menu - Compact dropdown panel */
       .mobile-menu {
         position: fixed;
-        top: 0;
-        right: -100%;
-        width: var(--mobile-menu-width);
-        height: 100vh;
-        background-color: var(--color-bg-alt);
-        padding: calc(var(--header-height) + var(--space-lg)) var(--space-lg) var(--space-lg);
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        transition: right 0.3s ease;
+        top: var(--header-height);
+        right: 1rem;
+        width: min(calc(100% - 2rem), 280px);
+        height: auto;
+        background-color: rgba(var(--color-bg-alt-rgb), 0.95);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transform: translateY(-20px) scale(0.95);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
         z-index: 100;
-        overflow-y: auto;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         gap: var(--space-md);
+        border: 1px solid var(--color-border);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
 
       .mobile-menu.open {
-        right: 0;
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        visibility: visible;
       }
 
       .mobile-menu a {
         color: var(--color-text);
         text-decoration: none;
         font-weight: 500;
-        font-size: clamp(1.1rem, 4vw, 1.3rem);
-        padding: var(--space-md) 0;
-        min-height: 44px;
-        border-bottom: 1px solid var(--color-border);
-        transition: all 0.2s ease;
+        font-size: 1.1rem;
+        padding: var(--space-sm) var(--space-md);
+        min-height: 44px; /* Maintain minimum touch target size */
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-sm);
+        opacity: 0.85;
+        transform: translateY(5px);
+        text-align: center;
       }
+
+      .mobile-menu.open a {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(var(--item-index, 0) * 0.05s);
+      }
+
+      .mobile-menu a:nth-child(1) { --item-index: 1; }
+      .mobile-menu a:nth-child(2) { --item-index: 2; }
+      .mobile-menu a:nth-child(3) { --item-index: 3; }
+      .mobile-menu a:nth-child(4) { --item-index: 4; }
 
       .mobile-menu a:hover, .mobile-menu a.active {
         color: var(--color-primary);
+        background-color: rgba(var(--color-primary-rgb), 0.1);
       }
 
       .overlay {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(3px);
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
         z-index: 90;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
+        overflow: hidden; /* Prevent scrolling when menu is open */
       }
 
       .overlay.open {
@@ -349,6 +443,18 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         }
       }
 
+      /* Medium-sized mobile devices */
+      @media (max-width: 600px) {
+        .hamburger {
+          margin-right: -5px;
+          background-color: rgba(var(--color-primary-rgb), 0.05);
+        }
+
+        .hamburger span {
+          width: 26px;
+        }
+      }
+
       @media (max-width: 480px) {
         :root {
           --header-height: 3.5rem;
@@ -359,11 +465,44 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         }
 
         .mobile-menu {
-          padding: calc(var(--header-height) + var(--space-md)) var(--space-md) var(--space-md);
+          right: 0.75rem;
+          width: min(calc(100% - 1.5rem), 260px);
+        }
+
+        .hamburger {
+          margin-right: -8px; /* Adjust position to be more visible */
         }
 
         footer p::before, footer p::after {
           width: 20px;
+        }
+      }
+
+      @media (max-width: 375px) {
+        :root {
+          --header-height: 3.25rem;
+        }
+
+        .container {
+          width: 95%;
+          padding: 0 var(--space-sm);
+        }
+
+        .logo {
+          font-size: 1.25rem;
+        }
+
+        .mobile-menu {
+          right: 0.5rem;
+          width: calc(100% - 1rem);
+          padding: var(--space-sm);
+          gap: var(--space-sm);
+        }
+
+        .mobile-menu a {
+          font-size: 1rem;
+          padding: var(--space-xs) var(--space-sm);
+          min-height: 42px;
         }
       }
 
@@ -382,7 +521,23 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
         }
 
         .mobile-menu {
-          width: 85%;
+          right: 0.5rem;
+          width: calc(100% - 1rem);
+          padding: var(--space-xs) var(--space-sm);
+          gap: var(--space-xs);
+        }
+
+        .mobile-menu a {
+          font-size: 0.95rem;
+          padding: var(--space-xs) var(--space-sm);
+          min-height: 40px; /* Slightly smaller touch target but still accessible */
+        }
+
+        .hamburger {
+          transform: scale(1); /* Keep hamburger button full size for better usability */
+          margin-right: -5px; /* Adjust position */
+          background-color: rgba(var(--color-primary-rgb), 0.1); /* Add subtle background */
+          border-radius: var(--radius-sm);
         }
 
         footer p::before, footer p::after {
@@ -392,44 +547,74 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
     </style>
   </head>
   <body>
-    <header>
+    <header role="banner">
       <div class="container">
-        <nav>
-          <a href="/portfolio/" class="logo">The Hope</a>
-          <div class="nav-links">
-            <a href="/portfolio/" class={Astro.url.pathname === "/portfolio/" ? "active" : ""}>Home</a>
-            <a href="/portfolio/professional" class={Astro.url.pathname === "/portfolio/professional" ? "active" : ""}>Professional</a>
-            <a href="/portfolio/personal" class={Astro.url.pathname === "/portfolio/personal" ? "active" : ""}>Personal</a>
-            <a href="/portfolio/growth" class={Astro.url.pathname === "/portfolio/growth" ? "active" : ""}>Growth</a>
+        <nav aria-label="Main navigation">
+          <a href="/portfolio/" class="logo" aria-label="The Hope - Homepage">The Hope</a>
+          <div class="nav-links" role="menubar">
+            <a href="/portfolio/" class={Astro.url.pathname === "/portfolio/" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/" ? "page" : undefined}>Home</a>
+            <a href="/portfolio/professional" class={Astro.url.pathname === "/portfolio/professional" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/professional" ? "page" : undefined}>Professional</a>
+            <a href="/portfolio/personal" class={Astro.url.pathname === "/portfolio/personal" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/personal" ? "page" : undefined}>Personal</a>
+            <a href="/portfolio/growth" class={Astro.url.pathname === "/portfolio/growth" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/growth" ? "page" : undefined}>Growth</a>
           </div>
-          <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <button 
+            class="hamburger" 
+            id="hamburger" 
+            aria-label="Toggle navigation menu" 
+            aria-expanded="false" 
+            aria-controls="mobile-menu"
+            aria-haspopup="true"
+            title="Open navigation menu"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
         </nav>
       </div>
     </header>
 
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="/portfolio/" class={Astro.url.pathname === "/portfolio/" ? "active" : ""}>Home</a>
-      <a href="/portfolio/professional" class={Astro.url.pathname === "/portfolio/professional" ? "active" : ""}>Professional</a>
-      <a href="/portfolio/personal" class={Astro.url.pathname === "/portfolio/personal" ? "active" : ""}>Personal</a>
-      <a href="/portfolio/growth" class={Astro.url.pathname === "/portfolio/growth" ? "active" : ""}>Growth</a>
-    </div>
+    <nav 
+      class="mobile-menu" 
+      id="mobile-menu" 
+      aria-label="Mobile navigation" 
+      aria-hidden="true"
+      role="menu"
+    >
+      <a href="/portfolio/" 
+         class={Astro.url.pathname === "/portfolio/" ? "active" : ""} 
+         aria-current={Astro.url.pathname === "/portfolio/" ? "page" : undefined}
+         role="menuitem"
+         tabindex="-1">Home</a>
+      <a href="/portfolio/professional" 
+         class={Astro.url.pathname === "/portfolio/professional" ? "active" : ""} 
+         aria-current={Astro.url.pathname === "/portfolio/professional" ? "page" : undefined}
+         role="menuitem"
+         tabindex="-1">Professional</a>
+      <a href="/portfolio/personal" 
+         class={Astro.url.pathname === "/portfolio/personal" ? "active" : ""} 
+         aria-current={Astro.url.pathname === "/portfolio/personal" ? "page" : undefined}
+         role="menuitem"
+         tabindex="-1">Personal</a>
+      <a href="/portfolio/growth" 
+         class={Astro.url.pathname === "/portfolio/growth" ? "active" : ""} 
+         aria-current={Astro.url.pathname === "/portfolio/growth" ? "page" : undefined}
+         role="menuitem"
+         tabindex="-1">Growth</a>
+    </nav>
 
-    <div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay" aria-hidden="true"></div>
 
-    <main>
+    <main id="main-content" role="main">
       <div class="container">
         <slot />
       </div>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
       <div class="container">
-        <p>Build with ❤️ by The Hope · &copy; {new Date().getFullYear()}</p>
+        <p>Built with <span aria-hidden="true">❤️</span><span class="sr-only">love</span> by The Hope · &copy; {new Date().getFullYear()}</p>
       </div>
     </footer>
 
@@ -439,21 +624,94 @@ const { title, description = "The Hope's personal portfolio - developer, writer,
       const mobileMenu = document.getElementById('mobile-menu');
       const overlay = document.getElementById('overlay');
       const body = document.body;
+      const mobileLinks = mobileMenu.querySelectorAll('a');
+      let isMenuOpen = false;
 
-      function toggleMenu() {
-        hamburger.classList.toggle('open');
-        mobileMenu.classList.toggle('open');
-        overlay.classList.toggle('open');
-        body.classList.toggle('menu-open');
+      // Get all focusable elements in the menu
+      const getFocusableElements = () => {
+        return [hamburger, ...Array.from(mobileLinks)];
+      };
+
+      function openMenu() {
+        hamburger.classList.add('open');
+        mobileMenu.classList.add('open');
+        overlay.classList.add('open');
+        body.classList.add('menu-open');
+
+        // Update ARIA attributes
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+
+        // Focus the first link in the menu after a short delay to allow animation
+        setTimeout(() => {
+          if (mobileLinks.length > 0) {
+            mobileLinks[0].focus();
+          }
+        }, 100);
+
+        isMenuOpen = true;
       }
 
+      function closeMenu() {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        overlay.classList.remove('open');
+        body.classList.remove('menu-open');
+
+        // Update ARIA attributes
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+
+        // Return focus to hamburger button
+        hamburger.focus();
+
+        isMenuOpen = false;
+      }
+
+      function toggleMenu() {
+        if (isMenuOpen) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      }
+
+      // Handle click events
       hamburger.addEventListener('click', toggleMenu);
-      overlay.addEventListener('click', toggleMenu);
+      overlay.addEventListener('click', closeMenu);
 
       // Close menu when clicking on a link
-      const mobileLinks = mobileMenu.querySelectorAll('a');
       mobileLinks.forEach(link => {
-        link.addEventListener('click', toggleMenu);
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Handle keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (!isMenuOpen) return;
+
+        // Close on Escape
+        if (e.key === 'Escape') {
+          closeMenu();
+          return;
+        }
+
+        // Trap focus within the menu
+        if (e.key === 'Tab') {
+          const focusableElements = getFocusableElements();
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          // If shift+tab on first element, go to last element
+          if (e.shiftKey && document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          } 
+          // If tab on last element, go to first element
+          else if (!e.shiftKey && document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       });
     </script>
   </body>

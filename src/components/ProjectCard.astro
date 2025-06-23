@@ -1,0 +1,118 @@
+---
+import Tag from './Tag.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  technologies: string[];
+  githubUrl?: string;
+  demoUrl?: string;
+  class?: string;
+}
+
+const { 
+  title, 
+  description, 
+  technologies,
+  githubUrl,
+  demoUrl,
+  class: className = ''
+} = Astro.props;
+---
+
+<div class={`project-card card ${className}`}>
+  <div class="project-content">
+    <h3>{title}</h3>
+    <p class="project-description">
+      {description}
+    </p>
+    <div class="project-tech">
+      {technologies.map(tech => (
+        <Tag text={tech} variant="primary" />
+      ))}
+    </div>
+    <div class="project-links">
+      {githubUrl && (
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`GitHub repository for ${title}`}>
+          GitHub
+        </a>
+      )}
+      {demoUrl && (
+        <a href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Live demo for ${title}`}>
+          Live Demo
+        </a>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .project-content {
+    padding: var(--space-md);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h3 {
+    margin-bottom: var(--space-sm);
+    color: var(--color-primary);
+  }
+  
+  .project-description {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+  
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+  
+  .project-links {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: auto;
+  }
+  
+  .project-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: all var(--transition-fast);
+    padding: var(--space-xs) 0;
+  }
+  
+  .project-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-medium);
+  }
+  
+  .project-links a:hover {
+    color: var(--color-secondary);
+  }
+  
+  .project-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+    background-color: var(--color-secondary);
+  }
+</style>

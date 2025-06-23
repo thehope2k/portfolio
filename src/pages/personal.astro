@@ -1,5 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import WritingCard from '../components/WritingCard.astro';
 ---
 
 <MainLayout title="The Hope - Personal Writing" description="Creative writing, personal projects, and thoughts">
@@ -9,7 +11,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   </div>
 
   <section class="writing-philosophy">
-    <h2>My Writing Philosophy</h2>
+    <SectionHeader title="My Writing Philosophy" />
     <p>
       Writing is a way for me to explore ideas, process experiences, and share perspectives. 
       I believe in the power of storytelling to connect people and create understanding.
@@ -24,7 +26,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   </section>
 
   <section class="writings-section">
-    <h2>Latest Writings</h2>
+    <SectionHeader title="Latest Writings" />
     <div class="writings-grid">
       <article class="writing-card">
         <div class="writing-content">

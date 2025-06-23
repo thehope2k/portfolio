@@ -1,5 +1,9 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
+import Tag from '../components/Tag.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 ---
 
 <MainLayout title="The Hope - Professional Life" description="Professional profile, skills, projects, and contact information">
@@ -9,7 +13,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   </div>
 
   <section class="about-section">
-    <h2>About Me</h2>
+    <SectionHeader title="About Me" />
     <div class="about-content">
       <div class="about-text">
         <p>
@@ -24,134 +28,90 @@ import MainLayout from '../layouts/MainLayout.astro';
           eager to learn new skills and take on challenging projects.
         </p>
         <div class="resume-download">
-          <a href="/portfolio/resume.pdf" class="btn btn-primary" download>
-            Download Resume (PDF)
-          </a>
+          <Button 
+            text="Download Resume (PDF)" 
+            href="/portfolio/resume.pdf" 
+            variant="primary" 
+            download={true}
+            ariaLabel="Download my resume as a PDF file"
+          />
         </div>
       </div>
     </div>
   </section>
 
   <section class="skills-section">
-    <h2>Skills & Technologies</h2>
+    <SectionHeader title="Skills & Technologies" />
     <div class="skills-categories">
       <div class="skill-category">
         <h3>Frontend</h3>
         <div class="skills-list">
-          <span class="skill-tag">HTML/CSS</span>
-          <span class="skill-tag">JavaScript</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">React</span>
-          <span class="skill-tag">Vue</span>
-          <span class="skill-tag">Responsive Design</span>
+          <Tag text="HTML/CSS" variant="primary" />
+          <Tag text="JavaScript" variant="primary" />
+          <Tag text="TypeScript" variant="primary" />
+          <Tag text="React" variant="primary" />
+          <Tag text="Vue" variant="primary" />
+          <Tag text="Responsive Design" variant="primary" />
         </div>
       </div>
 
       <div class="skill-category">
         <h3>Backend</h3>
         <div class="skills-list">
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">Express</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">Django</span>
-          <span class="skill-tag">RESTful APIs</span>
-          <span class="skill-tag">GraphQL</span>
+          <Tag text="Node.js" variant="secondary" />
+          <Tag text="Express" variant="secondary" />
+          <Tag text="Python" variant="secondary" />
+          <Tag text="Django" variant="secondary" />
+          <Tag text="RESTful APIs" variant="secondary" />
+          <Tag text="GraphQL" variant="secondary" />
         </div>
       </div>
 
       <div class="skill-category">
         <h3>Tools & Others</h3>
         <div class="skills-list">
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">AWS</span>
-          <span class="skill-tag">CI/CD</span>
-          <span class="skill-tag">Agile/Scrum</span>
-          <span class="skill-tag">Testing</span>
+          <Tag text="Git" variant="accent" />
+          <Tag text="Docker" variant="accent" />
+          <Tag text="AWS" variant="accent" />
+          <Tag text="CI/CD" variant="accent" />
+          <Tag text="Agile/Scrum" variant="accent" />
+          <Tag text="Testing" variant="accent" />
         </div>
       </div>
     </div>
   </section>
 
   <section class="projects-section">
-    <h2>Projects</h2>
+    <SectionHeader title="Projects" />
     <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-content">
-          <h3>Project 1</h3>
-          <p class="project-description">
-            A full-stack web application for managing personal tasks and projects.
-            Built with React, Node.js, and MongoDB.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">MongoDB</span>
-            <span class="tech-tag">Express</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/yourusername/project1" target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-            <a href="https://project1-demo.example.com" target="_blank" rel="noopener noreferrer">
-              Live Demo
-            </a>
-          </div>
-        </div>
-      </div>
+      <ProjectCard
+        title="Project 1"
+        description="A full-stack web application for managing personal tasks and projects. Built with React, Node.js, and MongoDB."
+        technologies={["React", "Node.js", "MongoDB", "Express"]}
+        githubUrl="https://github.com/yourusername/project1"
+        demoUrl="https://project1-demo.example.com"
+      />
 
-      <div class="project-card">
-        <div class="project-content">
-          <h3>Project 2</h3>
-          <p class="project-description">
-            A responsive e-commerce website with product filtering, cart functionality,
-            and payment processing. Built with Vue.js and Firebase.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">Vue.js</span>
-            <span class="tech-tag">Firebase</span>
-            <span class="tech-tag">Vuex</span>
-            <span class="tech-tag">Stripe</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/yourusername/project2" target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-            <a href="https://project2-demo.example.com" target="_blank" rel="noopener noreferrer">
-              Live Demo
-            </a>
-          </div>
-        </div>
-      </div>
+      <ProjectCard
+        title="Project 2"
+        description="A responsive e-commerce website with product filtering, cart functionality, and payment processing. Built with Vue.js and Firebase."
+        technologies={["Vue.js", "Firebase", "Vuex", "Stripe"]}
+        githubUrl="https://github.com/yourusername/project2"
+        demoUrl="https://project2-demo.example.com"
+      />
 
-      <div class="project-card">
-        <div class="project-content">
-          <h3>Project 3</h3>
-          <p class="project-description">
-            A mobile-first web application for tracking fitness activities and goals.
-            Built with React Native and a Python backend.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">React Native</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Django</span>
-            <span class="tech-tag">PostgreSQL</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/yourusername/project3" target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-            <a href="https://project3-demo.example.com" target="_blank" rel="noopener noreferrer">
-              Live Demo
-            </a>
-          </div>
-        </div>
-      </div>
+      <ProjectCard
+        title="Project 3"
+        description="A mobile-first web application for tracking fitness activities and goals. Built with React Native and a Python backend."
+        technologies={["React Native", "Python", "Django", "PostgreSQL"]}
+        githubUrl="https://github.com/yourusername/project3"
+        demoUrl="https://project3-demo.example.com"
+      />
     </div>
   </section>
 
   <section class="contact-section">
-    <h2>Contact</h2>
+    <SectionHeader title="Contact" />
     <p>Feel free to reach out to me through any of the following channels:</p>
 
     <div class="contact-links">

@@ -1,0 +1,34 @@
+---
+interface Props {
+  text: string;
+  variant?: 'primary' | 'secondary' | 'accent' | 'default';
+  class?: string;
+}
+
+const { 
+  text, 
+  variant = 'default',
+  class: className = ''
+} = Astro.props;
+
+const variantClass = variant !== 'default' ? `tag-${variant}` : '';
+---
+
+<span class={`tag ${variantClass} ${className}`} aria-label={`Tag: ${text}`}>
+  {text}
+</span>
+
+<style>
+  /* Base styles are in global.css */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+  }
+  
+  .tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+</style>

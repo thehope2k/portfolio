@@ -7,7 +7,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     <h1>Personal Writing</h1>
     <p class="lead">A space for creative writing, personal projects, and thoughts</p>
   </div>
-  
+
   <section class="writing-philosophy">
     <h2>My Writing Philosophy</h2>
     <p>
@@ -22,7 +22,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       resonates with you.
     </p>
   </section>
-  
+
   <section class="writings-section">
     <h2>Latest Writings</h2>
     <div class="writings-grid">
@@ -41,7 +41,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           <a href="/portfolio/personal/journey-of-learning" class="read-more">Read More →</a>
         </div>
       </article>
-      
+
       <article class="writing-card">
         <div class="writing-content">
           <h3>Creativity in Coding</h3>
@@ -57,7 +57,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           <a href="/portfolio/personal/creativity-in-coding" class="read-more">Read More →</a>
         </div>
       </article>
-      
+
       <article class="writing-card">
         <div class="writing-content">
           <h3>The Digital Minimalist</h3>
@@ -73,7 +73,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           <a href="/portfolio/personal/digital-minimalist" class="read-more">Read More →</a>
         </div>
       </article>
-      
+
       <article class="writing-card">
         <div class="writing-content">
           <h3>Morning Rituals</h3>
@@ -97,51 +97,52 @@ import MainLayout from '../layouts/MainLayout.astro';
     text-align: center;
     margin-bottom: 3rem;
   }
-  
+
   .lead {
     font-size: 1.25rem;
     color: var(--color-secondary);
   }
-  
+
   section {
     margin-bottom: 4rem;
   }
-  
+
   h2 {
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--color-border);
   }
-  
+
   .writing-philosophy {
     max-width: 800px;
     margin: 0 auto 4rem;
     line-height: 1.8;
   }
-  
+
   .writings-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
   }
-  
+
   .writing-card {
-    background-color: white;
+    background-color: var(--color-card-bg);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--color-border);
   }
-  
+
   .writing-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
-  
+
   .writing-content {
     padding: 1.5rem;
   }
-  
+
   .writing-meta {
     display: flex;
     gap: 1rem;
@@ -149,30 +150,32 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: 0.9rem;
     color: var(--color-secondary);
   }
-  
+
   .writing-category {
-    background-color: #e9ecef;
+    background-color: rgba(var(--color-secondary-rgb), 0.15);
+    color: var(--color-text);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
+    border: 1px solid rgba(var(--color-secondary-rgb), 0.3);
   }
-  
+
   .writing-excerpt {
     margin-bottom: 1.5rem;
     line-height: 1.6;
   }
-  
+
   .read-more {
     display: inline-block;
     color: var(--color-primary);
     text-decoration: none;
     font-weight: 500;
   }
-  
+
   .read-more:hover {
     text-decoration: underline;
   }
-  
+
   @media (max-width: 768px) {
     .writings-grid {
       grid-template-columns: 1fr;

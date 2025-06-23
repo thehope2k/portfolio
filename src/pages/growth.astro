@@ -7,7 +7,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     <h1>Growth & Learning</h1>
     <p class="lead">A collection of my learning notes, reflections, and tutorials</p>
   </div>
-  
+
   <section class="learning-philosophy">
     <h2>My Learning Philosophy</h2>
     <p>
@@ -20,7 +20,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       I learn best by doing, teaching others, and reflecting on both successes and failures.
     </p>
   </section>
-  
+
   <section class="posts-section">
     <h2>Latest Posts</h2>
     <div class="posts-grid">
@@ -42,7 +42,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           <a href="/portfolio/growth/understanding-react-hooks" class="read-more">Read More →</a>
         </div>
       </article>
-      
+
       <article class="post-card">
         <div class="post-content">
           <h3>System Design Basics</h3>
@@ -62,7 +62,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           <a href="/portfolio/growth/system-design-basics" class="read-more">Read More →</a>
         </div>
       </article>
-      
+
       <article class="post-card">
         <div class="post-content">
           <h3>Book Notes: Atomic Habits</h3>
@@ -82,7 +82,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           <a href="/portfolio/growth/atomic-habits-notes" class="read-more">Read More →</a>
         </div>
       </article>
-      
+
       <article class="post-card">
         <div class="post-content">
           <h3>Getting Started with TypeScript</h3>
@@ -104,7 +104,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       </article>
     </div>
   </section>
-  
+
   <section class="topics-section">
     <h2>Topics</h2>
     <div class="topics-list">
@@ -127,120 +127,125 @@ import MainLayout from '../layouts/MainLayout.astro';
     text-align: center;
     margin-bottom: 3rem;
   }
-  
+
   .lead {
     font-size: 1.25rem;
     color: var(--color-secondary);
   }
-  
+
   section {
     margin-bottom: 4rem;
   }
-  
+
   h2 {
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--color-border);
   }
-  
+
   .learning-philosophy {
     max-width: 800px;
     margin: 0 auto 4rem;
     line-height: 1.8;
   }
-  
+
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
   }
-  
+
   .post-card {
-    background-color: white;
+    background-color: var(--color-card-bg);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--color-border);
   }
-  
+
   .post-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
-  
+
   .post-content {
     padding: 1.5rem;
   }
-  
+
   .post-meta {
     margin-bottom: 1rem;
   }
-  
+
   .post-date {
     display: block;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
     color: var(--color-secondary);
   }
-  
+
   .post-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  
+
   .post-tag {
-    background-color: #e9ecef;
+    background-color: rgba(var(--color-primary-rgb), 0.15);
+    color: var(--color-text);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.3);
   }
-  
+
   .post-excerpt {
     margin-bottom: 1.5rem;
     line-height: 1.6;
   }
-  
+
   .read-more {
     display: inline-block;
     color: var(--color-primary);
     text-decoration: none;
     font-weight: 500;
   }
-  
+
   .read-more:hover {
     text-decoration: underline;
   }
-  
+
   .topics-section {
     max-width: 800px;
     margin: 0 auto;
   }
-  
+
   .topics-list {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
   }
-  
+
   .topic-tag {
-    background-color: white;
+    background-color: var(--color-card-bg);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
     text-decoration: none;
     color: var(--color-text);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
   }
-  
+
   .topic-tag:hover {
     background-color: var(--color-primary);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-color: var(--color-primary);
   }
-  
+
   @media (max-width: 768px) {
     .posts-grid {
       grid-template-columns: 1fr;

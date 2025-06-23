@@ -44,6 +44,31 @@ import ResumeModal from '../components/ResumeModal.astro';
     </div>
   </section>
 
+  <section class="education-section">
+    <SectionHeader title="Education" />
+    <div class="education-timeline">
+      <div class="education-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="education-icon">🎓</div>
+        <div class="education-content card">
+          <h3 class="education-title">Vinh Phuc High School for the Gifted</h3>
+          <p class="education-major">Major: Informatics</p>
+          <p class="education-description">Where I first learned about programming with C++, and quit at the Dynamic Programming chapter.
+            I still haven't understood DP to this day yet.
+          </p>
+        </div>
+      </div>
+
+      <div class="education-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="education-icon">🏛️</div>
+        <div class="education-content card">
+          <h3 class="education-title">Hanoi University of Science, VNU</h3>
+          <p class="education-major">Major: Computer Science</p>
+          <p class="education-description">Where I cut classes to play Chinese Chess. Luckily, I graduated anyway.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="skills-section">
     <SectionHeader title="Skills & Technologies" />
     <div class="skills-categories">
@@ -64,7 +89,6 @@ import ResumeModal from '../components/ResumeModal.astro';
           <Tag text="Java" variant="secondary" />
           <Tag text="Node.js" variant="secondary" />
           <Tag text="Python" variant="secondary" />
-          <Tag text="Spring" variant="secondary" />
           <Tag text="RESTful APIs" variant="secondary" />
           <Tag text="Microservices" variant="secondary" />
           <Tag text="Kafka" variant="secondary" />
@@ -145,9 +169,9 @@ import ResumeModal from '../components/ResumeModal.astro';
         <span>LinkedIn</span>
       </a>
 
-      <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="contact-link">
+      <a href="https://zalo.me/0979465164" target="_blank" rel="noopener noreferrer" class="contact-link">
         <span class="contact-icon">🐦</span>
-        <span>Twitter</span>
+        <span>Zalo</span>
       </a>
     </div>
   </section>
@@ -342,6 +366,87 @@ import ResumeModal from '../components/ResumeModal.astro';
     font-size: 1.25rem;
   }
 
+  .education-section {
+    margin-bottom: 4rem;
+  }
+
+  .education-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .education-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 24px;
+    width: 2px;
+    background: linear-gradient(to bottom, 
+      var(--color-primary), 
+      var(--color-secondary));
+    opacity: 0.5;
+  }
+
+  .education-item {
+    display: flex;
+    gap: var(--space-md);
+    position: relative;
+    z-index: 1;
+  }
+
+  .education-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--color-card-bg);
+    border: 2px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.3);
+    position: relative;
+    z-index: 2;
+  }
+
+  .education-content {
+    flex: 1;
+    padding: var(--space-md);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+  }
+
+  .education-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .education-title {
+    font-family: var(--font-alt);
+    font-size: var(--fs-h3);
+    color: var(--color-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .education-major {
+    font-family: var(--font-alt);
+    font-size: var(--fs-body);
+    color: var(--color-secondary);
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+  }
+
+  .education-description {
+    font-family: var(--font-alt);
+    font-size: var(--fs-body);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
   @media (max-width: 768px) {
     .about-content {
       flex-direction: column;
@@ -349,6 +454,20 @@ import ResumeModal from '../components/ResumeModal.astro';
 
     .contact-links {
       flex-direction: column;
+    }
+
+    .education-timeline::before {
+      left: 30px;
+    }
+
+    .education-item {
+      padding-left: var(--space-xs);
+    }
+
+    .education-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1.25rem;
     }
   }
 </style>

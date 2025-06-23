@@ -52,6 +52,8 @@ const formattedPublishDate = publishDate
 
     <title>{title}</title>
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -713,6 +715,30 @@ const formattedPublishDate = publishDate
           }
         }
       });
+
+      // Initialize AOS (Animate On Scroll)
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-out',
+          once: true,
+          offset: 100,
+          delay: 100
+        });
+      } else {
+        // If AOS is not loaded yet, wait for it to load
+        window.addEventListener('load', function() {
+          if (typeof AOS !== 'undefined') {
+            AOS.init({
+              duration: 800,
+              easing: 'ease-out',
+              once: true,
+              offset: 100,
+              delay: 100
+            });
+          }
+        });
+      }
     </script>
   </body>
 </html>

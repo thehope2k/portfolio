@@ -13,7 +13,7 @@ export const latestContent = {
     description: 'A reflection on how code can tell stories about its creators and the problems they solve.'
   },
   growth: {
-    title: 'Reflections on Progress',
-    description: 'Looking back on my learning journey and the milestones that have shaped my development.'
+    title: 'Bad experiences teach us better than good ones',
+    description: 'A personal story about a job interview that taught me valuable lessons about interviewing and company culture.'
   }
 };

@@ -11,19 +11,40 @@ import SectionHeader from "../components/SectionHeader.astro";
 
   <section class="learning-philosophy">
     <SectionHeader title="My Learning Philosophy" />
-    <p>
-      I believe that continuous learning is essential for personal and professional growth.
-      This section is dedicated to sharing what I learn along the way, from technical tutorials
-      to reflections on books, courses, and experiences.
-    </p>
-    <p>
-      My approach to learning is based on curiosity, experimentation, and sharing knowledge.
-      I learn best by doing, teaching others, and reflecting on both successes and failures.
-    </p>
+    <div class="philosophy-content">
+      <div class="philosophy-text">
+        <p>
+          I believe that continuous learning is essential for personal and professional growth.
+          This section is dedicated to sharing what I learn along the way, from technical tutorials
+          to reflections on books, courses, and experiences.
+        </p>
+        <p>
+          My approach to learning is based on curiosity, experimentation, and sharing knowledge.
+          I learn best by doing, teaching others, and reflecting on both successes and failures.
+        </p>
+      </div>
+      <div class="philosophy-visual">
+        <div class="quote-block">
+          <i data-lucide="lightbulb"></i>
+          <blockquote>
+            "The beautiful thing about learning is that nobody can take it away from you."
+            <cite>— B.B. King</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <div class="section-divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">
+      <i data-lucide="book"></i>
+    </div>
+    <div class="divider-line"></div>
+  </div>
+
   <section class="posts-section">
-    <h2>Latest Posts</h2>
+    <SectionHeader title="Latest Posts" />
     <div class="posts-grid">
       <article class="post-card">
         <div class="post-content">
@@ -106,21 +127,6 @@ import SectionHeader from "../components/SectionHeader.astro";
     </div>
   </section>
 
-  <section class="topics-section">
-    <h2>Topics</h2>
-    <div class="topics-list">
-      <a href="#" class="topic-tag">JavaScript</a>
-      <a href="#" class="topic-tag">TypeScript</a>
-      <a href="#" class="topic-tag">React</a>
-      <a href="#" class="topic-tag">System Design</a>
-      <a href="#" class="topic-tag">Books</a>
-      <a href="#" class="topic-tag">Productivity</a>
-      <a href="#" class="topic-tag">Frontend</a>
-      <a href="#" class="topic-tag">Backend</a>
-      <a href="#" class="topic-tag">Career</a>
-      <a href="#" class="topic-tag">Personal Growth</a>
-    </div>
-  </section>
 </MainLayout>
 
 <style>
@@ -145,111 +151,312 @@ import SectionHeader from "../components/SectionHeader.astro";
   }
 
   .learning-philosophy {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto 4rem;
     line-height: 1.8;
+  }
+
+  .philosophy-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .philosophy-text {
+    font-size: var(--fs-body);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .philosophy-text p {
+    margin-bottom: var(--space-md);
+  }
+
+  .philosophy-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .quote-block {
+    background-color: rgba(var(--color-accent-rgb), 0.05);
+    border-left: 3px solid var(--color-accent);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .quote-block i {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 30px;
+    height: 30px;
+    color: var(--color-accent);
+    background-color: var(--color-bg);
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .quote-block blockquote {
+    font-family: var(--font-alt);
+    font-style: italic;
+    font-size: calc(var(--fs-body) * 1.1);
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .quote-block cite {
+    display: block;
+    margin-top: var(--space-sm);
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+    text-align: right;
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--space-xl) 0;
+    gap: var(--space-md);
+  }
+
+  .divider-line {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    flex: 1;
+    max-width: 200px;
+  }
+
+  .divider-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(var(--color-accent-rgb), 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .divider-icon i {
+    width: 20px;
+    height: 20px;
+    color: var(--color-accent);
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
   }
 
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: var(--space-lg);
   }
 
   .post-card {
     background-color: var(--color-card-bg);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-medium);
     border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 300px;
+    position: relative;
+  }
+
+  .post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--color-accent), var(--color-secondary));
+    opacity: 0.7;
   }
 
   .post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(var(--color-accent-rgb), 0.1);
   }
 
   .post-content {
-    padding: 1.5rem;
+    padding: var(--space-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-content h3 {
+    font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+    margin-bottom: var(--space-sm);
+    color: var(--color-accent);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 2.6em;
   }
 
   .post-meta {
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
 
   .post-date {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  .post-date::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
   }
 
   .post-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--space-xs);
   }
 
   .post-tag {
-    background-color: rgba(var(--color-primary-rgb), 0.15);
+    background-color: var(--tag-bg-primary);
     color: var(--color-text);
     padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    border: 1px solid rgba(var(--color-primary-rgb), 0.3);
+    border-radius: var(--radius-full);
+    font-size: calc(var(--fs-small) * 0.9);
+    border: 1px solid var(--tag-border-primary);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .post-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(var(--color-accent-rgb), 0.2);
   }
 
   .post-excerpt {
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
+    flex: 1;
   }
 
   .read-more {
-    display: inline-block;
-    color: var(--color-primary);
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-accent);
     text-decoration: none;
     font-weight: 500;
+    margin-top: auto;
+    transition: all var(--transition-fast);
+    padding: var(--space-xs) 0;
+    position: relative;
+  }
+
+  .read-more::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-medium);
   }
 
   .read-more:hover {
-    text-decoration: underline;
+    color: var(--color-secondary);
   }
 
-  .topics-section {
-    max-width: 800px;
-    margin: 0 auto;
+  .read-more:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+    background-color: var(--color-secondary);
   }
 
-  .topics-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .topic-tag {
-    background-color: var(--color-card-bg);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    text-decoration: none;
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-  }
-
-  .topic-tag:hover {
-    background-color: var(--color-primary);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-color: var(--color-primary);
-  }
 
   @media (max-width: 768px) {
+    .philosophy-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .philosophy-visual {
+      order: -1;
+      margin-bottom: var(--space-md);
+    }
+
+    .quote-block {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .section-divider {
+      margin: var(--space-lg) 0;
+    }
+
+    .divider-line {
+      max-width: 100px;
+    }
+
     .posts-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .quote-block {
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .quote-block i {
+      width: 24px;
+      height: 24px;
+      top: -12px;
+      left: -12px;
+    }
+
+    .divider-line {
+      max-width: 60px;
+    }
+
+    .divider-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .divider-icon i {
+      width: 16px;
+      height: 16px;
+    }
+
+    .post-card {
+      min-height: 250px;
+    }
+
+    .post-content {
+      padding: var(--space-md);
     }
   }
 </style>

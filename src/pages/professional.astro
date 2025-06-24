@@ -48,7 +48,10 @@ import ResumeModal from '../components/ResumeModal.astro';
     <SectionHeader title="Education" />
     <div class="education-timeline">
       <div class="education-item" data-aos="fade-up" data-aos-delay="100">
-        <div class="education-icon">🎓</div>
+        <div class="education-icon">
+          <i data-lucide="graduation-cap"></i>
+          <span class="education-year">2015-2018</span>
+        </div>
         <div class="education-content card">
           <h3 class="education-title">Vinh Phuc High School for the Gifted</h3>
           <p class="education-major">Major: Informatics</p>
@@ -59,7 +62,10 @@ import ResumeModal from '../components/ResumeModal.astro';
       </div>
 
       <div class="education-item" data-aos="fade-up" data-aos-delay="200">
-        <div class="education-icon">🏛️</div>
+        <div class="education-icon">
+          <i data-lucide="building-2"></i>
+          <span class="education-year">2018-2022</span>
+        </div>
         <div class="education-content card">
           <h3 class="education-title">Hanoi University of Science, VNU</h3>
           <p class="education-major">Major: Computer Science</p>
@@ -86,35 +92,35 @@ import ResumeModal from '../components/ResumeModal.astro';
       <div class="skill-category">
         <h3>Backend</h3>
         <div class="skills-list">
-          <Tag text="Java" variant="secondary" />
-          <Tag text="Node.js" variant="secondary" />
-          <Tag text="Python" variant="secondary" />
-          <Tag text="RESTful APIs" variant="secondary" />
-          <Tag text="Microservices" variant="secondary" />
-          <Tag text="Kafka" variant="secondary" />
-          <Tag text="OAuth2 / OIDC" variant="secondary" />
+          <Tag text="Java" variant="primary" />
+          <Tag text="Node.js" variant="primary" />
+          <Tag text="Python" variant="primary" />
+          <Tag text="RESTful APIs" variant="primary" />
+          <Tag text="Microservices" variant="primary" />
+          <Tag text="Kafka" variant="primary" />
+          <Tag text="OAuth2 / OIDC" variant="primary" />
         </div>
       </div>
 
       <div class="skill-category">
         <h3>Databases</h3>
         <div class="skills-list">
-          <Tag text="MySQL" variant="neutral" />
-          <Tag text="PostgreSQL" variant="neutral" />
-          <Tag text="MongoDB" variant="neutral" />
-          <Tag text="Redis" variant="neutral" />
+          <Tag text="MySQL" variant="primary" />
+          <Tag text="PostgreSQL" variant="primary" />
+          <Tag text="MongoDB" variant="primary" />
+          <Tag text="Redis" variant="primary" />
         </div>
-        </div>
+      </div>
 
       <div class="skill-category">
         <h3>Tools & Others</h3>
         <div class="skills-list">
-          <Tag text="Git" variant="accent" />
-          <Tag text="Docker" variant="accent" />
-          <Tag text="AWS" variant="accent" />
-          <Tag text="CI/CD" variant="accent" />
-          <Tag text="Agile/Scrum" variant="accent" />
-          <Tag text="Testing" variant="accent" />
+          <Tag text="Git" variant="primary" />
+          <Tag text="Docker" variant="primary" />
+          <Tag text="AWS" variant="primary" />
+          <Tag text="CI/CD" variant="primary" />
+          <Tag text="Agile/Scrum" variant="primary" />
+          <Tag text="Testing" variant="primary" />
         </div>
       </div>
     </div>
@@ -141,8 +147,8 @@ import ResumeModal from '../components/ResumeModal.astro';
 
       <ProjectCard
         title="Unnamed Project"
-        description="Something that I worked on that is not yet public."
-        technologies={["Mystery"]}
+        description="A mysterious project currently in stealth mode. All I can say is that it involves cutting-edge technology and might just change the way we think about software development."
+        technologies={["Mystery", "Innovation", "Coming Soon"]}
         githubUrl="https://github.com/thehope2k/unnamed-project"
         demoUrl="https://project3-demo.example.com"
       />
@@ -155,22 +161,30 @@ import ResumeModal from '../components/ResumeModal.astro';
 
     <div class="contact-links">
       <a href="mailto:nguyenthehop2000@gmail.com" class="contact-link">
-        <span class="contact-icon">✉️</span>
+        <span class="contact-icon">
+          <i data-lucide="mail"></i>
+        </span>
         <span>nguyenthehop2000@gmail.com</span>
       </a>
 
       <a href="https://github.com/thehope2k" target="_blank" rel="noopener noreferrer" class="contact-link">
-        <span class="contact-icon">🐙</span>
+        <span class="contact-icon">
+          <i data-lucide="github"></i>
+        </span>
         <span>GitHub</span>
       </a>
 
       <a href="https://linkedin.com/in/hop-nguyen-0b3284129/" target="_blank" rel="noopener noreferrer" class="contact-link">
-        <span class="contact-icon">💼</span>
+        <span class="contact-icon">
+          <i data-lucide="linkedin"></i>
+        </span>
         <span>LinkedIn</span>
       </a>
 
       <a href="https://zalo.me/0979465164" target="_blank" rel="noopener noreferrer" class="contact-link">
-        <span class="contact-icon">🐦</span>
+        <span class="contact-icon">
+          <i data-lucide="message-circle"></i>
+        </span>
         <span>Zalo</span>
       </a>
     </div>
@@ -251,28 +265,40 @@ import ResumeModal from '../components/ResumeModal.astro';
   .skills-categories {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: var(--space-lg);
+  }
+
+  .skill-category {
+    background-color: var(--color-card-bg);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-medium);
+  }
+
+  .skill-category:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15), 0 0 10px rgba(var(--color-primary-rgb), 0.05);
+    transform: translateY(-3px);
   }
 
   .skill-category h3 {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     color: var(--color-primary);
+    font-size: calc(var(--fs-h3) * 0.85);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-xs);
   }
 
   .skills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--space-xs);
+    align-items: center;
+    justify-content: flex-start;
   }
 
-  .skill-tag {
-    background-color: rgba(var(--color-secondary-rgb), 0.15);
-    color: var(--color-text);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    border: 1px solid rgba(var(--color-secondary-rgb), 0.3);
-  }
+  /* Using the unified tag styles from global.css */
 
   .projects-grid {
     display: grid;
@@ -334,36 +360,70 @@ import ResumeModal from '../components/ResumeModal.astro';
     text-decoration: underline;
   }
 
+  .contact-section {
+    margin-bottom: 6rem; /* Increased bottom margin for better breathing room */
+  }
+
   .contact-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
   }
 
   .contact-link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
     text-decoration: none;
     color: var(--color-text);
-    padding: 0.75rem 1rem;
+    padding: var(--space-sm) var(--space-md);
     background-color: var(--color-card-bg);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-medium);
+    min-width: 180px;
   }
 
   .contact-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 
+      0 6px 15px rgba(0, 0, 0, 0.15),
+      0 0 10px rgba(var(--color-primary-rgb), 0.2);
     color: var(--color-primary);
     border-color: rgba(var(--color-primary-rgb), 0.5);
+    background-color: rgba(var(--color-primary-rgb), 0.03);
   }
 
   .contact-icon {
-    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    padding: calc(var(--space-xs) * 0.8);
+    transition: all var(--transition-medium);
+  }
+
+  .contact-icon i {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+    transition: all var(--transition-medium);
+  }
+
+  .contact-link:hover .contact-icon {
+    background-color: rgba(var(--color-primary-rgb), 0.2);
+    transform: scale(1.05);
+  }
+
+  .contact-link:hover .contact-icon i {
+    transform: scale(1.05);
   }
 
   .education-section {
@@ -385,11 +445,14 @@ import ResumeModal from '../components/ResumeModal.astro';
     top: 0;
     bottom: 0;
     left: 24px;
-    width: 2px;
+    width: 3px;
     background: linear-gradient(to bottom, 
       var(--color-primary), 
       var(--color-secondary));
-    opacity: 0.5;
+    opacity: 0.6;
+    border-radius: var(--radius-full);
+    filter: blur(1px);
+    box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.3);
   }
 
   .education-item {
@@ -397,6 +460,7 @@ import ResumeModal from '../components/ResumeModal.astro';
     gap: var(--space-md);
     position: relative;
     z-index: 1;
+    margin-bottom: var(--space-md);
   }
 
   .education-icon {
@@ -408,10 +472,32 @@ import ResumeModal from '../components/ResumeModal.astro';
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.3);
+    box-shadow: 0 0 15px rgba(var(--color-primary-rgb), 0.3);
     position: relative;
     z-index: 2;
+    flex-direction: column;
+  }
+
+  .education-icon i {
+    width: 24px;
+    height: 24px;
+    color: var(--color-primary);
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+  }
+
+  .education-year {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
   }
 
   .education-content {

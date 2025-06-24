@@ -51,39 +51,73 @@ const {
     height: 100%;
     display: flex;
     flex-direction: column;
+    min-height: 320px;
+    transition: all var(--transition-medium);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
-  
+
+  .project-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(var(--color-primary-rgb), 0.1);
+  }
+
   .project-content {
-    padding: var(--space-md);
+    padding: var(--space-lg);
     flex: 1;
     display: flex;
     flex-direction: column;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
   }
-  
+
   h3 {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
     color: var(--color-primary);
+    font-size: calc(var(--fs-h3) * 0.9);
+    position: relative;
+    display: inline-block;
   }
-  
+
+  h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--color-primary);
+    opacity: 0.7;
+    transition: width var(--transition-medium);
+  }
+
+  .project-card:hover h3::after {
+    width: 60px;
+  }
+
   .project-description {
     margin-bottom: var(--space-md);
     color: var(--color-text-muted);
     line-height: 1.6;
+    font-size: var(--fs-body);
   }
-  
+
   .project-tech {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
   }
-  
+
   .project-links {
     display: flex;
     gap: var(--space-md);
     margin-top: auto;
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.1);
   }
-  
+
   .project-links a {
     color: var(--color-primary);
     text-decoration: none;
@@ -91,8 +125,22 @@ const {
     position: relative;
     transition: all var(--transition-fast);
     padding: var(--space-xs) 0;
+    display: flex;
+    align-items: center;
   }
-  
+
+  .project-links a::before {
+    content: '→';
+    opacity: 0;
+    margin-right: -10px;
+    transition: all var(--transition-fast);
+  }
+
+  .project-links a:hover::before {
+    opacity: 1;
+    margin-right: 5px;
+  }
+
   .project-links a::after {
     content: '';
     position: absolute;
@@ -105,11 +153,11 @@ const {
     transform-origin: right;
     transition: transform var(--transition-medium);
   }
-  
+
   .project-links a:hover {
     color: var(--color-secondary);
   }
-  
+
   .project-links a:hover::after {
     transform: scaleX(1);
     transform-origin: left;

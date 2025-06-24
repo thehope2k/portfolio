@@ -70,6 +70,8 @@ const formattedPublishDate = publishDate
         --color-primary-rgb: 0, 191, 255;
         --color-secondary: #00ffcc;
         --color-secondary-rgb: 0, 255, 204;
+        --color-accent: #e69138;
+        --color-accent-rgb: 230, 145, 56;
         --color-border: #2a2f35;
         --color-card-bg: rgba(255, 255, 255, 0.05);
         --shadow-glow: 0 0 15px rgba(0, 191, 255, 0.15);
@@ -554,10 +556,10 @@ const formattedPublishDate = publishDate
         <nav aria-label="Main navigation">
           <a href="/portfolio/" class="logo" aria-label="The Hope - Homepage">The Hope</a>
           <div class="nav-links" role="menubar">
-            <a href="/portfolio/" class={Astro.url.pathname === "/portfolio/" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/" ? "page" : undefined}>Home</a>
-            <a href="/portfolio/professional" class={Astro.url.pathname === "/portfolio/professional" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/professional" ? "page" : undefined}>Professional</a>
-            <a href="/portfolio/personal" class={Astro.url.pathname === "/portfolio/personal" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/personal" ? "page" : undefined}>Personal</a>
-            <a href="/portfolio/growth" class={Astro.url.pathname === "/portfolio/growth" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/growth" ? "page" : undefined}>Growth</a>
+            <a href="/portfolio/" class={Astro.url.pathname === "/portfolio/" || Astro.url.pathname === "/" ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname === "/portfolio/" || Astro.url.pathname === "/" ? "page" : undefined}>Home</a>
+            <a href="/portfolio/professional" class={Astro.url.pathname.includes("/professional") ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname.includes("/professional") ? "page" : undefined}>Professional</a>
+            <a href="/portfolio/personal" class={Astro.url.pathname.includes("/personal") ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname.includes("/personal") ? "page" : undefined}>Personal</a>
+            <a href="/portfolio/growth" class={Astro.url.pathname.includes("/growth") ? "active" : ""} role="menuitem" aria-current={Astro.url.pathname.includes("/growth") ? "page" : undefined}>Growth</a>
           </div>
           <button 
             class="hamburger" 
@@ -585,23 +587,23 @@ const formattedPublishDate = publishDate
       role="menu"
     >
       <a href="/portfolio/" 
-         class={Astro.url.pathname === "/portfolio/" ? "active" : ""} 
-         aria-current={Astro.url.pathname === "/portfolio/" ? "page" : undefined}
+         class={Astro.url.pathname === "/portfolio/" || Astro.url.pathname === "/" ? "active" : ""} 
+         aria-current={Astro.url.pathname === "/portfolio/" || Astro.url.pathname === "/" ? "page" : undefined}
          role="menuitem"
          tabindex="-1">Home</a>
       <a href="/portfolio/professional" 
-         class={Astro.url.pathname === "/portfolio/professional" ? "active" : ""} 
-         aria-current={Astro.url.pathname === "/portfolio/professional" ? "page" : undefined}
+         class={Astro.url.pathname.includes("/professional") ? "active" : ""} 
+         aria-current={Astro.url.pathname.includes("/professional") ? "page" : undefined}
          role="menuitem"
          tabindex="-1">Professional</a>
       <a href="/portfolio/personal" 
-         class={Astro.url.pathname === "/portfolio/personal" ? "active" : ""} 
-         aria-current={Astro.url.pathname === "/portfolio/personal" ? "page" : undefined}
+         class={Astro.url.pathname.includes("/personal") ? "active" : ""} 
+         aria-current={Astro.url.pathname.includes("/personal") ? "page" : undefined}
          role="menuitem"
          tabindex="-1">Personal</a>
       <a href="/portfolio/growth" 
-         class={Astro.url.pathname === "/portfolio/growth" ? "active" : ""} 
-         aria-current={Astro.url.pathname === "/portfolio/growth" ? "page" : undefined}
+         class={Astro.url.pathname.includes("/growth") ? "active" : ""} 
+         aria-current={Astro.url.pathname.includes("/growth") ? "page" : undefined}
          role="menuitem"
          tabindex="-1">Growth</a>
     </nav>
@@ -621,6 +623,13 @@ const formattedPublishDate = publishDate
     </footer>
 
     <script>
+      // Initialize Lucide icons
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+      });
+
       // Mobile menu toggle
       const hamburger = document.getElementById('hamburger');
       const mobileMenu = document.getElementById('mobile-menu');

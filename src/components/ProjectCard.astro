@@ -72,6 +72,17 @@ const {
     border: 1px solid var(--color-border);
   }
 
+  /* Adjustments for laptop screens */
+  @media (min-width: 1024px) {
+    .project-card {
+      min-height: 300px;
+    }
+
+    .project-content {
+      padding: calc(var(--space-lg) * 0.85);
+    }
+  }
+
   h3 {
     margin-bottom: var(--space-md);
     color: var(--color-primary);

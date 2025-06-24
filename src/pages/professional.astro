@@ -796,6 +796,25 @@ import ResumeModal from '../components/ResumeModal.astro';
     line-height: 1.6;
   }
 
+  /* Laptop screen adjustments */
+  @media (min-width: 1024px) {
+    .values-timeline {
+      gap: calc(var(--space-lg) * 0.8);
+    }
+
+    .education-timeline {
+      gap: calc(var(--space-lg) * 0.8);
+    }
+
+    .value-item {
+      margin-bottom: calc(var(--space-md) * 0.8);
+    }
+
+    .education-item {
+      margin-bottom: calc(var(--space-md) * 0.8);
+    }
+  }
+
   @media (max-width: 768px) {
     .about-content {
       flex-direction: column;

@@ -30,14 +30,21 @@ const alignClass = align !== 'left' ? `text-${align}` : '';
   .section-header {
     margin-bottom: var(--space-lg);
   }
-  
+
   h2 {
     margin-bottom: var(--space-sm);
     padding-bottom: var(--space-xs);
     position: relative;
     display: inline-block;
   }
-  
+
+  /* Adjustments for laptop screens */
+  @media (min-width: 1024px) {
+    .section-header {
+      margin-bottom: calc(var(--space-lg) * 0.9);
+    }
+  }
+
   h2::after {
     content: '';
     position: absolute;
@@ -47,26 +54,26 @@ const alignClass = align !== 'left' ? `text-${align}` : '';
     height: 2px;
     background: linear-gradient(90deg, var(--color-primary), transparent);
   }
-  
+
   .text-center h2 {
     display: block;
   }
-  
+
   .text-center h2::after {
     left: 25%;
   }
-  
+
   .text-right h2 {
     display: block;
     text-align: right;
   }
-  
+
   .text-right h2::after {
     left: auto;
     right: 0;
     background: linear-gradient(90deg, transparent, var(--color-primary));
   }
-  
+
   .section-subtitle {
     color: var(--color-text-muted);
     font-size: var(--fs-body);
@@ -74,12 +81,12 @@ const alignClass = align !== 'left' ? `text-${align}` : '';
     margin: var(--space-sm) auto 0;
     line-height: 1.6;
   }
-  
+
   .text-center .section-subtitle {
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .text-right .section-subtitle {
     margin-left: auto;
     margin-right: 0;

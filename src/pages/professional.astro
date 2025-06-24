@@ -15,33 +15,74 @@ import ResumeModal from '../components/ResumeModal.astro';
 
   <section class="about-section">
     <SectionHeader title="About Me" />
-    <div class="about-content">
-      <div class="about-text">
-        <p>
-          I'm a passionate software developer with a love for web technologies.
-          I enjoy building user-friendly applications and solving real-world problems—well,
-          sometimes I build software for problems that don’t exist... but hey, who doesn’t?
-        </p>
-        <p>
-          My approach to development centers around writing clean,
-          maintainable code while staying aligned with the latest technologies and best practices.
-          I focus on understanding real business needs and building solutions that create value for clients.
-          I'm always eager to learn new skills and take on meaningful, challenging projects.
-        </p>
-        <div class="resume-download">
-          <Button
-            text="Get My Resume (PDF)"
-            href="#"
-            variant="primary"
-            ariaLabel="View my resume"
-            class="resume-button"
-          />
+    <div class="values-timeline">
+      <div class="value-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="value-icon attitude">
+          <i data-lucide="smile"></i>
         </div>
+        <div class="value-content card">
+          <h3 class="value-title">Attitude First</h3>
+          <p class="value-description">
+            Skills can be learned—attitude shows up first. I bring curiosity, honesty,
+            and good energy into whatever I do, whether that’s squashing a bug or teaming up under pressure.
+          </p>
+        </div>
+      </div>
 
-        <!-- Resume Modal -->
-        <ResumeModal />
+      <div class="value-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="value-icon responsibility">
+          <i data-lucide="shield"></i>
+        </div>
+        <div class="value-content card">
+          <h3 class="value-title">Responsibility</h3>
+          <p class="value-description">
+            If I say I’ll do something, I mean it. Responsibility is self-respect:
+            owning my part, communicating clearly, and delivering even when no one’s watching.
+          </p>
+        </div>
+      </div>
+
+      <div class="value-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="value-icon professionalism">
+          <i data-lucide="code"></i>
+        </div>
+        <div class="value-content card">
+          <h3 class="value-title">Professionalism</h3>
+          <p class="value-description">
+            Engineering is a craft that demands excellence. Clean code isn’t a preference—it’s a principle:
+            best practices, steady improvement, and standards my future self will thank me for.
+        </div>
+      </div>
+
+      <div class="value-item" data-aos="fade-up" data-aos-delay="400">
+        <div class="value-icon growth">
+          <i data-lucide="sprout"></i>
+        </div>
+        <div class="value-content card">
+          <h3 class="value-title">Growth & Sharing</h3>
+          <p class="value-description">
+            No gatekeeping, no egos. I believe in the mix—30% under our skill level (to teach),
+            30% at our edge (for growth), and 30% beyond (for inspiration).
+            Oops, I missed 10%. Oh wait—that’s for laziness!
+          </p>
+        </div>
       </div>
     </div>
+
+    <div class="resume-download">
+      <Button
+        text="Get My Resume (PDF)"
+        href="#"
+        variant="outline"
+        ariaLabel="View my resume"
+        class="resume-button"
+      >
+        <i data-lucide="file-down" slot="icon-before"></i>
+      </Button>
+    </div>
+
+    <!-- Resume Modal -->
+    <ResumeModal />
   </section>
 
   <section class="education-section">
@@ -230,18 +271,240 @@ import ResumeModal from '../components/ResumeModal.astro';
     border-bottom: 2px solid var(--color-border);
   }
 
-  .about-content {
+  .values-timeline {
     display: flex;
-    gap: 2rem;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-lg);
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  .about-text {
+  .values-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 24px;
+    width: 3px;
+    background: linear-gradient(to bottom, 
+      var(--color-primary), 
+      var(--color-secondary),
+      var(--color-accent),
+      var(--color-neutral));
+    opacity: 0.6;
+    border-radius: var(--radius-full);
+    filter: blur(1px);
+    box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  .value-item {
+    display: flex;
+    gap: var(--space-md);
+    position: relative;
+    z-index: 1;
+    margin-bottom: var(--space-md);
+  }
+
+  .value-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--color-card-bg);
+    border: 2px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(var(--color-primary-rgb), 0.3);
+    position: relative;
+    z-index: 2;
+  }
+
+  .value-icon.attitude {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  .value-icon.responsibility {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 15px rgba(var(--color-secondary-rgb), 0.3);
+  }
+
+  .value-icon.professionalism {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 15px rgba(var(--color-accent-rgb), 0.3);
+  }
+
+  .value-icon.growth {
+    border-color: var(--color-neutral);
+    box-shadow: 0 0 15px rgba(var(--color-neutral-rgb), 0.3);
+  }
+
+  .value-icon i {
+    width: 24px;
+    height: 24px;
+    color: var(--color-primary);
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+  }
+
+  .value-icon.attitude i {
+    color: var(--color-primary);
+    stroke: var(--color-primary);
+  }
+
+  .value-icon.responsibility i {
+    color: var(--color-secondary);
+    stroke: var(--color-secondary);
+  }
+
+  .value-icon.professionalism i {
+    color: var(--color-accent);
+    stroke: var(--color-accent);
+  }
+
+  .value-icon.growth i {
+    color: var(--color-neutral);
+    stroke: var(--color-neutral);
+  }
+
+  .value-content {
     flex: 1;
+    padding: var(--space-md);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    border-top: 3px solid transparent;
+  }
+
+  .value-item:nth-child(1) .value-content {
+    border-top-color: var(--color-primary);
+  }
+
+  .value-item:nth-child(2) .value-content {
+    border-top-color: var(--color-secondary);
+  }
+
+  .value-item:nth-child(3) .value-content {
+    border-top-color: var(--color-accent);
+  }
+
+  .value-item:nth-child(4) .value-content {
+    border-top-color: var(--color-neutral);
+  }
+
+  .value-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .value-title {
+    font-family: var(--font-alt);
+    font-size: var(--fs-h3);
+    margin-bottom: var(--space-xs);
+  }
+
+  .value-item:nth-child(1) .value-title {
+    color: var(--color-primary);
+  }
+
+  .value-item:nth-child(2) .value-title {
+    color: var(--color-secondary);
+  }
+
+  .value-item:nth-child(3) .value-title {
+    color: var(--color-accent);
+  }
+
+  .value-item:nth-child(4) .value-title {
+    color: var(--color-neutral);
+  }
+
+  .value-description {
+    font-family: var(--font-alt);
+    font-size: var(--fs-body);
+    color: var(--color-text-muted);
+    line-height: 1.6;
   }
 
   .resume-download {
-    margin-top: 1.5rem;
+    margin-top: 3.5rem;
+    text-align: center;
+  }
+
+  .resume-button {
+    background-color: #0F172A;
+    color: var(--color-text);
+    border: 2.5px solid;
+    border-image: linear-gradient(to right, var(--color-primary), var(--color-secondary)) 1;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.85rem 1.8rem;
+    font-size: 1.05rem;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-medium);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 8px rgba(var(--color-primary-rgb), 0.2);
+    transform: translateZ(0) translateY(-2px); /* For better performance and raised look */
+    border-radius: var(--radius-md);
+  }
+
+  .resume-button i {
+    margin-right: var(--space-sm);
+    color: var(--color-primary);
+    transition: all var(--transition-medium);
+    width: 20px;
+    height: 20px;
+    filter: drop-shadow(0 0 3px rgba(var(--color-primary-rgb), 0.5));
+  }
+
+  .resume-button::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    z-index: -2;
+    opacity: 0.3;
+    transition: opacity var(--transition-medium), filter var(--transition-medium);
+    border-radius: var(--radius-md);
+    filter: blur(2px);
+  }
+
+  .resume-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0F172A;
+    z-index: -1;
+    border-radius: calc(var(--radius-md) - 2px);
+  }
+
+  .resume-button:hover {
+    color: white;
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 0 15px rgba(var(--color-primary-rgb), 0.5);
+  }
+
+  .resume-button:hover i {
+    transform: translateY(-2px) scale(1.1);
+    color: var(--color-secondary);
+    filter: drop-shadow(0 0 5px rgba(var(--color-secondary-rgb), 0.8));
+  }
+
+  .resume-button:hover::before {
+    opacity: 0.8;
+    animation: pulse 1.5s infinite;
+    filter: blur(3px);
+  }
+
+  @keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
   }
 
   .btn {
@@ -538,6 +801,28 @@ import ResumeModal from '../components/ResumeModal.astro';
       flex-direction: column;
     }
 
+    .values-timeline::before {
+      left: 30px;
+    }
+
+    .value-item {
+      padding-left: var(--space-xs);
+    }
+
+    .value-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .value-icon i {
+      width: 20px;
+      height: 20px;
+    }
+
+    .value-content {
+      padding: var(--space-sm);
+    }
+
     .contact-links {
       flex-direction: column;
     }
@@ -554,6 +839,58 @@ import ResumeModal from '../components/ResumeModal.astro';
       width: 40px;
       height: 40px;
       font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .values-timeline::before {
+      left: 25px;
+    }
+
+    .value-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .value-icon i {
+      width: 18px;
+      height: 18px;
+    }
+
+    .value-content {
+      padding: var(--space-xs);
+    }
+
+    .value-title {
+      font-size: calc(var(--fs-h3) * 0.9);
+    }
+
+    .value-description {
+      font-size: calc(var(--fs-body) * 0.95);
+    }
+
+    .resume-button {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .resume-button i {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* Extra small devices */
+  @media (max-width: 320px) {
+    .resume-button {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .resume-button i {
+      width: 16px;
+      height: 16px;
+      margin-right: var(--space-xs);
     }
   }
 </style>

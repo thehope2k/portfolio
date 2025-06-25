@@ -318,34 +318,45 @@ h3 {
 
   /* Adjustments for laptop and large tablet screens to reduce "zoomed-in" feel */
   :root {
-    /* Slightly decrease body font size */
-    --fs-body: clamp(0.83rem, 1.7vw, 0.93rem);
+    /* Further decrease body font size for better breathing room */
+    --fs-body: clamp(0.8rem, 1.5vw, 0.9rem);
+    --fs-small: clamp(0.7rem, 1.3vw, 0.85rem);
 
-    /* Reduce spacing for better breathing room */
-    --space-sm: clamp(0.65rem, 1.2vw, 0.85rem);
-    --space-md: clamp(0.85rem, 1.7vw, 1.2rem);
-    --space-lg: clamp(1.2rem, 2.5vw, 2rem);
-    --space-xl: clamp(1.7rem, 3.4vw, 3rem);
+    /* Further reduce spacing for better breathing room */
+    --space-sm: clamp(0.6rem, 1vw, 0.8rem);
+    --space-md: clamp(0.8rem, 1.5vw, 1.1rem);
+    --space-lg: clamp(1.1rem, 2.2vw, 1.8rem);
+    --space-xl: clamp(1.6rem, 3vw, 2.7rem);
   }
 
   /* Reduce card padding */
   .card {
-    padding: calc(var(--space-md) * 0.85);
+    padding: calc(var(--space-md) * 0.8);
   }
 
   /* Adjust section margins */
   .section {
-    margin-bottom: calc(var(--space-xl) * 0.85);
+    margin-bottom: calc(var(--space-xl) * 0.8);
   }
 
   /* Adjust section header margins */
   .section-header {
-    margin-bottom: calc(var(--space-lg) * 0.85);
+    margin-bottom: calc(var(--space-lg) * 0.8);
   }
 
   /* Ensure line height remains comfortable */
   body {
-    line-height: 1.55;
+    line-height: 1.5;
+  }
+
+  /* Reduce button padding for better proportions */
+  .btn {
+    padding: 0.65rem 1.3rem;
+  }
+
+  /* Adjust tag padding */
+  .tag {
+    padding: 0.2rem 0.65rem;
   }
 }
 

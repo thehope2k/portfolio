@@ -71,7 +71,7 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
   .blog-post {
     max-width: 800px;
     margin: 0 auto;
-    padding: var(--space-lg) 0;
+    padding: var(--space-lg) 0 var(--space-sm);
   }
 
   .post-header {
@@ -199,7 +199,7 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
 
   @media (max-width: 768px) {
     .blog-post {
-      padding: var(--space-md);
+      padding: var(--space-md) var(--space-md) var(--space-sm);
     }
 
     h1 {

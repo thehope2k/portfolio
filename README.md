@@ -41,23 +41,25 @@ npm run dev
 
 ## Deployment
 
-This project is configured for deployment to GitHub Pages:
+This project is configured for deployment with a custom domain:
 
-1. Make sure the `site` and `base` in `astro.config.ts` are set correctly:
+1. The `site` and `base` in `astro.config.ts` are configured as:
 ```ts
 export default defineConfig({
-  site: 'https://thehope2k.github.io',
-  base: '/portfolio',
-  // ...
+  site: 'https://thehope2k.com',
+  base: '/',
+  output: 'static'
 });
 ```
 
-2. Run the deployment command:
+2. The custom domain is set in `public/CNAME`
+
+3. Run the deployment command:
 ```
 npm run deploy
 ```
 
-This will build the site and deploy it to the `gh-pages` branch of your repository.
+This will build the site and deploy it to the `gh-pages` branch of your repository, which is served at the custom domain.
 
 ## Updating Content
 

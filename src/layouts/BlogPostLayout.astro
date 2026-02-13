@@ -22,8 +22,8 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
 });
 
 // Determine the section based on the URL path
-const section = Astro.url.pathname.split('/')[2]; // e.g., "personal" or "growth"
-const backUrl = `/portfolio/${section}`;
+const section = Astro.url.pathname.split('/')[1]; // e.g., "personal" or "growth"
+const backUrl = `/${section}`;
 const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(1)}`;
 ---
 

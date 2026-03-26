@@ -13,7 +13,7 @@ export const latestContent = {
     description: 'A reflection on how code can tell stories about its creators and the problems they solve.'
   },
   growth: {
-    title: 'Bad experiences teach us better than good ones',
-    description: 'A personal story about a job interview that taught me valuable lessons about interviewing and company culture.'
+    title: 'Scalable Software Systems — A Story of Growing Pains',
+    description: 'A story-driven walkthrough of how a weekend project evolves into a scalable distributed system.'
   }
 };

@@ -10,9 +10,9 @@ interface Props {
   class?: string;
 }
 
-const { 
-  title, 
-  description, 
+const {
+  title,
+  description,
   technologies,
   githubUrl,
   demoUrl,
@@ -20,12 +20,10 @@ const {
 } = Astro.props;
 ---
 
-<div class={`project-card card ${className}`}>
+<div class={`project-card ${className}`}>
   <div class="project-content">
     <h3>{title}</h3>
-    <p class="project-description">
-      {description}
-    </p>
+    <p class="project-description">{description}</p>
     <div class="project-tech">
       {technologies.map(tech => (
         <Tag text={tech} variant="primary" />
@@ -48,53 +46,38 @@ const {
 
 <style>
   .project-card {
+    --card-rgb: 0, 191, 255;
     height: 100%;
     display: flex;
     flex-direction: column;
-    min-height: 320px;
-    transition: all var(--transition-medium);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium), background var(--transition-medium);
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(170deg, rgba(var(--card-rgb), 0.45) 0%, rgba(var(--card-rgb), 0.08) 50%, rgba(255, 255, 255, 0.04) 100%) border-box;
+    border: 1px solid transparent;
   }
 
   .project-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(var(--color-primary-rgb), 0.1);
+    transform: translateY(-5px);
+    box-shadow:
+      0 14px 36px rgba(0, 0, 0, 0.22),
+      0 0 20px rgba(var(--card-rgb), 0.08);
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(170deg, rgba(var(--card-rgb), 0.65) 0%, rgba(var(--card-rgb), 0.14) 50%, rgba(255, 255, 255, 0.06) 100%) border-box;
   }
 
   .project-content {
-    padding: var(--space-lg);
+    padding: var(--space-md);
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-  }
-
-  /* Adjustments for laptop screens */
-  @media (min-width: 1024px) {
-    .project-card {
-      min-height: 280px;
-    }
-
-    .project-content {
-      padding: calc(var(--space-lg) * 0.8);
-    }
-
-    .project-tech {
-      margin-bottom: calc(var(--space-lg) * 0.9);
-      gap: calc(var(--space-xs) * 0.9);
-    }
-
-    .project-links {
-      gap: calc(var(--space-md) * 0.9);
-      padding-top: calc(var(--space-md) * 0.9);
-    }
   }
 
   h3 {
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     color: var(--color-primary);
     font-size: calc(var(--fs-h3) * 0.9);
     position: relative;
@@ -104,21 +87,21 @@ const {
   h3::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -4px;
     left: 0;
-    width: 40px;
+    width: 36px;
     height: 2px;
     background: var(--color-primary);
-    opacity: 0.7;
+    opacity: 0.6;
     transition: width var(--transition-medium);
   }
 
   .project-card:hover h3::after {
-    width: 60px;
+    width: 56px;
   }
 
   .project-description {
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     color: var(--color-text-muted);
     line-height: 1.6;
     font-size: var(--fs-body);
@@ -128,14 +111,14 @@ const {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
   }
 
   .project-links {
     display: flex;
     gap: var(--space-md);
     margin-top: auto;
-    padding-top: var(--space-md);
+    padding-top: var(--space-sm);
     border-top: 1px solid rgba(var(--color-primary-rgb), 0.1);
   }
 
@@ -143,6 +126,7 @@ const {
     color: var(--color-primary);
     text-decoration: none;
     font-weight: 500;
+    font-size: var(--fs-body);
     position: relative;
     transition: all var(--transition-fast);
     padding: var(--space-xs) 0;
@@ -183,5 +167,11 @@ const {
     transform: scaleX(1);
     transform-origin: left;
     background-color: var(--color-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .project-content {
+      padding: var(--space-sm) var(--space-md);
+    }
   }
 </style>

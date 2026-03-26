@@ -225,42 +225,39 @@ import WritingCard from '../components/WritingCard.astro';
 
   .writings-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-lg);
   }
 
   .writing-card {
-    background-color: var(--color-card-bg);
-    border-radius: var(--radius-md);
+    --card-rgb: 0, 255, 204;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: all var(--transition-medium);
-    border: 1px solid var(--color-border);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium), background var(--transition-medium);
     display: flex;
     flex-direction: column;
     height: 100%;
-    min-height: 300px;
     position: relative;
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(170deg, rgba(var(--card-rgb), 0.45) 0%, rgba(var(--card-rgb), 0.08) 50%, rgba(255,255,255,0.04) 100%) border-box;
+    border: 1px solid transparent;
   }
 
   .writing-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(var(--color-primary-rgb), 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22), 0 0 20px rgba(var(--card-rgb), 0.08);
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(170deg, rgba(var(--card-rgb), 0.65) 0%, rgba(var(--card-rgb), 0.14) 50%, rgba(255,255,255,0.06) 100%) border-box;
   }
 
   .writing-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-    opacity: 0.7;
+    display: none;
   }
 
   .writing-content {
-    padding: var(--space-lg);
+    padding: var(--space-md);
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -406,12 +403,8 @@ import WritingCard from '../components/WritingCard.astro';
       height: 16px;
     }
 
-    .writing-card {
-      min-height: 250px;
-    }
-
     .writing-content {
-      padding: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
     }
   }
 </style>

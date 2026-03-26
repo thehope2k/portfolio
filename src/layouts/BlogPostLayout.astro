@@ -1,6 +1,5 @@
 ---
 import MainLayout from './MainLayout.astro';
-import Button from '../components/Button.astro';
 import Tag from '../components/Tag.astro';
 import ShareLinks from '../components/ShareLinks.astro';
 
@@ -21,14 +20,13 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
-// Determine the section based on the URL path
-const section = Astro.url.pathname.split('/')[1]; // e.g., "personal" or "growth"
+const section = Astro.url.pathname.split('/')[1];
 const backUrl = `/${section}`;
-const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(1)}`;
+const backText = `All ${section.charAt(0).toUpperCase() + section.slice(1)}`;
 ---
 
-<MainLayout 
-  title={`${frontmatter.title} | The Hope`} 
+<MainLayout
+  title={`${frontmatter.title} | The Hope`}
   description={frontmatter.description}
   image={frontmatter.image}
   type="article"
@@ -49,29 +47,27 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
     </div>
 
     <div class="post-footer">
-      <div class="post-nav">
-        <Button 
-          text={backText}
-          href={backUrl}
-          variant="secondary"
-          class="back-button"
+      <div class="post-footer-row">
+        <a href={backUrl} class="back-cta">
+          <span class="back-arrow">←</span>
+          {backText}
+        </a>
+
+        <ShareLinks
+          title={frontmatter.title}
+          url={Astro.url.href}
+          platforms={['twitter', 'linkedin', 'facebook', 'email']}
         />
       </div>
-
-      <ShareLinks 
-        title={frontmatter.title}
-        url={Astro.url.href}
-        platforms={['twitter', 'linkedin', 'facebook', 'email']}
-      />
     </div>
   </article>
 </MainLayout>
 
 <style>
   .blog-post {
-    max-width: 800px;
+    max-width: 760px;
     margin: 0 auto;
-    padding: var(--space-lg) 0 var(--space-sm);
+    padding: var(--space-md) 0 var(--space-sm);
   }
 
   .post-header {
@@ -84,6 +80,7 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
     color: var(--color-secondary);
     text-decoration: none;
     font-size: var(--fs-small);
+    font-weight: 500;
     transition: color var(--transition-fast);
     padding: var(--space-xs) 0;
   }
@@ -93,9 +90,10 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
   }
 
   h1 {
-    font-size: var(--fs-h1);
+    font-size: clamp(1.5rem, 5vw, 2.75rem);
     margin-bottom: var(--space-sm);
-    line-height: 1.2;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 
   .post-meta {
@@ -112,7 +110,7 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
 
   .post-content {
     line-height: 1.8;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
   }
 
   /* Markdown content styling */
@@ -142,7 +140,7 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
   }
 
   .post-content :global(blockquote) {
-    border-left: 4px solid var(--color-primary);
+    border-left: 3px solid var(--color-primary);
     padding-left: var(--space-sm);
     margin-left: 0;
     color: var(--color-text-muted);
@@ -151,7 +149,7 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
 
   .post-content :global(code) {
     background-color: var(--color-card-bg);
-    padding: 0.2rem 0.4rem;
+    padding: 0.15rem 0.4rem;
     border-radius: var(--radius-sm);
     font-size: 0.9em;
   }
@@ -187,23 +185,51 @@ const backText = `Back to All ${section.charAt(0).toUpperCase() + section.slice(
     text-decoration: underline;
   }
 
+  /* Post footer */
   .post-footer {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-lg);
+    padding-top: var(--space-md);
     border-top: 1px solid var(--color-border);
   }
 
-  .post-nav {
-    margin-bottom: var(--space-lg);
+  .post-footer-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .back-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    padding: var(--space-xs) 0;
+    align-self: flex-start;
+  }
+
+  .back-arrow {
+    transition: transform var(--transition-fast);
+    display: inline-block;
+  }
+
+  .back-cta:hover {
+    color: var(--color-primary);
+  }
+
+  .back-cta:hover .back-arrow {
+    transform: translateX(-4px);
   }
 
   @media (max-width: 768px) {
     .blog-post {
-      padding: var(--space-md) var(--space-md) var(--space-sm);
+      padding: var(--space-sm) var(--space-sm) var(--space-xs);
     }
 
     h1 {
-      font-size: calc(var(--fs-h1) * 0.85);
+      font-size: clamp(1.35rem, 6vw, 2rem);
     }
   }
 </style>

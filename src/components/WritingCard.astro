@@ -10,8 +10,8 @@ interface Props {
   class?: string;
 }
 
-const { 
-  title, 
+const {
+  title,
   date,
   category,
   excerpt,
@@ -19,77 +19,94 @@ const {
   class: className = ''
 } = Astro.props;
 
-// Format date if it's a string in ISO format
-const formattedDate = date.includes('-') 
+const formattedDate = date.includes('-')
   ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
   : date;
 ---
 
-<article class={`writing-card card ${className}`}>
+<article class={`writing-card ${className}`}>
   <div class="writing-content">
     <h3>{title}</h3>
     <div class="writing-meta">
-      <span class="writing-date">{formattedDate}</span>
+      <span class="writing-date">• {formattedDate}</span>
       <Tag text={category} variant="secondary" class="writing-category" />
     </div>
-    <p class="writing-excerpt">
-      {excerpt}
-    </p>
+    <p class="writing-excerpt">{excerpt}</p>
     <a href={url} class="read-more" aria-label={`Read more about ${title}`}>Read More →</a>
   </div>
 </article>
 
 <style>
   .writing-card {
+    --card-rgb: 0, 255, 204;
     height: 100%;
     display: flex;
     flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium), background var(--transition-medium);
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(170deg, rgba(var(--card-rgb), 0.45) 0%, rgba(var(--card-rgb), 0.08) 50%, rgba(255, 255, 255, 0.04) 100%) border-box;
+    border: 1px solid transparent;
   }
-  
+
+  .writing-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+      0 14px 36px rgba(0, 0, 0, 0.22),
+      0 0 20px rgba(var(--card-rgb), 0.08);
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(170deg, rgba(var(--card-rgb), 0.65) 0%, rgba(var(--card-rgb), 0.14) 50%, rgba(255, 255, 255, 0.06) 100%) border-box;
+  }
+
   .writing-content {
     padding: var(--space-md);
     flex: 1;
     display: flex;
     flex-direction: column;
   }
-  
+
   h3 {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
     color: var(--color-text);
     font-weight: 500;
   }
-  
+
   .writing-meta {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     font-size: var(--fs-small);
     color: var(--color-text-muted);
   }
-  
+
   .writing-date {
     color: var(--color-secondary);
   }
-  
+
   .writing-excerpt {
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     color: var(--color-text-muted);
     line-height: 1.6;
+    font-size: var(--fs-body);
     flex-grow: 1;
   }
-  
+
   .read-more {
     display: inline-block;
     color: var(--color-primary);
     text-decoration: none;
     font-weight: 500;
+    font-size: var(--fs-body);
     position: relative;
     transition: all var(--transition-fast);
     align-self: flex-start;
     padding: var(--space-xs) 0;
   }
-  
+
   .read-more::after {
     content: '';
     position: absolute;
@@ -102,11 +119,11 @@ const formattedDate = date.includes('-')
     transform-origin: right;
     transition: transform var(--transition-medium);
   }
-  
+
   .read-more:hover {
     color: var(--color-secondary);
   }
-  
+
   .read-more:hover::after {
     transform: scaleX(1);
     transform-origin: left;

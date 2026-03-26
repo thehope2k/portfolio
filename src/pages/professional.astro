@@ -253,7 +253,7 @@ import ResumeModal from '../components/ResumeModal.astro';
 <style>
   .professional-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .lead {
@@ -262,7 +262,7 @@ import ResumeModal from '../components/ResumeModal.astro';
   }
 
   section {
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
   }
 
   h2 {
@@ -426,7 +426,7 @@ import ResumeModal from '../components/ResumeModal.astro';
   }
 
   .resume-download {
-    margin-top: 3.5rem;
+    margin-top: 2rem;
     text-align: center;
   }
 
@@ -565,73 +565,21 @@ import ResumeModal from '../components/ResumeModal.astro';
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
   }
 
-  .project-card {
-    background-color: var(--color-card-bg);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid var(--color-border);
-  }
-
-  .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  .project-content {
-    padding: 1.5rem;
-  }
-
-  .project-description {
-    margin-bottom: 1rem;
-    color: var(--color-secondary);
-  }
-
-  .project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .tech-tag {
-    background-color: rgba(var(--color-primary-rgb, 0, 191, 255), 0.15);
-    color: var(--color-text);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    border: 1px solid rgba(var(--color-primary-rgb, 0, 191, 255), 0.3);
-  }
-
-  .project-links {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .project-links a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .project-links a:hover {
-    text-decoration: underline;
-  }
+  /* Project card styles are handled by ProjectCard.astro component */
 
   .contact-section {
-    margin-bottom: 6rem; /* Increased bottom margin for better breathing room */
+    margin-bottom: 4rem;
   }
 
   .contact-links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-md);
-    margin-top: var(--space-lg);
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
   }
 
   .contact-link {
@@ -640,40 +588,41 @@ import ResumeModal from '../components/ResumeModal.astro';
     gap: var(--space-sm);
     text-decoration: none;
     color: var(--color-text);
-    padding: var(--space-sm) var(--space-md);
-    background-color: var(--color-card-bg);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-lg);
     transition: all var(--transition-medium);
-    min-width: 180px;
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(170deg, rgba(0, 191, 255, 0.35) 0%, rgba(0, 191, 255, 0.06) 50%, rgba(255,255,255,0.04) 100%) border-box;
+    border: 1px solid transparent;
+    font-size: var(--fs-body);
   }
 
   .contact-link:hover {
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 
-      0 6px 15px rgba(0, 0, 0, 0.15),
-      0 0 10px rgba(var(--color-primary-rgb), 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), 0 0 12px rgba(var(--color-primary-rgb), 0.1);
     color: var(--color-primary);
-    border-color: rgba(var(--color-primary-rgb), 0.5);
-    background-color: rgba(var(--color-primary-rgb), 0.03);
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(170deg, rgba(0, 191, 255, 0.6) 0%, rgba(0, 191, 255, 0.12) 50%, rgba(255,255,255,0.06) 100%) border-box;
   }
 
   .contact-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background-color: rgba(var(--color-primary-rgb), 0.1);
-    padding: calc(var(--space-xs) * 0.8);
+    background-color: rgba(var(--color-primary-rgb), 0.08);
+    box-sizing: border-box;
+    flex-shrink: 0;
     transition: all var(--transition-medium);
   }
 
   .contact-icon i {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     color: var(--color-primary);
     stroke: var(--color-primary);
     stroke-width: 1.5;
@@ -681,16 +630,11 @@ import ResumeModal from '../components/ResumeModal.astro';
   }
 
   .contact-link:hover .contact-icon {
-    background-color: rgba(var(--color-primary-rgb), 0.2);
-    transform: scale(1.05);
-  }
-
-  .contact-link:hover .contact-icon i {
-    transform: scale(1.05);
+    background-color: rgba(var(--color-primary-rgb), 0.15);
   }
 
   .education-section {
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
   }
 
   .education-timeline {

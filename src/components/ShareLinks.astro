@@ -6,17 +6,15 @@ interface Props {
   class?: string;
 }
 
-const { 
-  title, 
+const {
+  title,
   url,
   platforms = ['twitter', 'linkedin'],
   class: className = ''
 } = Astro.props;
 
-// Ensure URL is absolute
 const absoluteUrl = url.startsWith('http') ? url : Astro.url.origin + url;
 
-// Generate sharing URLs
 const shareUrls = {
   twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(absoluteUrl)}`,
   linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(absoluteUrl)}`,
@@ -24,7 +22,6 @@ const shareUrls = {
   email: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this article: ${absoluteUrl}`)}`
 };
 
-// Platform display names
 const platformNames = {
   twitter: 'Twitter',
   linkedin: 'LinkedIn',
@@ -34,13 +31,13 @@ const platformNames = {
 ---
 
 <div class={`share-section ${className}`}>
-  <h3>Share this post</h3>
+  <p class="share-label">Share this post</p>
   <div class="share-links">
     {platforms.map(platform => (
-      <a 
-        href={shareUrls[platform]} 
-        target="_blank" 
-        rel="noopener noreferrer" 
+      <a
+        href={shareUrls[platform]}
+        target="_blank"
+        rel="noopener noreferrer"
         class="share-link"
         aria-label={`Share on ${platformNames[platform]}`}
       >
@@ -54,37 +51,46 @@ const platformNames = {
   .share-section {
     margin-top: var(--space-lg);
   }
-  
-  h3 {
-    font-size: 1.2rem;
+
+  .share-label {
+    font-size: var(--fs-body);
+    font-weight: 500;
     margin-bottom: var(--space-sm);
-    color: var(--color-text);
+    color: var(--color-text-muted);
   }
-  
+
   .share-links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
   }
-  
+
   .share-link {
+    --link-rgb: 0, 191, 255;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-xs) var(--space-md);
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    padding: 0.4rem 1.1rem;
+    border-radius: var(--radius-full);
     text-decoration: none;
-    color: var(--color-text);
-    transition: all var(--transition-fast);
-    min-height: 44px; /* Ensure minimum tap target size */
+    color: rgba(var(--link-rgb), 0.8);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: all var(--transition-medium);
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(150deg, rgba(var(--link-rgb), 0.4) 0%, rgba(var(--link-rgb), 0.08) 100%) border-box;
+    border: 1px solid transparent;
+    min-height: 36px;
   }
-  
+
   .share-link:hover {
-    background-color: var(--color-primary);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow);
+    color: rgba(var(--link-rgb), 1);
+    background:
+      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+      linear-gradient(150deg, rgba(var(--link-rgb), 0.7) 0%, rgba(var(--link-rgb), 0.15) 100%) border-box;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--link-rgb), 0.12);
   }
 </style>

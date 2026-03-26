@@ -290,35 +290,16 @@ const formattedPublishDate = publishDate
       }
 
       footer {
-        background-color: var(--color-bg-alt);
-        border-top: 1px solid var(--color-border);
-        padding: 2rem 0;
+        border-top: 1px solid transparent;
+        border-image: linear-gradient(90deg, transparent 5%, rgba(0,191,255,0.25) 30%, rgba(0,255,204,0.2) 70%, transparent 95%) 1;
+        padding: var(--space-md) 0;
         text-align: center;
         color: var(--color-text-muted);
-        font-size: 0.9rem;
+        font-size: var(--fs-small);
       }
 
-      footer p {
-        position: relative;
-        display: inline-block;
-      }
-
-      footer p::before, footer p::after {
-        content: '';
-        position: absolute;
-        height: 1px;
-        top: 50%;
-        width: 30px;
-        background: linear-gradient(90deg, transparent, var(--color-border));
-      }
-
-      footer p::before {
-        right: calc(100% + 15px);
-      }
-
-      footer p::after {
-        left: calc(100% + 15px);
-        background: linear-gradient(90deg, var(--color-border), transparent);
+      .footer-text {
+        margin: 0;
       }
 
       h1, h2, h3, h4, h5, h6 {
@@ -443,7 +424,7 @@ const formattedPublishDate = publishDate
         }
 
         footer {
-          padding: var(--space-md) 0;
+          padding: var(--space-sm) 0;
         }
       }
 
@@ -477,8 +458,8 @@ const formattedPublishDate = publishDate
           margin-right: -8px; /* Adjust position to be more visible */
         }
 
-        footer p::before, footer p::after {
-          width: 20px;
+        footer {
+          padding: var(--space-sm) 0;
         }
       }
 
@@ -544,8 +525,8 @@ const formattedPublishDate = publishDate
           border-radius: var(--radius-sm);
         }
 
-        footer p::before, footer p::after {
-          display: none;
+        footer {
+          padding: var(--space-xs) 0;
         }
       }
     </style>
@@ -618,7 +599,7 @@ const formattedPublishDate = publishDate
 
     <footer role="contentinfo">
       <div class="container">
-        <p>Built with <span aria-hidden="true">❤️</span><span class="sr-only">love</span> by The Hope · &copy; {new Date().getFullYear()}</p>
+        <p class="footer-text">&copy; {new Date().getFullYear()} The Hope</p>
       </div>
     </footer>
 

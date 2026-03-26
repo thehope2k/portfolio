@@ -5,15 +5,15 @@
 
 export const latestContent = {
   professional: {
-    title: 'Portfolio Redesign',
-    description: 'A complete redesign of my personal portfolio using Astro, focusing on performance and maintainability.'
+    title: 'Chinese Chess Online',
+    description: 'An online platform for playing Chinese Chess with real-time multiplayer support.'
   },
   personal: {
-    title: 'Lines of code, stories untold',
-    description: 'A reflection on how code can tell stories about its creators and the problems they solve.'
+    title: 'Một (vài) người xếp',
+    description: 'Một câu chuyện nhỏ về một (vài) người xếp.'
   },
   growth: {
-    title: 'Scalable Software Systems — A Story of Growing Pains',
-    description: 'A story-driven walkthrough of how a weekend project evolves into a scalable distributed system.'
+    title: 'Scalable Software Systems',
+    description: 'A story-driven interactive presentation about building scalable distributed systems.'
   }
 };

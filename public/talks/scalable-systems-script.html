@@ -175,8 +175,7 @@
 <p>So how do we solve this? What if we always route a user to a specific server? If so, We can use their IP to hash to
     always send the same user to the same server. Problem solved, right? Kind of. That's called sticky sessions. It
     works — until Server 1 goes down. The moment it crashes, every
-    user who was "stuck" to it loses their session. And it creates uneven load, because some users are way more active
-    than others. You're not solving the problem. You're just hiding it.</p>
+    user who was "stuck" to it loses their session. You're not solving the problem. You're just hiding it.</p>
 
 <p>So we have to ask a deeper question: why does this break at all? It breaks because our application is stateful. It's
     holding information — the session — between requests, inside its own memory. That's state. And that state only
@@ -196,18 +195,16 @@
     and Server 2 both query the same place. They both see the same data. The database becomes the single source of
     truth.</p>
 
-<p>Now your servers are interchangeable. Server 1 can go down, Server 3 can come up, and nothing breaks. No user
-    notices. Because every server is just reading from the same database anyway. You can run 50 servers and they all
-    agree on who is logged in — because they all ask the same question to the same place.</p>
+<p>Now your servers are interchangeable. Server 1 can go down, Server 3 can come up, and nothing breaks. You can run
+    50 servers and they all agree on who is logged in — because they all ask the same question to the same place.</p>
 
 <p>That's stateless. Move the state out. Let the database remember. The servers just process.</p>
 
 <!-- ─── ACT 3 ─── -->
 <div class="act">Act 3 · 2009 · Performance</div>
 
-<p>A couple of years go by. The servers are stable. The load balancer is doing its job. But Gossip.com is growing fast —
-    more users, more gossip, more traffic. And a new problem starts quietly building up. The database is getting
-    slow.</p>
+<p>A couple of years go by. Gossip.com is growing fast — more users, more gossip, more traffic. And a new problem
+    starts quietly building up. The database is getting slow.</p>
 
 <p>Hope pulls up the database logs. And there's something immediately obvious. The same five queries are running over
     and over again. The homepage feed. The trending topics. The most gossiped-about neighbors. These queries run forty
@@ -228,8 +225,8 @@
 
 <p>The first instinct might be to store it in the server's own memory. Just a local variable. Fast, easy. And it works —
     until you remember you have ten servers. Each server has its own memory. Server 1 caches the feed. Server 2 doesn't
-    know about that. Server 2 runs the query again. Server 3 runs it again. Each server ends up with its own copy, and
-    those copies might not even agree with each other. That's worse than no cache.</p>
+    know about that. Each server ends up with its own copy, and those copies might not even agree. That's worse than
+    no cache.</p>
 
 <p>So the cache needs to be shared. One place that all servers read from and write to. When Server 1 fetches the feed
     and stores it there, Server 2 and Server 3 find it already — no database call needed. That shared in-memory store is
@@ -290,9 +287,8 @@
 
 <p>Here's something about gossip that Hope didn't fully anticipate: gossip is not local. Gossip is a fundamental human
     need. People everywhere, in every country, in every timezone — they all want to talk about other people's business.
-    Gossip.com started in one small town, but the internet doesn't have borders. Word spread. Users from Japan found it.
-    Users from Germany found it. Brazil, Australia, the US. Turns out everyone, everywhere, has something to say about
-    their neighbors. Gossip.com went global.</p>
+    Gossip.com started in one small town, but the internet doesn't have borders. Word spread globally. Turns out
+    everyone, everywhere, has something to say about their neighbors.</p>
 
 <p>And that's exciting — until the complaints start coming in. Not from local users. From the new ones. "The site is
     slow." "Images take forever to load." "I clicked a profile photo and waited five seconds." Hope checks the servers —
@@ -340,10 +336,9 @@
     feed — 3,100 milliseconds. Total: around nine seconds. The user sits there watching a spinner while their server is
     off sending emails to strangers.</p>
 
-<p>Now here's the question — and it seems obvious once you ask it: does the user need to wait for the notification email
-    to be sent before they can see their post published? Does the post only exist after every follower has been
-    notified? No. The post is saved. That's done in 200 milliseconds. Everything else is a side effect. The user doesn't
-    need to be involved in any of it.</p>
+<p>Now here's the question — and it seems obvious once you ask it: does the user need to wait for all those side
+    effects before their post is published? No. The post is saved in 200 milliseconds. Everything else is a side effect.
+    The user doesn't need to be involved in any of it.</p>
 
 <p>The problem is that all of these steps are synchronous. One thing happens, then the next thing waits for it to
     finish, then the next thing waits for that.</p>
@@ -368,12 +363,9 @@
 
 <div class="beat">Beat 4.3 · WebSocket + Redis Pub/Sub</div>
 
-<p>They said that in love amd feeds, every one wants to be the first.
-    You're a user sitting on Gossip.com waiting for fresh gossip. How do you find out that someone just posted something
-    new? The page has to check. Every few seconds the browser sends a request: "anything new?" Server says no. Three
-    seconds later: "anything new?" No. Three seconds later: "anything new?" Still no. This is polling. And it's exactly
-    as wasteful as it sounds — thousands of users asking the same question every three seconds, most of the time getting
-    told nothing happened.</p>
+<p>They said that in love and feeds, everyone wants to be the first. So how does a user find out that something new was
+    posted? The page has to ask. Every few seconds: "anything new?" No. Again: "anything new?" Still no. This is
+    polling — thousands of users asking the same question every three seconds, most of the time hearing nothing.</p>
 
 <p>And even when something does happen, there's a lag. A post goes up at second zero. Your browser asks at second three.
     You find out at second three. Not real-time. Close enough for email. Not good enough for a platform where the whole
@@ -427,9 +419,7 @@
     smaller services, each responsible for one focused domain. Each service can be deployed independently — the payment
     team ships on Tuesday, the notification team ships on Thursday, nobody waits for anyone. Each service fails
     independently — a crash in notifications doesn't touch payments. And each service scales independently — the feed
-    service might need 20 instances during peak hours while the payment service only needs 2. With a monolith, you'd
-    have to scale the entire application together, which is wasteful. Now you scale exactly what needs scaling, nothing
-    more.</p>
+    service might need 20 instances during peak hours while the payment service only needs 2.</p>
 
 <p>So Hope splits everything up. Services deployed. Teams are happy. And almost immediately, the first real distributed
     system problem shows up. Each service now has its own database — that was intentional, sharing a database would just
@@ -438,8 +428,7 @@
     everything again — the same problem we had before.</p>
 
 <p>So here's the deeper question underneath this. You have five services that can't share a database. They all need to
-    know about a new post. Do they all have to know right now, at the exact same instant? Think about what that would
-    require — you'd have to freeze everything, wait for every service to confirm it's updated, then proceed. And if one
+    know about a new post. Do they all have to know right now, at the exact same instant? And if one
     service is down? You either wait forever, or you say the post never happened. That's not a system, that's a
     deadlock.</p>
 
@@ -447,8 +436,7 @@
     seconds behind. The data will be right — just not instantly everywhere. That's eventual consistency. And yes,
     there's a theorem that formally names this tradeoff — CAP — but you don't need to memorize it. You just lived the
     reasoning. The network will fail, that's physics, and when it does you're choosing between stopping the world or
-    accepting a brief lag. Most systems choose the lag. And that choice shapes how everything communicates from
-    here.</p>
+    accepting a brief lag. Most systems choose the lag.</p>
 
 <p>Instead of synchronous calls that block and demand immediate consistency, services communicate through events. Things
     that happened. The Post service says "post 991 was created" — drops that into a shared event channel and moves on.
@@ -494,11 +482,9 @@
 
 <div class="beat">Beat 5.2d · Docker</div>
 
-<p>Time goes by, Hope starts to hear engineer in the team says "It works on my machine". We all know this and had been
-    there, right? The issue is real, he root problem is that the service and the environment it runs in are separate
-    things. The code is written assuming certain things exist — a specific runtime, specific libraries, specific system
-    dependencies. If the environment doesn't match exactly, behavior changes.. But it doesn't justify. So Hope is being
-    very sarcastic and ask the team to ship their machine. They did</p>
+<p>Time goes by, Hope starts to hear engineers say "It works on my machine." We've all been there. The root problem:
+    code assumes a specific environment — runtime, libraries, dependencies. If the environment doesn't match, behavior
+    changes. So Hope, being very sarcastic, asked the team to just ship their machine. They did.</p>
 
 <p>Instead of shipping just the code and hoping the server has
     everything it needs, you package the code, the runtime, the libraries, the dependencies — everything — into one
@@ -573,10 +559,9 @@
     publishes it again. Now the Subscription service receives the same event twice. It activates the subscription twice.
     Maybe it charges the user twice.</p>
 
-<p>So every consumer that processes these events needs to be designed to handle duplicates safely. If you receive the
-    same event twice, the second time should produce the same result as the first — not a second action. This property
-    is called idempotency. Before activating a subscription, the Subscription service checks: is this order already
-    activated? If yes, skip it. Same result, no side effect. The duplicate is harmless.</p>
+<p>So every consumer needs to handle duplicates safely. This property is called idempotency — if you receive the same
+    event twice, the second time produces the same result, not a second charge. The Subscription service checks: is
+    this order already activated? If yes, skip. The duplicate is harmless.</p>
 
 <p>At-least-once delivery is easy to guarantee. Exactly-once is extremely hard. So the practical solution is: guarantee
     at-least-once, and make your consumers idempotent.</p>
@@ -598,19 +583,17 @@
 <p>The solution is a circuit breaker — named after the electrical concept. You wrap calls to a service with a circuit
     breaker. When the failure rate crosses a threshold, say fifty percent of calls failing or timing out, the circuit
     opens. Instead of continuing to make calls and waiting, you fail fast: immediately return an error or a fallback,
-    without even trying. After a timeout, you try one test request. If it succeeds, you close the circuit and resume. If
-    it fails again, you stay open. Fail fast. Don't wait for timeouts that will never come. Protect the rest of the
-    system from one sick neighbor.</p>
+    without even trying. After a timeout, it probes once — succeed and it closes, fail and it stays open. Fail fast.
+    Don't wait for timeouts that will never come. Protect the rest of the system from one sick neighbor.</p>
 
 <p>And when you do retry — because sometimes retrying is the right call — you can't just fire again immediately. The
     service is already struggling. Hammering it at full speed makes recovery harder. So you back off: wait a bit before
     the first retry, wait longer before the second, longer still before the third. Each failure doubles the wait. That's
     exponential backoff.</p>
 
-<p>But if you have hundreds of service instances all backing off on the same schedule, they all wake up at the same
-    moment and hit the struggling service together and make the target service down again. The thundering herd. So you
-    add a small random offset — jitter — to
-    each wait. So they randomly retry at different time </p>
+<p>But if you have hundreds of instances all backing off on the same schedule, they all wake up at the same moment and
+    hit the struggling service together. The thundering herd. So you add a small random offset — jitter — so each
+    instance retries at a slightly different time.</p>
 
 <p>And at the gateway level, rate limiting. Not every threat comes from inside the system. Sometimes it's a single
     client making too many requests — a misbehaving script, an accidental retry loop. Rate limiting says: you get X
@@ -622,8 +605,6 @@
 
 <p>And that's the system. 2004 to 2017, one gossip platform, grown into something none of us would have drawn on a
     whiteboard at the start.</p>
-
-<p>Let's zoom out for a second.</p>
 
 <p>2004: a PHP app, one server, five dollars a month. It worked. That was the right solution for that scale.</p>
 

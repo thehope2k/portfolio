@@ -1898,7 +1898,7 @@
       </div>
     </div>
     <div class="beat-right">
-      <svg viewBox="0 0 620 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 620 360" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Four services in sequence (base) -->
         <rect x="20"  y="124" width="110" height="60" rx="5" fill="#0c0c12" stroke="#1e2e3e" stroke-width="1.5"/>
         <text x="75"  y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#00d4ff">Order</text>
@@ -1916,15 +1916,15 @@
         <line x1="132" y1="154" x2="168" y2="154" stroke="#444455" stroke-width="1.5" marker-end="url(#arr)"/>
         <line x1="282" y1="154" x2="318" y2="154" stroke="#444455" stroke-width="1.5" marker-end="url(#arr)"/>
         <line x1="432" y1="154" x2="468" y2="154" stroke="#444455" stroke-width="1.5" marker-end="url(#arr)"/>
-        <!-- DB under each service -->
-        <rect x="30"  y="204" width="90" height="28" rx="3" fill="#0c0c12" stroke="rgba(6,214,160,0.3)" stroke-width="1"/>
-        <text x="75"  y="222" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#06d6a0">orders db</text>
-        <rect x="180" y="204" width="90" height="28" rx="3" fill="#0c0c12" stroke="rgba(6,214,160,0.3)" stroke-width="1"/>
-        <text x="225" y="222" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#06d6a0">payments db</text>
-        <rect x="330" y="204" width="90" height="28" rx="3" fill="#0c0c12" stroke="rgba(6,214,160,0.3)" stroke-width="1"/>
-        <text x="375" y="222" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#06d6a0">subs db</text>
-        <rect x="480" y="204" width="90" height="28" rx="3" fill="#0c0c12" stroke="rgba(6,214,160,0.3)" stroke-width="1"/>
-        <text x="525" y="222" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#06d6a0">email db</text>
+        <!-- DB under each service (y=228, gap=44px from service bottom y=184) -->
+        <rect x="30"  y="228" width="90" height="28" rx="3" fill="#0c0c12" stroke="rgba(6,214,160,0.3)" stroke-width="1"/>
+        <text x="75"  y="246" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#06d6a0">orders db</text>
+        <rect x="180" y="228" width="90" height="28" rx="3" fill="#0c0c12" stroke="rgba(6,214,160,0.3)" stroke-width="1"/>
+        <text x="225" y="246" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#06d6a0">payments db</text>
+        <rect x="330" y="228" width="90" height="28" rx="3" fill="#0c0c12" stroke="rgba(6,214,160,0.3)" stroke-width="1"/>
+        <text x="375" y="246" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#06d6a0">subs db</text>
+        <rect x="480" y="228" width="90" height="28" rx="3" fill="#0c0c12" stroke="rgba(6,214,160,0.3)" stroke-width="1"/>
+        <text x="525" y="246" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#06d6a0">email db</text>
         <!-- Step 1: Order + Payment committed — looks fine so far -->
         <g data-step="1" data-step-out="2">
           <rect x="20"  y="124" width="110" height="60" rx="5" fill="rgba(0,255,204,0.05)" stroke="rgba(0,255,204,0.4)" stroke-width="1.5"/>
@@ -1948,13 +1948,12 @@
           <text x="300" y="146" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="14" fill="#ef476f">✗</text>
           <!-- Email and further dimmed -->
           <rect x="468" y="122" width="114" height="64" rx="5" fill="rgba(20,20,30,0.7)" stroke="#1e1e2a" stroke-width="1.5"/>
-          <rect x="318" y="202" width="94" height="32" rx="3" fill="rgba(239,71,111,0.04)" stroke="rgba(239,71,111,0.2)" stroke-width="1"/>
         </g>
         <!-- Step 3: consequence annotation -->
         <g data-step="3">
-          <rect x="92" y="264" width="440" height="44" rx="5" fill="rgba(239,71,111,0.06)" stroke="rgba(239,71,111,0.3)" stroke-width="1"/>
-          <text x="312" y="282" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#ef476f">User charged. No access. No automatic rollback.</text>
-          <text x="312" y="300" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#7a3a3a">four separate databases · nothing coordinating them</text>
+          <rect x="92" y="296" width="440" height="44" rx="5" fill="rgba(239,71,111,0.06)" stroke="rgba(239,71,111,0.3)" stroke-width="1"/>
+          <text x="312" y="314" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#ef476f">User charged. No access. No automatic rollback.</text>
+          <text x="312" y="332" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#7a3a3a">four separate databases · nothing coordinating them</text>
         </g>
       </svg>
     </div>
@@ -2154,11 +2153,12 @@
           <line x1="150" y1="143" x2="244" y2="141" stroke="#ff8c42" stroke-width="1" opacity="0.7" marker-end="url(#arr-o)"/>
           <line x1="150" y1="157" x2="244" y2="159" stroke="#ff8c42" stroke-width="1" opacity="0.7" marker-end="url(#arr-o)"/>
           <line x1="150" y1="163" x2="244" y2="165" stroke="#ff8c42" stroke-width="1" opacity="0.8" marker-end="url(#arr-o)"/>
-          <rect x="244" y="196" width="138" height="30" rx="3" fill="rgba(239,71,111,0.07)" stroke="rgba(239,71,111,0.3)" stroke-width="1"/>
-          <text x="313" y="215" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">50 threads waiting · 10s timeout</text>
+          <rect x="244" y="192" width="138" height="44" rx="3" fill="rgba(239,71,111,0.07)" stroke="rgba(239,71,111,0.3)" stroke-width="1"/>
+          <text x="313" y="207" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">50 threads waiting</text>
+          <text x="313" y="221" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">10s timeout</text>
           <!-- Feed svc also backing up -->
-          <rect x="28" y="196" width="120" height="30" rx="3" fill="rgba(239,71,111,0.07)" stroke="rgba(239,71,111,0.25)" stroke-width="1"/>
-          <text x="88" y="215" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">backing up too</text>
+          <rect x="28" y="192" width="120" height="44" rx="3" fill="rgba(239,71,111,0.07)" stroke="rgba(239,71,111,0.25)" stroke-width="1"/>
+          <text x="88" y="218" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">backing up too</text>
           <!-- cascade arrow to other services -->
           <rect x="430" y="116" width="160" height="68" rx="5" fill="rgba(239,71,111,0.05)" stroke="rgba(239,71,111,0.3)" stroke-width="1.5"/>
           <text x="510" y="148" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#ef476f">Other Services</text>
@@ -2177,13 +2177,13 @@
           <line x1="150" y1="150" x2="164" y2="150" stroke="#444455" stroke-width="1.5" marker-end="url(#arr)"/>
           <!-- CB returns error immediately -->
           <path d="M 166 162 Q 128 210 88 196 Q 88 184 88 184" stroke="#ef476f" stroke-width="1.5" fill="none" marker-end="url(#arr-r)" stroke-dasharray="4 3"/>
-          <rect x="28" y="198" width="120" height="36" rx="3" fill="rgba(239,71,111,0.06)" stroke="rgba(239,71,111,0.25)" stroke-width="1"/>
-          <text x="88" y="214" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">fail fast</text>
-          <text x="88" y="228" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">return fallback immediately</text>
+          <rect x="20" y="194" width="136" height="44" rx="3" fill="rgba(239,71,111,0.06)" stroke="rgba(239,71,111,0.25)" stroke-width="1"/>
+          <text x="88" y="210" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">fail fast</text>
+          <text x="88" y="224" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ef476f">return fallback immediately</text>
           <!-- Rec Svc has room to recover -->
-          <rect x="246" y="196" width="136" height="36" rx="3" fill="rgba(0,255,204,0.05)" stroke="rgba(0,255,204,0.2)" stroke-width="1"/>
-          <text x="314" y="214" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#00ffcc">pressure relieved</text>
-          <text x="314" y="228" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3a5a4a">can recover</text>
+          <rect x="246" y="194" width="136" height="44" rx="3" fill="rgba(0,255,204,0.05)" stroke="rgba(0,255,204,0.2)" stroke-width="1"/>
+          <text x="314" y="210" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#00ffcc">pressure relieved</text>
+          <text x="314" y="224" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3a5a4a">can recover</text>
         </g>
         <!-- Step 3: backoff -->
         <g data-step="3">

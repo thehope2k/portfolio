@@ -804,7 +804,7 @@
   </section>
 
   <!-- BEAT-3-1 · Cache / Redis -->
-  <section class="slide slide-beat" data-steps="4">
+  <section class="slide slide-beat" data-steps="5">
     <div class="beat-left">
       <div class="beat-tag">2009 · caching</div>
       <div class="beat-insight">Compute once.<br><em>Remember</em> the answer.</div>
@@ -925,12 +925,14 @@
           <text x="196" y="56" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00ffcc">HIT → return immediately</text>
         </g>
 
-        <!-- Step 4: TTL annotation + the famous quote -->
+        <!-- Step 4: TTL annotation -->
         <g data-step="4">
           <rect x="184" y="196" width="220" height="52" rx="4" fill="rgba(255,209,102,0.06)" stroke="rgba(255,209,102,0.25)" stroke-width="1"/>
           <text x="294" y="216" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#ffd166">TTL: 60s → auto-expire</text>
           <text x="294" y="234" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#6a5a30">or: delete key when data changes</text>
-          <!-- The quote -->
+        </g>
+        <!-- Step 5: the famous quote -->
+        <g data-step="5">
           <rect x="22" y="264" width="576" height="44" rx="5" fill="rgba(0,212,255,0.04)" stroke="rgba(0,212,255,0.18)" stroke-width="1"/>
           <text x="310" y="281" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#8888a8">"There are only two hard problems in computer science:</text>
           <text x="310" y="299" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00d4ff">naming things,  and  cache invalidation."</text>
@@ -2115,7 +2117,7 @@
     </div>
   </section>
   <!-- BEAT-6-3 · Circuit Breaker + Rate Limiting -->
-  <section class="slide slide-beat" data-steps="3">
+  <section class="slide slide-beat" data-steps="4">
     <div class="beat-left">
       <div class="beat-tag">2017 · resilience</div>
       <div style="display:grid;">
@@ -2126,7 +2128,7 @@
         <span class="pill o" data-step="1">Cascade Failure</span>
         <span class="pill r" data-step="2">Circuit Breaker</span>
         <span class="pill y" data-step="3">Backoff + Jitter</span>
-        <span class="pill c" data-step="3">Rate Limiting</span>
+        <span class="pill c" data-step="4">Rate Limiting</span>
       </div>
       <div class="beat-tradeoffs" data-step="3">
         <div class="tradeoff pro"><span class="sign">✓</span><span>sick service doesn't take down healthy ones</span></div>
@@ -2183,7 +2185,7 @@
           <text x="314" y="214" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#00ffcc">pressure relieved</text>
           <text x="314" y="228" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3a5a4a">can recover</text>
         </g>
-        <!-- Step 3: backoff + rate limit -->
+        <!-- Step 3: backoff -->
         <g data-step="3">
           <!-- Backoff timeline -->
           <rect x="28" y="252" width="380" height="52" rx="4" fill="rgba(255,209,102,0.05)" stroke="rgba(255,209,102,0.25)" stroke-width="1"/>
@@ -2193,7 +2195,9 @@
           <text x="196" y="285" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ffd166">→ 4s</text>
           <text x="248" y="285" font-family="'JetBrains Mono',monospace" font-size="8" fill="#ffd166">→ 8s</text>
           <text x="300" y="285" font-family="'JetBrains Mono',monospace" font-size="8" fill="#7a6a30">+ jitter</text>
-          <!-- Rate limit label -->
+        </g>
+        <!-- Step 4: rate limit @ gateway -->
+        <g data-step="4">
           <rect x="424" y="252" width="168" height="52" rx="4" fill="rgba(0,212,255,0.04)" stroke="rgba(0,212,255,0.25)" stroke-width="1"/>
           <text x="508" y="268" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#00d4ff">rate limit @ gateway</text>
           <text x="508" y="285" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" fill="#00d4ff">100 req/s → 429</text>

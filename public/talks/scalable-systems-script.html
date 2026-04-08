@@ -97,16 +97,18 @@
     everything was already in place — good practices, best practices for highly scalable and maintainable systems.</p>
 
 <p>I still remember my very first days, as a fresh intern, joining a project that had SPA, JWT, OAuth2/SSO/OIDC,
-    Microservices, Kong API Gateway, Load Balancer, Kafka, Redis, SSE/WebSocket, Horizontal Scaling, Docker, K8s, AWS. I
-    was lost. Each of these solutions and technologies used to be someone's breakthrough to solve a complex problem —
+    Microservices, Kong API Gateway, Load Balancer, Kafka, Redis, SSE/WebSocket, Docker, K8s, AWS. That's real and I
+    was lost. Up until that point, I only know how to make a simple CRUD APIS. Each of these solutions and technologies
+    used to be someone's breakthrough to solve a complex problem —
     it's not as easy as drawing an architecture diagram and dragging things in. And today, with the current development
     and evolution of AI, the undeniable future for us as developers is to let go of the coding and put more focus into
     architecture design. In other words, we will all become Solution Architects. So my goal today is to walk you through
     the history of how software development evolved — the reason why we use what we use today, why we build the way we
-    build today. Hopefully by the end of this session, for experienced Software Engineers get a refresher, and for less
-    experienced developers like me, we know a little more of the buzzwords that we can later use to show off.</p>
+    build today. Hopefully by the end of this session, for any experienced Software Engineers - you'll get a refresher
+    about technologies, and for less experienced developers like me, we know a little more of the buzzwords that we can
+    later use to show off.</p>
 
-<p> So how do we do this? This talks will be like a story telling, a journey follow Hope built a platform, get issues
+<p> So how do we do this? This talks will be like a story telling, a journey follow Hope built a platform, hit issues
     and get over it, growth with it. I hope it can be interactive, so please interrupt me whenever you want to discuss
     about something or you want to point out something I say is wrong. I would really appreciate that.</p>
 
@@ -155,17 +157,12 @@
 
 <p>But there's a problem with that. Requests are not equal. Some requests are fast — just fetching a username, done in 5
     milliseconds. Some requests are heavy — generating a full news feed, joining 10 tables, running for 2 seconds.
-    Round-robin doesn't know that. It just rotates. So randomly, all the heavy requests could pile onto Server 1, while
-    Server 2 is breezing through light ones. Server 1 is drowning, Server 2 is bored. That's imbalanced and
-    inefficient.</p>
+    Round-robin doesn't know that. One server drowns while the other idles.</p>
 
-<p>So a smarter approach is to let the load balancer actually look at the servers before deciding. It checks things like
-    how many active connections each server has, or how fast each server has been responding lately. If Server 1 is
-    already handling 20 slow requests and its response time has crept up, new traffic goes to Server 2 instead. It
-    doesn't take turns blindly — it routes based on where the traffic will actually be handled faster.</p>
+<p>So a smarter approach: the load balancer watches how busy each server actually is, and routes to whoever is least loaded.</p>
 
-<p>So Hope sets this up. Two servers, load balancer in front. Looks great on the diagram. Ships it. And then the support
-    tickets come in. "I keep getting logged out." "Every time I refresh I have to log in again." Hope checks the code —
+<p>So Hope sets this up. Two servers, load balancer in front. Looks great on the diagram. Ships it. And user complaint
+    they get logged out right after logged in Hope checks the code —
     nothing wrong. Checks the servers — nothing wrong. Logs in himself, refreshes a couple of times — and suddenly, he's
     logged out too.</p>
 
@@ -175,8 +172,9 @@
     it to Server 2. Server 2 looks in its memory. Nothing. You're a complete stranger to Server 2. Back to the login
     page. This is not a bug. This is architecture. A very embarrassing architecture, but still architecture.</p>
 
-<p>Now someone might say — well, what if we use IP hash? Always send the same user to the same server. Problem solved,
-    right? Kind of. That's called sticky sessions. It works — until Server 1 goes down. The moment it crashes, every
+<p>So how do we solve this? What if we always route a user to a specific server? If so, We can use their IP to hash to
+    always send the same user to the same server. Problem solved, right? Kind of. That's called sticky sessions. It
+    works — until Server 1 goes down. The moment it crashes, every
     user who was "stuck" to it loses their session. And it creates uneven load, because some users are way more active
     than others. You're not solving the problem. You're just hiding it.</p>
 
@@ -217,7 +215,7 @@
 
 <p>And these are not simple queries. The feed query joins multiple tables, sorts by time, filters by who you follow.
     It's expensive. Run it once, maybe 800 milliseconds. Run it forty times a second across all your servers — the
-    database starts to sweat. Response times creep up. Users notice the site getting sluggish.</p>
+    database starts to sweat. Response times creep up. Users notice the site getting slow.</p>
 
 <div class="beat">Beat 3.1 · Caching + Redis</div>
 
@@ -244,7 +242,7 @@
 
 <p>One approach is TTL — time to live. You say: this cache entry is valid for 60 seconds. After that, it expires
     automatically, and the next request fetches fresh data from the database. Simple, predictable. The tradeoff is that
-    users might see data that's up to 60 seconds old. For a gossip feed, that's probably fine.</p>
+    users might see data that's up to 60 seconds old. But for a gossip feed, that's probably fine.</p>
 
 <p>The other approach is cache invalidation — when the data changes, you immediately delete the cached version. Someone
     posts something new, you delete the "homepage-feed" entry. The very next request finds nothing in cache, goes to the
@@ -266,18 +264,15 @@
 <p>Hope runs a command to inspect one of the slow queries — basically asks the database to explain how it's processing
     it. And the database says: full table scan. 10 million rows scanned. Found 847 matching rows.</p>
 
-<p>Full table scan means the database reads every single row in the table, one by one, top to bottom, checking whether
-    each one matches your condition. Think of it like finding someone's name in a phone book — but there's no
-    alphabetical order, no sections. You start from page 1 and read every single entry until you reach the end. With 10
-    million rows, that's a lot of reading. Even if you only want a few results.</p>
+<p>Full table scan means the database reads every single row in the table, one by one, checking whether it matches your
+    condition. Like reading every page of an unordered phone book. With 10 million rows, that's a lot of reading.</p>
 
 <p>So the question is: can we give the database a shortcut? Instead of reading everything, can it somehow jump straight
     to the rows it needs?</p>
 
 <p>Yes. That's what a database index is. Think of the index at the back of a textbook. You don't read every page to find
-    where "load balancer" is mentioned. You go to the index, find the entry, it tells you exactly which pages. You jump
-    straight there. A database index works the same way — it's a separate, sorted data structure that maps a column's
-    values to the exact locations of the matching rows. When the database searches for all posts by user ID 42, instead
+    where "a user" is mentioned. You go to the index, find the entry, it tells you exactly which pages. You jump
+    straight there. When the database searches for all posts by user ID 42, instead
     of scanning 10 million rows, it looks up user ID 42 in the index and jumps straight to those rows. Query time drops
     from seconds to milliseconds.</p>
 
@@ -304,20 +299,17 @@
     healthy. Checks the database — fine. Everything looks good on paper. But users in Tokyo, in Germany, in Brazil are
     getting terrible load times.</p>
 
-<p>Here's the thing about the internet that's easy to forget: data travels through physical cables. And physical cables
-    have physical distance. A user in Tokyo requesting a photo stored on a server in Singapore — that request travels
-    thousands of kilometers, the server responds, and the response travels thousands of kilometers back. Even at the
-    speed of light, that adds up. That delay is called latency. And no amount of code optimization fixes it. You can't
-    refactor your way out of geography.</p>
+<p>Here's the thing about the internet that's easy to forget: data travels through physical cables. Cables have distance.
+    A user in Tokyo hitting a server in Singapore — that round trip adds up. That's latency. And no amount of code
+    optimization fixes it. You can't refactor your way out of geography.</p>
 
 <p>So Hope looks at what's actually being served. HTML, API responses, the dynamic stuff — yes, those need the server.
     But images, profile photos, CSS files, JavaScript files — those are just static files. They don't change per user.
     They don't need business logic. They're the same file for everyone who requests them.</p>
 
-<p>So the question is: why are we routing them through our application server at all? What if, instead of every user in
-    the world reaching back to one server in Singapore, we stored copies of those files in servers physically close to
-    the users? A server in Tokyo, one in Frankfurt, one in São Paulo. When a user in Tokyo asks for a photo, they get it
-    from the Tokyo server — milliseconds away, not thousands of kilometers.</p>
+<p>So the question is: why are we routing them through our application server at all? What if we stored copies of those
+    files in servers physically close to the users? When a user in Tokyo asks for a photo, they get it from a nearby
+    server — milliseconds away, not thousands of kilometers.</p>
 
 <p>That's a CDN — Content Delivery Network. A global network of servers called edge nodes, spread across the world,
     caching your static content close to your users. The first time someone requests a file from a region, the edge node
@@ -339,8 +331,7 @@
     it.</p>
 
 <p>And then someone posts something. And just... waits. The page spins. Five seconds. Seven seconds. Nine point two
-    seconds. Then finally — the post appears. Nine seconds to publish one piece of gossip. On a gossip site. Where the
-    entire point is that information spreads fast.</p>
+    seconds. Then finally — the post appears. Nine seconds to publish one piece of gossip.</p>
 
 <div class="beat">Beat 4.1 · The Blocking Chain</div>
 
@@ -355,8 +346,7 @@
     need to be involved in any of it.</p>
 
 <p>The problem is that all of these steps are synchronous. One thing happens, then the next thing waits for it to
-    finish, then the next thing waits for that. Like a line at a counter where everyone queues up even though they could
-    all be helped at the same time. The user's request is stuck at the back of that line.</p>
+    finish, then the next thing waits for that.</p>
 
 <p>What we need is a way for the post service to say: "I'm done, post is saved" — and then walk away. Let the
     notifications, the emails, the feed updates all happen in the background, independently, without blocking the user's
@@ -374,20 +364,11 @@
 
 <p>This works really well, and it has a nice property: because the job is written in the same database transaction as
     the post, you get atomicity for free. Either both the post and the job are saved, or neither is. You can't save the
-    post and lose the job record. That guarantee matters.</p>
-
-<p>One thing to be careful about: what if the worker picks up a job, starts processing, and crashes halfway through? The
-    job gets retried — which means it might run more than once. So your logic needs to be safe to repeat. Don't send two
-    emails because the worker crashed after the first one.</p>
-
-<p>This DB-backed job queue approach is simple, reliable, and gets you surprisingly far. It's how most teams handle
-    async for a long time. The limits only start showing up later — when the system grows larger, when you have many
-    independent services all needing to react to the same events, and when the volume of jobs is too high for a single
-    table to handle cleanly. But that's a problem for a future version of Gossip.com.</p>
+    post and lose the job record. That guarantee matters. So it's all happy</p>
 
 <div class="beat">Beat 4.3 · WebSocket + Redis Pub/Sub</div>
 
-<p>The job queue fixed the posting experience. User clicks post, 200 milliseconds, done. But now flip to the other side.
+<p>They said that in love amd feeds, every one wants to be the first.
     You're a user sitting on Gossip.com waiting for fresh gossip. How do you find out that someone just posted something
     new? The page has to check. Every few seconds the browser sends a request: "anything new?" Server says no. Three
     seconds later: "anything new?" No. Three seconds later: "anything new?" Still no. This is polling. And it's exactly
@@ -403,8 +384,10 @@
 
 <p>What if we flipped that? Instead of the client asking over and over, you open one persistent connection between the
     client and the server — and keep it open. Now the server can push data the moment something happens. No polling, no
-    lag. Someone posts gossip, the server says "here it is" directly to every connected client. That's WebSocket. Full
-    duplex, persistent connection, server push. The feed feels alive. Users see new posts appear without refreshing.
+    lag. Someone posts gossip, the server says "here it is" directly to every connected client. It's Http long pulling.
+    It works, but it's costly to open an HTTP connection for that long time. So with some magic, after 3way TCP
+    handshake, they upgraded connection to something called WebSocket. It's full duplex, persistent connection, server
+    push. The feed feels alive. Users see new posts appear without refreshing.
     That's what the product was always supposed to feel like.</p>
 
 <p>But then Hope looks at the infrastructure. WebSocket connections are stateful. Each one is a long-lived, persistent
@@ -412,7 +395,7 @@
     posts something new — Server 1 processes it and needs to push the update to every connected user. But User B's
     connection lives on Server 2. Server 1 has no way to reach it directly.</p>
 
-<p>Same problem as Act 2 with sessions. Different layer, exact same shape.</p>
+<p>Same problem with stateful sessions earlier, just different layer.</p>
 
 <p>The solution follows the same logic: move the coordination out of the individual servers into a shared layer. When
     Server 1 needs to broadcast an event, it publishes to a shared channel. Every server subscribes to that channel.
@@ -424,15 +407,12 @@
 <!-- ─── ACT 5 ─── -->
 <div class="act">Act 5 · 2014 · Microservices</div>
 
-<p>By 2014, Gossip.com has a team. Real engineers. Multiple product squads working in parallel — one team on the feed,
-    one on notifications, one on payments. And they all work in the same codebase. One giant application. User
-    management, posts, comments, notifications, payments, feeds — all tangled together. Every feature touches every
-    other feature. Every deploy deploys everything.</p>
+<p>Time went by, by 2014, Gossip.com has a team. Real engineers.</p>
 
 <p>And one Friday afternoon, the notification team pushes a fix. Small change. A regex update for filtering spam. Goes
-    through review, looks fine. Deploy. Within minutes, the payment flow is broken. Users can't check out. Support
-    tickets flood in. The notification team's code somehow broke payments. Two hours to roll back, diagnose, fix. A
-    Friday. It's always a Friday.</p>
+    through review, looks fine. Deploy. Within minutes, the payment flow is broken. Users can't check out. The
+    notification team's code somehow broke payments. Two hours to roll back, diagnose, fix. A Friday. It's always a
+    Friday.</p>
 
 <div class="beat">Beat 5.1 · Service Decomposition + Kafka</div>
 
@@ -440,10 +420,8 @@
     there's no way to be sure it won't affect something completely unrelated. The notification service and the payment
     service share the same process, the same memory, the same deploy pipeline. A bug in one is a bug in all.</p>
 
-<p>So the question is: what if they didn't share any of that? What if each major piece of functionality ran as its own
-    independent service — its own codebase, its own deployment, its own process? The notification service lives on its
-    own. The payment service lives on its own. They don't know about each other's internals. A bug in notifications
-    crashes notifications. Payments keeps running.</p>
+<p>So the question is: what if they didn't share any of that? As people always said "Mind your own business". So each
+    service mind its own business</p>
 
 <p>That's the idea behind microservices. Instead of one large application doing everything, you decompose it into
     smaller services, each responsible for one focused domain. Each service can be deployed independently — the payment
@@ -503,44 +481,26 @@
 
 <div class="beat">Beat 5.2c · OAuth2 / OIDC / SSO</div>
 
-<p>Around this time, product comes to Hope with two requests. First: users are dropping off at signup. Nobody wants to
-    create another account, remember another password. "Can we just add Login with Google?" Second: a company reached
-    out — they want their whole team on Gossip.com, but employees need to log in using their existing company account.
-    Not create new ones.</p>
+<p>Two product requests land at the same time. One: "users drop off at signup, can we add Login with Google?" Two: a
+    company wants their whole team on the platform using their existing company accounts.</p>
 
-<p>Two different requests, same underlying ask: stop making users manage credentials with us. Let someone else handle
-    it.</p>
+<p>Same underlying ask: stop making users manage credentials with us. Building auth in-house means passwords, reset
+    flows, brute force protection, 2FA — all security-critical, none of it Gossip.com's actual product.</p>
 
-<p>Hope looks at what building auth in-house actually means: storing passwords — which need to be hashed correctly.
-    Password reset flows. Brute force protection. Account lockouts. Two-factor. All of it security-critical, none of it
-    Gossip.com's actual product. And all of that work, just to compete with "it already works with my Google
-    account."</p>
-
-<p>The cleaner path: don't own identity — delegate it. The user proves who they are to Google. Google hands back a token
-    saying "I vouch for this person." Gossip.com trusts that token and moves on. No password stored. No credential
-    touched. That's OAuth2 — a framework for letting a trusted third party handle identity on your behalf.</p>
-
-<p>OIDC — OpenID Connect — standardizes what's inside that token. So whether the user comes in through Google, GitHub,
-    or any other provider, your system reads the same structure. One integration pattern, many providers.</p>
-
-<p>For the company that reached out — same thing. Their internal identity provider, Okta or Azure AD, becomes the
-    trusted third party. Employees log in once with their company account and get in. That's SSO — Single Sign-On. Hope
-    didn't build it. He just plugged into what already existed.</p>
+<p>So delegate it. User proves who they are to Google. Google says "I vouch for this person." Gossip.com trusts the
+    token and moves on. That's OAuth2. OIDC standardizes what's inside the token — same structure regardless of
+    provider. And for the company — their identity provider (Okta, Azure AD) does the same thing. Employees log in once
+    with their work account. That's SSO. Hope didn't build any of it. He just plugged in.</p>
 
 <div class="beat">Beat 5.2d · Docker</div>
 
-<p>And then a different kind of pain. A new engineer joins the team. Setting up their local environment takes two days,
-    three Stack Overflow tabs, and at least one "but it works on my machine." They deploy to staging — different OS,
-    different library versions, different everything. The service crashes. Works locally, breaks in staging. Works in
-    staging, breaks in production. Ten services, ten stacks — the Node 18 vs Node 16 situation nobody remembers why
-    happened. Every difference between environments is a potential failure, and with ten services, the combinations are
-    endless.</p>
+<p>Time goes by, Hope starts to hear engineer in the team says "It works on my machine". We all know this and had been
+    there, right? The issue is real, he root problem is that the service and the environment it runs in are separate
+    things. The code is written assuming certain things exist — a specific runtime, specific libraries, specific system
+    dependencies. If the environment doesn't match exactly, behavior changes.. But it doesn't justify. So Hope is being
+    very sarcastic and ask the team to ship their machine. They did</p>
 
-<p>The root problem is that the service and the environment it runs in are separate things. The code is written assuming
-    certain things exist — a specific runtime, specific libraries, specific system dependencies. If the environment
-    doesn't match exactly, behavior changes.</p>
-
-<p>What if the service carried its environment with it? Instead of shipping just the code and hoping the server has
+<p>Instead of shipping just the code and hoping the server has
     everything it needs, you package the code, the runtime, the libraries, the dependencies — everything — into one
     self-contained unit. That unit runs identically everywhere: your laptop, the staging server, production. Same
     environment, guaranteed. That's a container. Docker is what makes building and running them practical. You define
@@ -579,20 +539,14 @@
     each step is its own local transaction — and we plan for failure at every step. When payment fails, we run a
     compensating action: cancel the order, mark it as failed. When the subscription service crashes, we retry. If it
     keeps failing, we issue a refund. Each step has a forward path and a backward path. This is the Saga pattern. Not
-    one transaction — a choreographed sequence of local transactions, each paired with a compensation if anything goes
-    wrong.</p>
+    one transaction — a sequence of local transactions, each paired with a compensation if anything goes wrong.</p>
 
 <div class="beat">Beat 6.2b · Outbox + Idempotency</div>
 
 <p>The Saga is in place. Payments flow, subscriptions activate, compensations fire when things fail. It holds up. For a
-    week. Then a new ticket: "I paid but I waited ten minutes before I got access." Hope checks. The payment record is
+    week. Then a new ticket: "I paid but I still cannot access" Hope checks. The payment record is
     in the database. The event that was supposed to trigger the Subscription service — gone. Never published. Kafka was
-    briefly unreachable at exactly the wrong moment, and nobody noticed because there was no error — the payment still
-    succeeded.</p>
-
-<p>After payment succeeds, the Order service does two things: writes the payment record to its database, then publishes
-    an event to Kafka — "payment completed for order 991." The Subscription service consumes that event and activates
-    access.</p>
+    down silently</p>
 
 <p>Here's the problem. Those two operations — writing to the database and publishing to Kafka — are not the same
     transaction. The database and Kafka are two completely separate systems. There is no atomicity between them. So if
@@ -616,8 +570,8 @@
 
 <p>But "at least once" means sometimes more than once. The relay publishes the event, Kafka receives it, but before
     Kafka's acknowledgement makes it back — the relay crashes. It restarts, sees the event is still marked pending, and
-    publishes it again. Now the Subscription service receives the same "payment completed for order 991" event twice. It
-    activates the subscription twice. Maybe it charges the user twice.</p>
+    publishes it again. Now the Subscription service receives the same event twice. It activates the subscription twice.
+    Maybe it charges the user twice.</p>
 
 <p>So every consumer that processes these events needs to be designed to handle duplicates safely. If you receive the
     same event twice, the second time should produce the same result as the first — not a second action. This property
@@ -654,9 +608,9 @@
     exponential backoff.</p>
 
 <p>But if you have hundreds of service instances all backing off on the same schedule, they all wake up at the same
-    moment and hit the struggling service together. The thundering herd. So you add a small random offset — jitter — to
-    each wait. Now they spread out. The recovering service gets a steady trickle instead of another synchronized
-    stampede.</p>
+    moment and hit the struggling service together and make the target service down again. The thundering herd. So you
+    add a small random offset — jitter — to
+    each wait. So they randomly retry at different time </p>
 
 <p>And at the gateway level, rate limiting. Not every threat comes from inside the system. Sometimes it's a single
     client making too many requests — a misbehaving script, an accidental retry loop. Rate limiting says: you get X
@@ -677,16 +631,14 @@
     distributing the load meant thinking carefully about where the state lives. Stateful became stateless.</p>
 
 <p>2009: the database became the bottleneck. We learned to cache — compute once, remember the answer — and to index —
-    give the database a map instead of making it read everything. And we pushed static content to the edge, as close to
-    users as possible.</p>
+    give the database a map instead of making it read everything.</p>
 
 <p>2011: we broke the synchronous chain. The user shouldn't wait while the server sends emails to strangers. Write a
     job, return immediately, process in the background.</p>
 
 <p>2014: the monolith became a liability. We decomposed it — not because microservices are fashionable, but because
     independent teams needed to move independently. And immediately we hit the distributed systems problem: services
-    can't share a database, but they have to coordinate. We chose availability over perfect consistency, and that choice
-    shaped how everything communicates.</p>
+    can't share a database, but they have to coordinate. We chose availability over perfect consistency.</p>
 
 <p>2017: we learned that distributed transactions don't exist. Not really. We learned to plan for failure at every step,
     to compensate instead of roll back, to never lose an event, and to protect a healthy system from a sick

@@ -62,64 +62,39 @@ const rgb = rgbMap[variant];
     position: relative;
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     overflow: hidden;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    transition: border-color var(--transition-medium), background-color var(--transition-medium), transform var(--transition-medium);
     padding: var(--space-md);
-    animation: fadeInUp 0.6s ease-out both;
-    animation-delay: calc(var(--card-index, 0) * 0.12s);
+    animation: fadeInUp 0.5s ease-out both;
+    animation-delay: calc(var(--card-index, 0) * 0.08s);
     text-align: left;
     height: 100%;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    /* Gradient border */
-    background:
-      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
-      linear-gradient(
-        150deg,
-        rgba(var(--card-rgb), 0.5) 0%,
-        rgba(var(--card-rgb), 0.08) 40%,
-        rgba(255, 255, 255, 0.03) 100%
-      ) border-box;
-    border: 1px solid transparent;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
   }
 
   @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
   .section-card:hover {
-    transform: translateY(-6px);
-    box-shadow:
-      0 20px 48px rgba(0, 0, 0, 0.3),
-      0 0 30px rgba(var(--card-rgb), 0.08);
+    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+    background-color: var(--color-card-bg-hover);
   }
 
   /* Ambient inner glow */
   .card-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-      ellipse at 15% 0%,
-      rgba(var(--card-rgb), 0.1) 0%,
-      transparent 55%
-    );
-    pointer-events: none;
-    z-index: 0;
-    transition: opacity var(--transition-medium);
+    display: none;
   }
 
   .section-card:hover .card-glow {
-    background: radial-gradient(
-      ellipse at 15% 0%,
-      rgba(var(--card-rgb), 0.16) 0%,
-      transparent 55%
-    );
+    display: none;
   }
 
   /* Header: icon + title inline */
@@ -133,35 +108,33 @@ const rgb = rgbMap[variant];
   }
 
   .icon-ring {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(var(--card-rgb), 0.35);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-strong);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(var(--card-rgb), 0.08);
+    background: transparent;
     flex-shrink: 0;
     transition: all var(--transition-medium);
   }
 
   .section-card:hover .icon-ring {
-    background: rgba(var(--card-rgb), 0.14);
-    border-color: rgba(var(--card-rgb), 0.55);
-    box-shadow: 0 0 16px rgba(var(--card-rgb), 0.15);
+    border-color: rgba(var(--card-rgb), 0.5);
   }
 
   .icon-ring i {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     stroke-width: 1.5;
-    color: rgba(var(--card-rgb), 0.9);
-    stroke: rgba(var(--card-rgb), 0.9);
+    color: var(--color-primary);
+    stroke: var(--color-primary);
   }
 
   h3 {
-    font-size: calc(var(--fs-h3) * 0.85);
-    color: rgba(var(--card-rgb), 0.95);
+    font-size: calc(var(--fs-h3) * 0.82);
+    color: var(--color-text);
     font-weight: 600;
     letter-spacing: -0.01em;
     margin: 0;
@@ -186,15 +159,14 @@ const rgb = rgbMap[variant];
     gap: var(--space-xs);
     position: relative;
     z-index: 1;
-    border-top: 1px solid rgba(var(--card-rgb), 0.1);
+    border-top: 1px solid var(--color-border);
     padding-top: var(--space-sm);
     margin-top: auto;
   }
 
   .preview-content {
     font-size: var(--fs-small);
-    color: rgba(var(--card-rgb), 0.45);
-    font-style: italic;
+    color: var(--color-text-faint);
     font-weight: 300;
     line-height: 1.4;
   }
@@ -203,15 +175,15 @@ const rgb = rgbMap[variant];
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    color: rgba(var(--card-rgb), 0.8);
+    color: var(--color-primary);
     font-size: 0.875rem;
     font-weight: 500;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.01em;
     transition: all var(--transition-medium);
   }
 
   .section-card:hover .card-cta {
-    color: rgba(var(--card-rgb), 1);
+    color: var(--color-primary);
   }
 
   .btn-arrow {

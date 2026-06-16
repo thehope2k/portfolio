@@ -2,34 +2,40 @@
   /* Font families */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --font-heading: 'DM Serif Display', serif;
-  --font-alt: 'Poppins', sans-serif;
+  --font-alt: 'Inter', sans-serif; /* legacy alias → Inter (Poppins removed) */
 
-  /* Color system */
-  --color-bg: #0d1117;
-  --color-bg-alt: #10151a;
-  --color-text: #f4f4f4;
-  --color-text-muted: #a0a0a0;
-  --color-primary: #00bfff;
-  --color-primary-rgb: 0, 191, 255;
-  --color-secondary: #00ffcc;
-  --color-secondary-rgb: 0, 255, 204;
-  --color-accent: #e69138;
-  --color-accent-rgb: 230, 145, 56;
-  --color-neutral: #c084fc;
-  --color-neutral-rgb: 192, 132, 252;
-  --color-border: #2a2f35;
-  --color-card-bg: rgba(255, 255, 255, 0.05);
-  --shadow-glow: 0 0 15px rgba(0, 191, 255, 0.15);
+  /* Color system — refined neutrals + one cool accent family */
+  --color-bg: #0c0e10;
+  --color-bg-alt: #111417;
+  --color-text: #ececec;
+  --color-text-muted: #9aa1a8;
+  --color-text-faint: #6b727a;
 
-  /* Tag colors - unified palette */
-  --tag-bg-primary: rgba(0, 191, 255, 0.12);
-  --tag-border-primary: rgba(0, 191, 255, 0.25);
-  --tag-bg-secondary: rgba(0, 191, 255, 0.08);
-  --tag-border-secondary: rgba(0, 191, 255, 0.2);
-  --tag-bg-accent: rgba(0, 191, 255, 0.05);
-  --tag-border-accent: rgba(0, 191, 255, 0.15);
-  --tag-bg-neutral: rgba(0, 191, 255, 0.03);
-  --tag-border-neutral: rgba(0, 191, 255, 0.1);
+  /* Single accent family (cool sky-cyan). accent/neutral repointed here. */
+  --color-primary: #38bdf8;
+  --color-primary-rgb: 56, 189, 248;
+  --color-secondary: #2dd4bf;
+  --color-secondary-rgb: 45, 212, 191;
+  --color-accent: #38bdf8;
+  --color-accent-rgb: 56, 189, 248;
+  --color-neutral: #38bdf8;
+  --color-neutral-rgb: 56, 189, 248;
+
+  --color-border: #20242a;
+  --color-border-strong: #2e343c;
+  --color-card-bg: #111417;
+  --color-card-bg-hover: #161a20;
+  --shadow-glow: none;
+
+  /* Tag colors - unified accent palette */
+  --tag-bg-primary: rgba(56, 189, 248, 0.10);
+  --tag-border-primary: rgba(56, 189, 248, 0.22);
+  --tag-bg-secondary: rgba(56, 189, 248, 0.07);
+  --tag-border-secondary: rgba(56, 189, 248, 0.18);
+  --tag-bg-accent: rgba(56, 189, 248, 0.05);
+  --tag-border-accent: rgba(56, 189, 248, 0.14);
+  --tag-bg-neutral: rgba(56, 189, 248, 0.03);
+  --tag-border-neutral: rgba(56, 189, 248, 0.10);
 
   /* Typography */
   --fs-h1: clamp(1.75rem, 5vw, 3.5rem);
@@ -74,14 +80,16 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-alt);
+  font-family: var(--font-sans);
   line-height: 1.2;
   margin-top: 0;
+  letter-spacing: -0.01em;
 }
 
 h1 {
   font-family: var(--font-heading);
   font-size: var(--fs-h1);
+  letter-spacing: -0.02em;
 }
 
 h2 {
@@ -109,20 +117,18 @@ h3 {
   margin-bottom: var(--space-lg);
 }
 
-/* Card styles */
+/* Card styles — one quiet surface for the whole site */
 .card {
   background-color: var(--color-card-bg);
   border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
   border: 1px solid var(--color-border);
   padding: var(--space-md);
+  transition: border-color var(--transition-medium), background-color var(--transition-medium);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-color: var(--color-border-strong);
+  background-color: var(--color-card-bg-hover);
 }
 
 /* Button styles */

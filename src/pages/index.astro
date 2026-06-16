@@ -1,589 +1,135 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import SectionCard from '../components/SectionCard.astro';
-import { latestContent } from '../config/latest-content';
 ---
 
 <MainLayout title="The Hope - Home">
   <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1>Welcome to my world of ideas.</h1>
-        <p class="lead">Developer. Writer. Thinker.</p>
-        <p class="tagline">Where logic meets imagination.</p>
+    <div class="hero-inner">
+      <h1>Welcome to my world of ideas.</h1>
+      <div class="lead-row">
+        <span class="lead">Developer. Writer. Thinker.</span>
+        <span class="lead-sep" aria-hidden="true">—</span>
+        <span class="tagline">Where logic meets imagination.</span>
       </div>
-
-      <div class="hero-visual">
-        <div class="abstract-art">
-          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <filter id="hero-glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="2.5" result="blur"/>
-                <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            <!-- Outer dashed ring, slow rotation -->
-            <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(0,191,255,0.2)" stroke-width="1" stroke-dasharray="8 5">
-              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="45s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Middle dashed ring, counter-rotation -->
-            <circle cx="150" cy="150" r="103" fill="none" stroke="rgba(0,255,204,0.15)" stroke-width="1" stroke-dasharray="4 10">
-              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="-360 150 150" dur="28s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Inner ring, pulsing opacity -->
-            <circle cx="150" cy="150" r="74" fill="none" stroke="rgba(0,191,255,0.4)" stroke-width="1.5" filter="url(#hero-glow)">
-              <animate attributeName="opacity" values="0.5;0.95;0.5" dur="5s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Innermost ring -->
-            <circle cx="150" cy="150" r="44" fill="none" stroke="rgba(0,255,204,0.35)" stroke-width="1" filter="url(#hero-glow)"/>
-            <!-- Core glow -->
-            <circle cx="150" cy="150" r="22" fill="rgba(0,191,255,0.06)">
-              <animate attributeName="r" values="22;27;22" dur="4s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Core dot -->
-            <circle cx="150" cy="150" r="6" fill="rgba(0,191,255,0.75)" filter="url(#hero-glow)">
-              <animate attributeName="opacity" values="0.75;1;0.75" dur="2.5s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Orbiting dot 1 on outer ring -->
-            <circle cx="280" cy="150" r="5" fill="rgba(0,191,255,0.9)" filter="url(#hero-glow)">
-              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="10s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Orbiting dot 2 on middle ring -->
-            <circle cx="253" cy="150" r="4" fill="rgba(0,255,204,0.85)" filter="url(#hero-glow)">
-              <animateTransform attributeName="transform" type="rotate" from="120 150 150" to="-240 150 150" dur="17s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Orbiting dot 3 on inner ring -->
-            <circle cx="224" cy="150" r="3" fill="rgba(0,191,255,0.8)" filter="url(#hero-glow)">
-              <animateTransform attributeName="transform" type="rotate" from="240 150 150" to="600 150 150" dur="24s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Scattered accent dots -->
-            <circle cx="55" cy="88" r="1.5" fill="rgba(0,191,255,0.35)"/>
-            <circle cx="242" cy="52" r="1.5" fill="rgba(0,255,204,0.3)"/>
-            <circle cx="78" cy="232" r="2" fill="rgba(0,191,255,0.3)"/>
-            <circle cx="236" cy="248" r="1.5" fill="rgba(0,255,204,0.25)"/>
-            <circle cx="266" cy="190" r="1" fill="rgba(0,191,255,0.25)"/>
-            <circle cx="42" cy="172" r="1" fill="rgba(0,255,204,0.25)"/>
-          </svg>
-          <div class="glow-effect"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="floating-nav">
-      <a href="/professional" class="nav-item">⇾ Professional</a>
-      <a href="/personal" class="nav-item">⇾ Personal</a>
-      <a href="/growth" class="nav-item">⇾ Growth</a>
-    </div>
-
-    <div class="scroll-cue">
-      <span class="arrow-icon">↓</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <section class="intro">
-    <h2>About This Site</h2>
-    <p class="intro-text">
-      This portfolio is divided into three main sections that represent different aspects of my life:
-    </p>
-
-    <div class="sections-grid">
-      <SectionCard
-        title="Professional"
-        description="My resume, skills, projects, and professional background. This section is designed for recruiters, collaborators, or anyone interested in my technical abilities."
-        icon="briefcase"
-        previewText={`Latest project → '${latestContent.professional.title}'`}
-        buttonText="View Professional Profile"
-        buttonLink="/professional"
-        variant="professional"
-      />
-
-      <SectionCard
-        title="Personal"
-        description="A space for my creative writing, personal projects, and thoughts. Here I share stories, reflections, and creative endeavors outside of my professional work."
-        icon="pen-tool"
-        previewText={`Latest writing → '${latestContent.personal.title}'`}
-        buttonText="Read My Writing"
-        buttonLink="/personal"
-        variant="personal"
-      />
-
-      <SectionCard
-        title="Growth"
-        description="Blog-style posts about my learning journey, technical tutorials, book notes, and reflections on personal and professional development."
-        icon="sprout"
-        previewText={`Latest blog → '${latestContent.growth.title}'`}
-        buttonText="Explore My Learning"
-        buttonLink="/growth"
-        variant="growth"
-      />
+      <p class="signature" id="signature" aria-live="polite">If you have a chance, be kind.</p>
     </div>
   </section>
 </MainLayout>
+
+<script>
+  const phrases = [
+    "If you have a chance, be kind.",
+    "Live a little.",
+    "Be present.",
+    "Stay curious.",
+  ];
+  const el = document.getElementById('signature');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (el && !reduceMotion) {
+    let i = 0;
+    setInterval(() => {
+      el.style.opacity = '0';
+      setTimeout(() => {
+        i = (i + 1) % phrases.length;
+        el.textContent = phrases[i];
+        el.style.opacity = '';
+      }, 600);
+    }, 4500);
+  }
+</script>
 
 
 <style>
   .hero {
     position: relative;
-    min-height: 80vh;
-    padding: 0;
-    margin-bottom: 3rem;
-    overflow: hidden;
+    min-height: calc(100svh - var(--header-height));
     display: flex;
     flex-direction: column;
-    justify-content: center;
     color: var(--color-text);
-    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
   }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 20% 30%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(0, 255, 204, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-  }
-
-  .hero-content {
-    position: relative;
+  .hero-inner {
+    flex: 1;
     width: 100%;
     max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: var(--space-xl) var(--space-lg);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-  }
-
-  .hero-text {
-    text-align: left;
-    padding-right: var(--space-lg);
+    padding: var(--space-xl) 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    animation: heroFade 0.7s ease-out both;
   }
 
-  h1 {
-    font-size: clamp(1.75rem, 4vw, 3.5rem); /* Improved responsive scaling */
-    margin-bottom: var(--space-sm); /* Reduced for better mobile spacing */
-    background: linear-gradient(120deg, var(--color-primary) 20%, var(--color-secondary) 80%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1.1;
+  @keyframes heroFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, 4rem);
+    margin: 0 0 var(--space-md);
+    color: var(--color-text);
+    line-height: 1.08;
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 10px rgba(var(--color-primary-rgb), 0.2);
+  }
+
+  .lead-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem var(--space-sm);
   }
 
   .lead {
-    font-size: clamp(1rem, 2.5vw, 1.75rem); /* Improved responsive scaling */
+    font-size: clamp(1.05rem, 2.5vw, 1.6rem);
     color: var(--color-text);
-    margin-bottom: var(--space-sm); /* Reduced for better mobile spacing */
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .lead-sep {
+    font-size: clamp(1.05rem, 2.5vw, 1.6rem);
+    color: var(--color-text-faint);
     font-weight: 300;
-    letter-spacing: 0.05em;
   }
 
   .tagline {
-    font-size: clamp(0.85rem, 1.8vw, 1.25rem); /* Improved responsive scaling */
+    font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+    color: var(--color-text-muted);
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .signature {
+    margin: calc(var(--space-xl) * 1.2) 0 0;
+    text-align: left;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
     color: var(--color-text-muted);
     font-style: italic;
-    margin-top: var(--space-md); /* Reduced from space-lg for better mobile spacing */
-    position: relative;
-    padding-left: 1.5rem;
-  }
-
-  .tagline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 1rem;
-    height: 1px;
-    background: var(--color-primary);
-  }
-
-  .hero-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
-  .abstract-art {
-    position: relative;
-    width: 100%;
-    max-width: min(350px, 100%);
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .abstract-art svg {
-    width: 100%;
-    height: auto;
-    z-index: 1;
-  }
-
-  .glow-effect {
-    position: absolute;
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle at center,
-      rgba(var(--color-primary-rgb), 0.15) 0%,
-      rgba(var(--color-secondary-rgb), 0.05) 50%,
-      transparent 70%
-    );
-    filter: blur(20px);
-    opacity: 0.8;
-    z-index: 0;
-    animation: pulse 6s ease-in-out infinite;
-  }
-
-  .floating-nav {
-    position: absolute;
-    bottom: 4rem;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: clamp(0.5rem, 1.5vw, 2rem); /* Further reduced gap for better mobile layout */
-    z-index: 3;
-    padding: 0 1rem;
-    box-sizing: border-box;
-    flex-wrap: wrap; /* Allow buttons to wrap on very small screens */
-  }
-
-  .nav-item {
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 400;
-    padding: 0.55rem 1.4rem;
-    border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 38px;
-  }
-
-  .nav-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15), 0 0 10px rgba(var(--color-primary-rgb), 0.2);
-    color: var(--color-primary);
-    border-color: rgba(var(--color-primary-rgb), 0.3);
-  }
-
-  .scroll-cue {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: var(--color-text-muted);
-    opacity: 0.7;
-    animation: fade-in-out 2s ease-in-out infinite;
-    z-index: 2; /* Lower z-index to ensure it's below the buttons */
-  }
-
-  .arrow-icon {
-    display: block;
-    font-size: 1.2rem; /* Smaller font size */
-    color: var(--color-primary);
-    margin-bottom: 0.25rem; /* Reduced margin */
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 2rem; /* Shorter line */
-    background: linear-gradient(to bottom, var(--color-primary), transparent);
-    margin: 0.25rem auto 0; /* Reduced margin */
-  }
-
-  @keyframes fade-in-out {
-    0%, 100% { opacity: 0.3; transform: translateY(0) translateX(-50%); }
-    50% { opacity: 0.7; transform: translateY(-3px) translateX(-50%); } /* Reduced vertical movement */
-  }
-
-  .intro {
-    margin: var(--space-xl) 0;
-    position: relative;
-  }
-
-  .intro::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(0, 191, 255, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(0, 255, 204, 0.03) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .intro h2 {
-    font-size: var(--fs-h2);
-    margin-bottom: var(--space-md);
-    color: var(--color-text);
-    position: relative;
-    display: inline-block;
-  }
-
-  .intro h2::after {
-    content: '';
-    position: absolute;
-    bottom: -0.5rem;
-    left: 0;
-    width: 50%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--color-primary), transparent);
-  }
-
-  .intro-text {
-    font-size: var(--fs-body);
-    color: var(--color-text-muted);
-    max-width: 800px;
-    margin-bottom: var(--space-xl);
-  }
-
-  .sections-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-    gap: var(--space-lg); /* Reduced gap */
-    margin-top: var(--space-lg); /* Reduced margin */
-    position: relative;
-  }
-
-  /* Subtle background connection between cards */
-  .sections-grid::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-      radial-gradient(circle at 30% 50%, rgba(var(--color-primary-rgb), 0.02) 0%, transparent 70%),
-      radial-gradient(circle at 70% 50%, rgba(var(--color-secondary-rgb), 0.02) 0%, transparent 70%);
-    z-index: 0;
-    opacity: 0.5;
-  }
-
-  /* Card variant z-index (applied to SectionCard root via Astro parent scoping) */
-  .section-card:hover {
-    z-index: 10 !important;
-  }
-
-  /* Responsive breakpoints */
-  @media (min-width: 1440px) {
-    .hero-content {
-      gap: var(--space-xl);
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .hero {
-      padding-bottom: var(--space-xl);
-    }
-
-    .hero-content {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: var(--space-md);
-    }
-
-    .hero-text {
-      padding-right: 0;
-      order: 1;
-    }
-
-    .hero-visual {
-      order: 0;
-      max-width: 240px;
-      margin: 0 auto;
-    }
-
-    .tagline {
-      display: inline-block;
-      padding-left: 0;
-    }
-
-    .tagline::before {
-      display: none;
-    }
-
-    /* Fix: static nav so it never overlaps text at tablet widths */
-    .floating-nav {
-      position: static;
-      margin-top: var(--space-lg);
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--space-sm);
-      padding: 0 var(--space-md);
-    }
-
-    .scroll-cue {
-      display: none;
-    }
+    letter-spacing: 0.01em;
+    transition: opacity 0.6s ease;
   }
 
   @media (max-width: 768px) {
-    .hero {
-      min-height: 100svh;
-      padding-top: var(--space-lg);
-      padding-bottom: var(--space-xl);
-      justify-content: center;
+    .hero-inner {
+      padding: var(--space-lg) 0;
     }
+  }
 
-    .hero-content {
-      padding: var(--space-md);
-      gap: 0;
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-
-    .hero-text {
-      padding: 0 var(--space-sm);
-      order: 1;
-    }
-
-    /* Hide the visual on mobile — text is the focus */
-    .hero-visual {
+  @media (max-width: 600px) {
+    .lead-sep {
       display: none;
     }
 
-    /* Float nav becomes a normal flow element on mobile */
-    .floating-nav {
-      position: static;
-      margin-top: var(--space-lg);
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-xs);
-      padding: 0 var(--space-md);
-    }
-
-    .nav-item {
-      width: auto;
-      min-width: 160px;
-      padding: 0.65rem 2rem;
-      min-height: 44px;
-      font-size: 0.9rem;
-    }
-
-    .scroll-cue {
-      display: none;
-    }
-
-    .sections-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-lg);
+    .tagline {
+      flex-basis: 100%;
     }
   }
 
   @media (max-width: 480px) {
-    .hero {
-      min-height: 100svh;
-      padding-top: var(--space-md);
-      padding-bottom: var(--space-lg);
-    }
-
-    .hero-content {
-      padding: var(--space-sm);
-    }
-
-    .hero-text {
-      padding: 0;
-    }
-
-    h1 {
-      font-size: clamp(1.5rem, 8vw, 2.5rem);
-      margin-bottom: var(--space-xs);
-    }
-
-    .lead {
-      font-size: clamp(0.9rem, 4.5vw, 1.5rem);
-      margin-bottom: var(--space-xs);
-    }
-
-    .tagline {
-      font-size: clamp(0.8rem, 3.5vw, 1rem);
-      margin-top: var(--space-sm);
-    }
-
-    .nav-item {
-      width: min(200px, 90%);
-    }
-
-    .sections-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Extra small devices */
-  @media (max-width: 320px) {
-    .hero {
-      min-height: 100svh;
-      padding-top: var(--space-xs);
-      padding-bottom: var(--space-md);
-    }
-
-    .hero-content {
-      padding: var(--space-xs);
-    }
-
-    h1 {
-      font-size: clamp(1.25rem, 9vw, 1.8rem);
-      margin-bottom: 0.3rem;
-    }
-
-    .lead {
-      font-size: clamp(0.85rem, 5vw, 1.2rem);
-      margin-bottom: 0.3rem;
-    }
-
-    .tagline {
-      font-size: clamp(0.75rem, 4vw, 0.9rem);
-      margin-top: 0.5rem;
-    }
-
-    .nav-item {
-      width: min(160px, 90%);
-      font-size: 0.85rem;
-    }
-
-    .intro {
-      margin: var(--space-md) 0;
-    }
-
-    .intro-text {
-      margin-bottom: var(--space-md);
-    }
-
-    .sections-grid {
-      gap: var(--space-sm);
+    .hero h1 {
+      font-size: clamp(1.75rem, 9vw, 2.5rem);
     }
   }
 </style>

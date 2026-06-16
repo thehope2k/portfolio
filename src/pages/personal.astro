@@ -7,34 +7,22 @@ import WritingCard from '../components/WritingCard.astro';
 <MainLayout title="The Hope - Personal Writing" description="Creative writing, personal projects, and thoughts">
   <div class="personal-header">
     <h1>Personal Writing</h1>
-    <p class="lead">A space for creative writing, personal projects, and thoughts</p>
+    <p class="lead">A space for messy writing and unfiltered opinions</p>
   </div>
 
   <section class="writing-philosophy">
     <SectionHeader title="My Writing Philosophy" />
     <div class="philosophy-content">
-      <div class="philosophy-text">
-        <p>
-          Writing is a way for me to explore ideas, process experiences, and share perspectives.
-          I believe in the power of storytelling to connect people and create understanding.
-          Whether it's fiction, personal essays, or reflections on life, I write to discover
-          and to communicate what matters most to me.
-        </p>
-        <p>
-          In this section, you'll find a collection of my personal writing projects, ranging from
-          short stories to longer reflections on various topics. I hope you find something that
-          resonates with you.
-        </p>
-      </div>
-      <div class="philosophy-visual">
-        <div class="quote-block">
-          <i data-lucide="quote"></i>
-          <blockquote>
-            "Writing is thinking. To write well is to think clearly. That's why it's so hard."
-            <cite>— David McCullough</cite>
-          </blockquote>
-        </div>
-      </div>
+      <p class="philosophy-statement">
+        Writing is where I put the things I can't say out loud — a quiet place to grumble
+        about someone or something I'd never say to their face. Sometimes it's just me
+        trying to think more clearly. And every now and then, almost by accident,
+        something here turns out to be useful to someone else.
+      </p>
+      <blockquote class="philosophy-quote">
+        “Writing is thinking. To write well is to think clearly. That's why it's so hard.”
+        <cite>— David McCullough</cite>
+      </blockquote>
     </div>
   </section>
 
@@ -48,54 +36,39 @@ import WritingCard from '../components/WritingCard.astro';
 
   <section class="writings-section">
     <SectionHeader title="Latest Writings" />
-    <div class="writings-grid">
-      <article class="writing-card">
-        <div class="writing-content">
-          <h3>Cái nóng</h3>
-          <div class="writing-meta">
-            <span class="writing-date">April 26, 2024</span>
-            <div class="writing-tags">
-              <span class="tag tag-primary">Essay</span>
-            </div>
-          </div>
-          <p class="writing-excerpt">
+    <div class="writing-list">
+      <a href="/personal/cai-nong" class="entry">
+        <div class="entry-body">
+          <span class="entry-meta">April 26, 2024 · Essay</span>
+          <h3 class="entry-title">Cái nóng</h3>
+          <p class="entry-excerpt">
             Một tản văn về những ngày nắng nóng và những suy nghĩ dịu lại giữa mùa hạ ở Hà Nội.
           </p>
-          <a href="/personal/cai-nong" class="read-more">Read More →</a>
         </div>
-      </article>
+        <span class="entry-arrow" aria-hidden="true">→</span>
+      </a>
 
-      <article class="writing-card">
-        <div class="writing-content">
-          <h3>Một (vài) người xếp</h3>
-          <div class="writing-meta">
-            <span class="writing-date">March 6, 2025</span>
-            <div class="writing-tags">
-              <span class="tag tag-primary">Essay</span>
-            </div>
-          </div>
-          <p class="writing-excerpt">
-              Một câu chuyện nhỏ về một (vài) người xếp.
+      <a href="/personal/mot-vai-nguoi-xep" class="entry">
+        <div class="entry-body">
+          <span class="entry-meta">March 6, 2025 · Essay</span>
+          <h3 class="entry-title">Một (vài) người xếp</h3>
+          <p class="entry-excerpt">
+            Một câu chuyện nhỏ về một (vài) người xếp.
           </p>
-          <a href="/personal/mot-vai-nguoi-xep" class="read-more">Read More →</a>
         </div>
-      </article>
+        <span class="entry-arrow" aria-hidden="true">→</span>
+      </a>
 
-      <article class="writing-card">
-        <div class="writing-content">
-          <h3>Một bữa no</h3>
-          <div class="writing-meta">
-            <span class="writing-date">April 6, 2024</span>
-            <div class="writing-tags">
-              <span class="tag tag-primary">Essay</span>
-            </div>
-          </div>
-          <p class="writing-excerpt">
+      <a href="/personal/mot-bua-no" class="entry">
+        <div class="entry-body">
+          <span class="entry-meta">April 6, 2024 · Essay</span>
+          <h3 class="entry-title">Một bữa no</h3>
+          <p class="entry-excerpt">
             Một bữa cơm gia đình bình dị khiến tôi chợt nhận ra mình "giàu" theo một cách khác.
           </p>
-          <a href="/personal/mot-bua-no" class="read-more">Read More →</a>
         </div>
-      </article>
+        <span class="entry-arrow" aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 </MainLayout>
@@ -109,6 +82,8 @@ import WritingCard from '../components/WritingCard.astro';
   .lead {
     font-size: 1.25rem;
     color: var(--color-secondary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
 
   section {
@@ -128,65 +103,34 @@ import WritingCard from '../components/WritingCard.astro';
   }
 
   .philosophy-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: var(--space-lg);
-    align-items: center;
+    max-width: 920px;
   }
 
-  .philosophy-text {
-    font-size: var(--fs-body);
-    color: var(--color-text-muted);
-    line-height: 1.8;
-  }
-
-  .philosophy-text p {
-    margin-bottom: var(--space-md);
-  }
-
-  .philosophy-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .quote-block {
-    background-color: rgba(var(--color-primary-rgb), 0.05);
-    border-left: 3px solid var(--color-primary);
-    padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-md);
-    position: relative;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .quote-block i {
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 30px;
-    height: 30px;
-    color: var(--color-primary);
-    background-color: var(--color-bg);
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .quote-block blockquote {
-    font-family: var(--font-alt);
-    font-style: italic;
-    font-size: calc(var(--fs-body) * 1.1);
+  .philosophy-statement {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
     color: var(--color-text);
+    line-height: 1.75;
+    font-weight: 300;
+    text-align: left;
+    margin: 0 0 var(--space-lg);
+  }
+
+  .philosophy-quote {
+    border-left: 2px solid var(--color-primary);
+    padding-left: var(--space-md);
     margin: 0;
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
     line-height: 1.6;
   }
 
-  .quote-block cite {
+  .philosophy-quote cite {
     display: block;
-    margin-top: var(--space-sm);
+    margin-top: var(--space-xs);
     font-size: var(--fs-small);
-    color: var(--color-text-muted);
-    text-align: right;
+    color: var(--color-text-faint);
+    font-style: normal;
   }
 
   .section-divider {
@@ -223,147 +167,71 @@ import WritingCard from '../components/WritingCard.astro';
     stroke-width: 1.5;
   }
 
-  .writings-grid {
+  /* Editorial list rows */
+  .writing-list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .entry {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-lg);
-  }
-
-  .writing-card {
-    --card-rgb: 0, 255, 204;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium), background var(--transition-medium);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    position: relative;
-    background:
-      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
-      linear-gradient(170deg, rgba(var(--card-rgb), 0.45) 0%, rgba(var(--card-rgb), 0.08) 50%, rgba(255,255,255,0.04) 100%) border-box;
-    border: 1px solid transparent;
-  }
-
-  .writing-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22), 0 0 20px rgba(var(--card-rgb), 0.08);
-    background:
-      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
-      linear-gradient(170deg, rgba(var(--card-rgb), 0.65) 0%, rgba(var(--card-rgb), 0.14) 50%, rgba(255,255,255,0.06) 100%) border-box;
-  }
-
-  .writing-card::before {
-    display: none;
-  }
-
-  .writing-content {
-    padding: var(--space-md);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .writing-card h3 {
-    font-size: clamp(1.05rem, 2.5vw, 1.4rem);
-    margin-bottom: var(--space-sm);
-    color: var(--color-primary);
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    max-height: 2.6em;
-  }
-
-  .writing-meta {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-    font-size: var(--fs-small);
-    color: var(--color-text-muted);
-  }
-
-  .writing-date {
-    display: flex;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 4px;
+    gap: var(--space-md);
+    margin: 0 calc(var(--space-sm) * -1);
+    padding: var(--space-md) var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: inherit;
+    transition: padding var(--transition-medium), background-color var(--transition-medium);
   }
 
-  .writing-date::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background-color: var(--color-primary);
+  .entry:hover {
+    padding-left: calc(var(--space-sm) + var(--space-xs));
+    background-color: var(--color-card-bg);
   }
 
-  .writing-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+  .entry-meta {
+    display: block;
+    font-size: var(--fs-small);
+    color: var(--color-primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
   }
 
-  .writing-excerpt {
-    margin-bottom: var(--space-md);
-    line-height: 1.7;
+  .entry-title {
+    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+    color: var(--color-text);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+    transition: color var(--transition-fast);
+  }
+
+  .entry:hover .entry-title {
+    color: var(--color-primary);
+  }
+
+  .entry-excerpt {
+    margin: var(--space-xs) 0 0;
+    line-height: 1.6;
     color: var(--color-text-muted);
     font-size: var(--fs-body);
-    flex: 1;
   }
 
-  .read-more {
-    display: inline-flex;
-    align-items: center;
+  .entry-arrow {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-medium), color var(--transition-medium);
+  }
+
+  .entry:hover .entry-arrow {
     color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 500;
-    margin-top: auto;
-    transition: all var(--transition-fast);
-    padding: var(--space-xs) 0;
-    position: relative;
-  }
-
-  .read-more::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-primary);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform var(--transition-medium);
-  }
-
-  .read-more:hover {
-    color: var(--color-secondary);
-  }
-
-  .read-more:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-    background-color: var(--color-secondary);
+    transform: translateX(6px);
   }
 
   @media (max-width: 768px) {
-    .philosophy-content {
-      grid-template-columns: 1fr;
-      gap: var(--space-md);
-    }
-
-    .philosophy-visual {
-      order: -1;
-      margin-bottom: var(--space-md);
-    }
-
-    .quote-block {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
     .section-divider {
       margin: var(--space-lg) 0;
     }
@@ -372,23 +240,17 @@ import WritingCard from '../components/WritingCard.astro';
       max-width: 100px;
     }
 
-    .writings-grid {
+    .entry {
       grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+
+    .entry-arrow {
+      display: none;
     }
   }
 
   @media (max-width: 480px) {
-    .quote-block {
-      padding: var(--space-sm) var(--space-md);
-    }
-
-    .quote-block i {
-      width: 24px;
-      height: 24px;
-      top: -12px;
-      left: -12px;
-    }
-
     .divider-line {
       max-width: 60px;
     }
@@ -403,8 +265,8 @@ import WritingCard from '../components/WritingCard.astro';
       height: 16px;
     }
 
-    .writing-content {
-      padding: var(--space-sm) var(--space-md);
+    .entry {
+      padding: var(--space-md) 0;
     }
   }
 </style>

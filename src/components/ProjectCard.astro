@@ -7,6 +7,8 @@ interface Props {
   technologies: string[];
   githubUrl?: string;
   demoUrl?: string;
+  demoDisabled?: boolean;
+  comingSoon?: boolean;
   class?: string;
 }
 
@@ -16,6 +18,8 @@ const {
   technologies,
   githubUrl,
   demoUrl,
+  demoDisabled = false,
+  comingSoon = false,
   class: className = ''
 } = Astro.props;
 ---
@@ -30,15 +34,23 @@ const {
       ))}
     </div>
     <div class="project-links">
-      {githubUrl && (
-        <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`GitHub repository for ${title}`}>
-          GitHub
-        </a>
-      )}
-      {demoUrl && (
-        <a href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Live demo for ${title}`}>
-          Live Demo
-        </a>
+      {comingSoon ? (
+        <span class="coming-soon">Coming soon</span>
+      ) : (
+        <>
+          {githubUrl && (
+            <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`GitHub repository for ${title}`}>
+              GitHub
+            </a>
+          )}
+          {demoUrl && !demoDisabled ? (
+            <a href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Live demo for ${title}`}>
+              Live Demo
+            </a>
+          ) : (
+            <span class="link-disabled" aria-disabled="true">Live Demo</span>
+          )}
+        </>
       )}
     </div>
   </div>
@@ -46,31 +58,25 @@ const {
 
 <style>
   .project-card {
-    --card-rgb: 0, 191, 255;
+    --card-rgb: 56, 189, 248;
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     overflow: hidden;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium), background var(--transition-medium);
-    background:
-      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
-      linear-gradient(170deg, rgba(var(--card-rgb), 0.45) 0%, rgba(var(--card-rgb), 0.08) 50%, rgba(255, 255, 255, 0.04) 100%) border-box;
-    border: 1px solid transparent;
+    transition: border-color var(--transition-medium), background-color var(--transition-medium), transform var(--transition-medium);
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
   }
 
   .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow:
-      0 14px 36px rgba(0, 0, 0, 0.22),
-      0 0 20px rgba(var(--card-rgb), 0.08);
-    background:
-      linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
-      linear-gradient(170deg, rgba(var(--card-rgb), 0.65) 0%, rgba(var(--card-rgb), 0.14) 50%, rgba(255, 255, 255, 0.06) 100%) border-box;
+    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+    background-color: var(--color-card-bg-hover);
   }
 
   .project-content {
-    padding: var(--space-md);
+    padding: var(--space-lg);
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -78,26 +84,10 @@ const {
 
   h3 {
     margin-bottom: var(--space-sm);
-    color: var(--color-primary);
-    font-size: calc(var(--fs-h3) * 0.9);
-    position: relative;
-    display: inline-block;
-  }
-
-  h3::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 36px;
-    height: 2px;
-    background: var(--color-primary);
-    opacity: 0.6;
-    transition: width var(--transition-medium);
-  }
-
-  .project-card:hover h3::after {
-    width: 56px;
+    color: var(--color-text);
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.35;
   }
 
   .project-description {
@@ -116,6 +106,7 @@ const {
 
   .project-links {
     display: flex;
+    align-items: center;
     gap: var(--space-md);
     margin-top: auto;
     padding-top: var(--space-sm);
@@ -167,6 +158,26 @@ const {
     transform: scaleX(1);
     transform-origin: left;
     background-color: var(--color-secondary);
+  }
+
+  .link-disabled {
+    color: var(--color-text-faint);
+    font-weight: 500;
+    font-size: var(--fs-body);
+    padding: var(--space-xs) 0;
+    cursor: not-allowed;
+    text-decoration: line-through;
+    text-decoration-color: var(--color-border-strong);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .coming-soon {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--color-text-faint);
+    font-style: italic;
+    padding: var(--space-xs) 0;
   }
 
   @media (max-width: 768px) {

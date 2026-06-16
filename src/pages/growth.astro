@@ -6,32 +6,22 @@ import SectionHeader from "../components/SectionHeader.astro";
 <MainLayout title="The Hope - Growth & Learning" description="Learning notes, reflections, tutorials, and knowledge sharing">
   <div class="growth-header">
     <h1>Growth & Learning</h1>
-    <p class="lead">A collection of my learning notes, reflections, and tutorials</p>
+    <p class="lead">A collection of learning notes, shared talks, and so on…</p>
   </div>
 
   <section class="learning-philosophy">
     <SectionHeader title="My Learning Philosophy" />
     <div class="philosophy-content">
-      <div class="philosophy-text">
-        <p>
-          I believe that continuous learning is essential for personal and professional growth.
-          This section is dedicated to sharing what I learn along the way, from technical tutorials
-          to reflections on books, courses, and experiences.
-        </p>
-        <p>
-          My approach to learning is based on curiosity, experimentation, and sharing knowledge.
-          I learn best by doing, teaching others, and reflecting on both successes and failures.
-        </p>
-      </div>
-      <div class="philosophy-visual">
-        <div class="quote-block">
-          <i data-lucide="lightbulb"></i>
-          <blockquote>
-            "The beautiful thing about learning is that nobody can take it away from you."
-            <cite>— B.B. King</cite>
-          </blockquote>
-        </div>
-      </div>
+      <p class="philosophy-statement">
+        Curiosity is the engine behind pretty much everything I do — I learn things because
+        I can't leave a question alone. And one of the things that makes me happiest is
+        realizing I'm better at something than I was before — continuous learning is what
+        keeps that happening.
+      </p>
+      <blockquote class="philosophy-quote">
+        “The beautiful thing about learning is that nobody can take it away from you.”
+        <cite>— B.B. King</cite>
+      </blockquote>
     </div>
   </section>
 
@@ -45,84 +35,50 @@ import SectionHeader from "../components/SectionHeader.astro";
 
   <section class="posts-section">
     <SectionHeader title="Latest Posts" />
-    <div class="posts-grid">
-      <article class="post-card">
-        <div class="post-content">
-          <h3>Scalable Software Systems</h3>
-          <div class="post-meta">
-            <span class="post-date">Interactive Presentation</span>
-            <div class="post-tags">
-              <span class="post-tag">System Design</span>
-              <span class="post-tag">Distributed Systems</span>
-              <span class="post-tag">Architecture</span>
-            </div>
-          </div>
-          <p class="post-excerpt">
+    <div class="writing-list">
+      <a href="/talks/scalable-systems.html" class="entry">
+        <div class="entry-body">
+          <span class="entry-meta">Interactive Presentation · System Design · Architecture</span>
+          <h3 class="entry-title">Scalable Software Systems</h3>
+          <p class="entry-excerpt">
             A story-driven talk following Hope building a social platform from 2003 to now — each act introduces a real pain point, then shows what technology the world invented to solve it.
           </p>
-          <a href="/talks/scalable-systems.html" class="read-more">View Presentation →</a>
         </div>
-      </article>
+        <span class="entry-arrow" aria-hidden="true">→</span>
+      </a>
 
-      <article class="post-card">
-        <div class="post-content">
-          <h3>Bad experiences teach us better than good ones</h3>
-          <div class="post-meta">
-            <span class="post-date">Aug 5, 2024</span>
-            <div class="post-tags">
-              <span class="post-tag">Career</span>
-              <span class="post-tag">Interviews</span>
-              <span class="post-tag">Personal Growth</span>
-            </div>
-          </div>
-          <p class="post-excerpt">
-            A personal story about a job interview that taught me valuable lessons about interviewing and company culture.
-            Learn what not to do when interviewing candidates from my own awkward experience.
+      <a href="/growth/bad-experiences-job-interview" class="entry">
+        <div class="entry-body">
+          <span class="entry-meta">Aug 5, 2024 · Career · Interviews</span>
+          <h3 class="entry-title">Bad experiences teach us better than good ones</h3>
+          <p class="entry-excerpt">
+            A personal story about a job interview that taught me valuable lessons about interviewing and company culture — what not to do when interviewing candidates, from my own awkward experience.
           </p>
-          <a href="/growth/bad-experiences-job-interview" class="read-more">Read More →</a>
         </div>
-      </article>
+        <span class="entry-arrow" aria-hidden="true">→</span>
+      </a>
 
-      <article class="post-card">
-        <div class="post-content">
-          <h3>Book Notes: Atomic Habits</h3>
-          <div class="post-meta">
-            <span class="post-date">Unpublished</span>
-            <div class="post-tags">
-              <span class="post-tag">Books</span>
-              <span class="post-tag">Productivity</span>
-              <span class="post-tag">Personal Growth</span>
-            </div>
-          </div>
-          <p class="post-excerpt">
-            My notes and takeaways from James Clear's "Atomic Habits." Learn how small changes
-            can lead to remarkable results, and how to build systems that make good habits inevitable
-            and bad habits impossible.
+      <div class="entry is-disabled">
+        <div class="entry-body">
+          <span class="entry-meta">Unpublished · Books · Productivity</span>
+          <h3 class="entry-title">Book Notes: Atomic Habits</h3>
+          <p class="entry-excerpt">
+            My notes and takeaways from James Clear's “Atomic Habits” — how small changes compound into remarkable results, and how to build systems that make good habits inevitable.
           </p>
-          <p class="unpublished-note">Unpublished — coming soon.</p>
-          <span class="read-more disabled" aria-disabled="true">Coming soon</span>
         </div>
-      </article>
+        <span class="entry-soon">Coming soon</span>
+      </div>
 
-      <article class="post-card">
-        <div class="post-content">
-          <h3>Review Book: The joy off less</h3>
-          <div class="post-meta">
-            <span class="post-date">Unpublished</span>
-            <div class="post-tags">
-              <span class="post-tag">Books</span>
-              <span class="post-tag">Review</span>
-              <span class="post-tag">Minimalism</span>
-            </div>
-          </div>
-          <p class="post-excerpt">
-            Reflections and key takeaways from a practical minimalism book—on decluttering, simplifying,
-            and focusing on what truly matters. Personal notes on applying minimalism in daily life.
+      <div class="entry is-disabled">
+        <div class="entry-body">
+          <span class="entry-meta">Unpublished · Books · Minimalism</span>
+          <h3 class="entry-title">Review Book: The Joy of Less</h3>
+          <p class="entry-excerpt">
+            Reflections and key takeaways from a practical minimalism book — on decluttering, simplifying, and focusing on what truly matters in daily life.
           </p>
-          <p class="unpublished-note">Unpublished — coming soon.</p>
-          <span class="read-more disabled" aria-disabled="true">Coming soon</span>
         </div>
-      </article>
+        <span class="entry-soon">Coming soon</span>
+      </div>
     </div>
   </section>
 
@@ -137,6 +93,8 @@ import SectionHeader from "../components/SectionHeader.astro";
   .lead {
     font-size: 1.25rem;
     color: var(--color-secondary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
 
   section {
@@ -156,65 +114,34 @@ import SectionHeader from "../components/SectionHeader.astro";
   }
 
   .philosophy-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: var(--space-lg);
-    align-items: center;
+    max-width: 920px;
   }
 
-  .philosophy-text {
-    font-size: var(--fs-body);
-    color: var(--color-text-muted);
-    line-height: 1.8;
-  }
-
-  .philosophy-text p {
-    margin-bottom: var(--space-md);
-  }
-
-  .philosophy-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .quote-block {
-    background-color: rgba(var(--color-accent-rgb), 0.05);
-    border-left: 3px solid var(--color-accent);
-    padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-md);
-    position: relative;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .quote-block i {
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 30px;
-    height: 30px;
-    color: var(--color-accent);
-    background-color: var(--color-bg);
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .quote-block blockquote {
-    font-family: var(--font-alt);
-    font-style: italic;
-    font-size: calc(var(--fs-body) * 1.1);
+  .philosophy-statement {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
     color: var(--color-text);
+    line-height: 1.75;
+    font-weight: 300;
+    text-align: left;
+    margin: 0 0 var(--space-lg);
+  }
+
+  .philosophy-quote {
+    border-left: 2px solid var(--color-primary);
+    padding-left: var(--space-md);
     margin: 0;
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
     line-height: 1.6;
   }
 
-  .quote-block cite {
+  .philosophy-quote cite {
     display: block;
-    margin-top: var(--space-sm);
+    margin-top: var(--space-xs);
     font-size: var(--fs-small);
-    color: var(--color-text-muted);
-    text-align: right;
+    color: var(--color-text-faint);
+    font-style: normal;
   }
 
   .section-divider {
@@ -251,183 +178,88 @@ import SectionHeader from "../components/SectionHeader.astro";
     stroke-width: 1.5;
   }
 
-  .posts-grid {
+  /* Editorial list rows */
+  .writing-list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .entry {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-lg);
-  }
-
-  .post-card {
-    background-color: var(--color-card-bg);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: all var(--transition-medium);
-    border: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 300px;
-    position: relative;
-  }
-
-  .post-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(to right, var(--color-accent), var(--color-secondary));
-    opacity: 0.7;
-  }
-
-  .post-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(var(--color-accent-rgb), 0.1);
-  }
-
-  .post-content {
-    padding: var(--space-lg);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .post-content h3 {
-    font-size: clamp(1.05rem, 2.5vw, 1.4rem);
-    margin-bottom: var(--space-sm);
-    color: var(--color-accent);
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    max-height: 2.6em;
-  }
-
-  .post-meta {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-  }
-
-  .post-date {
-    display: flex;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 4px;
+    gap: var(--space-md);
+    margin: 0 calc(var(--space-sm) * -1);
+    padding: var(--space-md) var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: inherit;
+    transition: padding var(--transition-medium), background-color var(--transition-medium);
+  }
+
+  a.entry:hover {
+    padding-left: calc(var(--space-sm) + var(--space-xs));
+    background-color: var(--color-card-bg);
+  }
+
+  .entry-meta {
+    display: block;
     font-size: var(--fs-small);
-    color: var(--color-text-muted);
+    color: var(--color-primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
   }
 
-  .post-date::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background-color: var(--color-accent);
-  }
-
-  .post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-  }
-
-  .post-tag {
-    background-color: var(--tag-bg-primary);
+  .entry-title {
+    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
     color: var(--color-text);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-full);
-    font-size: calc(var(--fs-small) * 0.9);
-    border: 1px solid var(--tag-border-primary);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+    transition: color var(--transition-fast);
   }
 
-  .post-tag:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(var(--color-accent-rgb), 0.2);
+  a.entry:hover .entry-title {
+    color: var(--color-primary);
   }
 
-  .post-excerpt {
-    margin-bottom: var(--space-md);
-    line-height: 1.7;
+  .entry-excerpt {
+    margin: var(--space-xs) 0 0;
+    line-height: 1.6;
     color: var(--color-text-muted);
     font-size: var(--fs-body);
-    flex: 1;
   }
 
-  .read-more {
-    display: inline-flex;
-    align-items: center;
-    color: var(--color-accent);
-    text-decoration: none;
-    font-weight: 500;
-    margin-top: auto;
-    transition: all var(--transition-fast);
-    padding: var(--space-xs) 0;
-    position: relative;
+  .entry-arrow {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-medium), color var(--transition-medium);
   }
 
-  .read-more::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-accent);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform var(--transition-medium);
+  a.entry:hover .entry-arrow {
+    color: var(--color-primary);
+    transform: translateX(6px);
   }
 
-  .read-more:hover {
-    color: var(--color-secondary);
+  .entry.is-disabled {
+    cursor: default;
   }
 
-  .read-more:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-    background-color: var(--color-secondary);
+  .entry.is-disabled .entry-title,
+  .entry.is-disabled .entry-excerpt {
+    opacity: 0.55;
   }
 
-  .read-more.disabled {
-    opacity: 0.6;
-    pointer-events: none;
-    cursor: not-allowed;
-  }
-
-  .read-more.disabled::after {
-    display: none;
-  }
-
-  .unpublished-note {
-    color: var(--color-secondary);
-    font-size: 0.9em;
-    margin: 0.25rem 0 0.5rem 0;
-    font-style: italic;
+  .entry-soon {
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
   }
 
 
   @media (max-width: 768px) {
-    .philosophy-content {
-      grid-template-columns: 1fr;
-      gap: var(--space-md);
-    }
-
-    .philosophy-visual {
-      order: -1;
-      margin-bottom: var(--space-md);
-    }
-
-    .quote-block {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
     .section-divider {
       margin: var(--space-lg) 0;
     }
@@ -436,23 +268,17 @@ import SectionHeader from "../components/SectionHeader.astro";
       max-width: 100px;
     }
 
-    .posts-grid {
+    .entry {
       grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+
+    .entry-arrow {
+      display: none;
     }
   }
 
   @media (max-width: 480px) {
-    .quote-block {
-      padding: var(--space-sm) var(--space-md);
-    }
-
-    .quote-block i {
-      width: 24px;
-      height: 24px;
-      top: -12px;
-      left: -12px;
-    }
-
     .divider-line {
       max-width: 60px;
     }
@@ -467,12 +293,8 @@ import SectionHeader from "../components/SectionHeader.astro";
       height: 16px;
     }
 
-    .post-card {
-      min-height: 250px;
-    }
-
-    .post-content {
-      padding: var(--space-md);
+    .entry {
+      padding: var(--space-md) 0;
     }
   }
 </style>

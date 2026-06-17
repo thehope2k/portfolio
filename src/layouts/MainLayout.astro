@@ -321,14 +321,15 @@ const formattedPublishDate = publishDate
       .mobile-menu {
         position: fixed;
         top: var(--header-height);
-        right: 1rem;
-        width: min(calc(100% - 2rem), 280px);
+        left: 0;
+        right: 0;
+        width: 100%;
         height: auto;
-        background-color: rgba(var(--color-bg-alt-rgb), 0.95);
-        padding: var(--space-md);
-        border-radius: var(--radius-md);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        transform: translateY(-20px) scale(0.95);
+        background-color: rgba(var(--color-bg-alt-rgb), 0.97);
+        padding: var(--space-xs) 0;
+        border-radius: 0;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+        transform: translateY(-12px);
         opacity: 0;
         visibility: hidden;
         transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
@@ -336,33 +337,31 @@ const formattedPublishDate = publishDate
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        gap: var(--space-md);
-        border: 1px solid var(--color-border);
+        gap: 0;
+        border: none;
+        border-bottom: 1px solid var(--color-border);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
       }
 
       .mobile-menu.open {
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
         opacity: 1;
         visibility: visible;
       }
 
       .mobile-menu a {
-        color: var(--color-text);
+        color: var(--color-text-muted);
         text-decoration: none;
         font-weight: 500;
         font-size: 1.1rem;
-        padding: var(--space-sm) var(--space-md);
-        min-height: 44px; /* Maintain minimum touch target size */
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--radius-sm);
-        opacity: 0.85;
+        padding: 0.7rem var(--space-lg);
+        transition: color 0.2s ease, border-color 0.2s ease, transform 0.3s ease, opacity 0.3s ease;
+        display: block;
+        border-left: 2px solid transparent;
+        opacity: 0.9;
         transform: translateY(5px);
-        text-align: center;
+        text-align: left;
       }
 
       .mobile-menu.open a {
@@ -378,7 +377,8 @@ const formattedPublishDate = publishDate
 
       .mobile-menu a:hover, .mobile-menu a.active {
         color: var(--color-primary);
-        background-color: rgba(var(--color-primary-rgb), 0.1);
+        border-left-color: var(--color-primary);
+        opacity: 1;
       }
 
       .overlay {
@@ -455,8 +455,9 @@ const formattedPublishDate = publishDate
         }
 
         .mobile-menu {
-          right: 0.75rem;
-          width: min(calc(100% - 1.5rem), 260px);
+          left: 0;
+          right: 0;
+          width: 100%;
         }
 
         .hamburger {
@@ -483,16 +484,16 @@ const formattedPublishDate = publishDate
         }
 
         .mobile-menu {
-          right: 0.5rem;
-          width: calc(100% - 1rem);
-          padding: var(--space-sm);
-          gap: var(--space-sm);
+          left: 0;
+          right: 0;
+          width: 100%;
+          padding: var(--space-xs) 0;
+          gap: 0;
         }
 
         .mobile-menu a {
-          font-size: 1rem;
-          padding: var(--space-xs) var(--space-sm);
-          min-height: 42px;
+          font-size: 1.05rem;
+          padding: 0.65rem var(--space-md);
         }
       }
 
@@ -511,16 +512,16 @@ const formattedPublishDate = publishDate
         }
 
         .mobile-menu {
-          right: 0.5rem;
-          width: calc(100% - 1rem);
-          padding: var(--space-xs) var(--space-sm);
-          gap: var(--space-xs);
+          left: 0;
+          right: 0;
+          width: 100%;
+          padding: var(--space-xs) 0;
+          gap: 0;
         }
 
         .mobile-menu a {
-          font-size: 0.95rem;
-          padding: var(--space-xs) var(--space-sm);
-          min-height: 40px; /* Slightly smaller touch target but still accessible */
+          font-size: 1rem;
+          padding: 0.6rem var(--space-md);
         }
 
         .hamburger {

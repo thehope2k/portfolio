@@ -13,6 +13,14 @@ import MainLayout from '../layouts/MainLayout.astro';
       </div>
       <p class="signature" id="signature" aria-live="polite">If you have a chance, be kind.</p>
     </div>
+
+    <nav class="hero-explore" aria-label="Explore sections">
+      <a href="/professional">Professional</a>
+      <span aria-hidden="true">·</span>
+      <a href="/personal">Personal</a>
+      <span aria-hidden="true">·</span>
+      <a href="/growth">Growth</a>
+    </nav>
   </section>
 </MainLayout>
 
@@ -42,21 +50,19 @@ import MainLayout from '../layouts/MainLayout.astro';
 <style>
   .hero {
     position: relative;
-    min-height: calc(100svh - var(--header-height));
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     color: var(--color-text);
+    min-height: 70vh;
   }
 
   .hero-inner {
-    flex: 1;
     width: 100%;
     max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: var(--space-xl) 0;
+    margin: auto 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     animation: heroFade 0.7s ease-out both;
   }
 
@@ -102,7 +108,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .signature {
-    margin: calc(var(--space-xl) * 1.2) 0 0;
+    margin: var(--space-lg) 0 0;
     text-align: left;
     font-size: clamp(1rem, 1.8vw, 1.25rem);
     color: var(--color-text-muted);
@@ -111,9 +117,53 @@ import MainLayout from '../layouts/MainLayout.astro';
     transition: opacity 0.6s ease;
   }
 
+  /* Mobile-only section links — positioned at bottom of hero */
+  .hero-explore {
+    display: none;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+
+  .hero-explore a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 2px;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .hero-explore a:hover {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+  }
+
+  .hero-explore span {
+    color: var(--color-text-faint);
+  }
+
   @media (max-width: 768px) {
+    .hero {
+      min-height: 77vh;
+    }
+
     .hero-inner {
       padding: var(--space-lg) 0;
+    }
+
+    .hero-explore {
+      display: flex;
+    }
+  }
+
+  /* iPad and tablet portrait - NO links, just shorter hero */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .hero {
+      min-height: 65vh;
     }
   }
 
@@ -128,8 +178,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   @media (max-width: 480px) {
+    .hero {
+      min-height: 78vh;
+    }
+
     .hero h1 {
       font-size: clamp(1.75rem, 9vw, 2.5rem);
     }
   }
+
 </style>

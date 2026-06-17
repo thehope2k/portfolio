@@ -106,6 +106,9 @@ const formattedPublishDate = publishDate
         color: var(--color-text);
         background-color: var(--color-bg);
         line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
       }
 
       .container {
@@ -206,17 +209,24 @@ const formattedPublishDate = publishDate
       .hamburger {
         display: none;
         cursor: pointer;
-        width: 48px;
-        height: 48px;
         position: relative;
         z-index: 110;
-        padding: 8px;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: 0 4px;
         box-sizing: border-box;
         background: transparent;
         border: none;
         outline: none;
         transition: all 0.3s ease;
         border-radius: var(--radius-sm);
+      }
+
+      .hamburger .bars {
+        position: relative;
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
       }
 
       .hamburger:hover {
@@ -228,7 +238,7 @@ const formattedPublishDate = publishDate
         border-radius: var(--radius-sm);
       }
 
-      .hamburger span {
+      .hamburger .bars span {
         display: block;
         position: absolute;
         height: 3px;
@@ -242,17 +252,17 @@ const formattedPublishDate = publishDate
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
       }
 
-      .hamburger span:nth-child(1) {
+      .hamburger .bars span:nth-child(1) {
         top: 13px;
         transform-origin: left center;
       }
 
-      .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
+      .hamburger .bars span:nth-child(2), .hamburger .bars span:nth-child(3) {
         top: 22px;
         transform-origin: center center;
       }
 
-      .hamburger span:nth-child(4) {
+      .hamburger .bars span:nth-child(4) {
         top: 31px;
         transform-origin: left center;
       }
@@ -262,24 +272,24 @@ const formattedPublishDate = publishDate
         background-color: rgba(var(--color-primary-rgb), 0.15);
       }
 
-      .hamburger.open span:nth-child(1) {
+      .hamburger.open .bars span:nth-child(1) {
         transform: rotate(45deg);
         top: 11px;
         left: 13px;
         width: 26px;
       }
 
-      .hamburger.open span:nth-child(2) {
+      .hamburger.open .bars span:nth-child(2) {
         width: 0%;
         opacity: 0;
       }
 
-      .hamburger.open span:nth-child(3) {
+      .hamburger.open .bars span:nth-child(3) {
         transform: rotate(-45deg);
         width: 26px;
       }
 
-      .hamburger.open span:nth-child(4) {
+      .hamburger.open .bars span:nth-child(4) {
         transform: rotate(-45deg);
         top: 31px;
         left: 13px;
@@ -288,8 +298,25 @@ const formattedPublishDate = publishDate
       }
 
       main {
-        min-height: calc(100vh - var(--header-height) - 60px);
-        padding: var(--space-lg) 0 var(--space-sm);
+        flex: 1;
+        padding: var(--space-md) 0 var(--space-sm);
+      }
+
+      /* For home page with hero, reduce top padding */
+      main:has(.hero) {
+        padding-top: 0;
+      }
+
+      /* Mobile: further reduce spacing */
+      @media (max-width: 768px) {
+        main {
+          padding: var(--space-sm) 0;
+        }
+
+        main:has(.hero) {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
       }
 
       footer {
@@ -299,6 +326,12 @@ const formattedPublishDate = publishDate
         text-align: center;
         color: var(--color-text-muted);
         font-size: var(--fs-small);
+      }
+
+      @media (max-width: 768px) {
+        footer {
+          padding: var(--space-xs) 0;
+        }
       }
 
       .footer-text {
@@ -417,7 +450,7 @@ const formattedPublishDate = publishDate
 
       @media (max-width: 768px) {
         .hamburger {
-          display: block;
+          display: inline-flex;
         }
 
         .nav-links {
@@ -426,10 +459,6 @@ const formattedPublishDate = publishDate
 
         body.menu-open {
           overflow: hidden;
-        }
-
-        footer {
-          padding: var(--space-sm) 0;
         }
       }
 
@@ -440,7 +469,7 @@ const formattedPublishDate = publishDate
           background-color: rgba(var(--color-primary-rgb), 0.05);
         }
 
-        .hamburger span {
+        .hamburger .bars span {
           width: 26px;
         }
       }
@@ -465,7 +494,7 @@ const formattedPublishDate = publishDate
         }
 
         footer {
-          padding: var(--space-sm) 0;
+          padding: var(--space-xs) 0;
         }
       }
 
@@ -557,10 +586,12 @@ const formattedPublishDate = publishDate
             aria-haspopup="true"
             title="Open navigation menu"
           >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+            <span class="bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
           </button>
         </nav>
       </div>

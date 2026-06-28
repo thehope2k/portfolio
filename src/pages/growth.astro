@@ -1,26 +1,51 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import SectionHeader from "../components/SectionHeader.astro";
+import { growthEntries } from '../config/articles';
+
+const allPosts = Object.values(
+  import.meta.glob<{ frontmatter: any; url: string }>('./growth/*.md', { eager: true })
+);
+const postMap = Object.fromEntries(
+  allPosts.map(p => [p.url!.split('/').at(-1)!, p])
+);
+
+const entries = growthEntries.map(entry => {
+  if (entry.type !== 'post') return entry;
+  const post = postMap[entry.slug];
+  if (!post) return null;
+  const { frontmatter, url } = post;
+  const date = new Date(frontmatter.date).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric'
+  });
+  return {
+    type: 'post' as const,
+    href: url!,
+    title: frontmatter.title,
+    description: frontmatter.description,
+    meta: `${date} · ${frontmatter.category ?? 'Article'}`,
+  };
+}).filter(Boolean);
 ---
 
 <MainLayout title="The Hope - Growth & Learning" description="Learning notes, reflections, tutorials, and knowledge sharing">
   <div class="growth-header">
     <h1>Growth & Learning</h1>
-    <p class="lead">A collection of learning notes, shared talks, and so on…</p>
+    <p class="lead">A collection of learning notes, shared talks, and so on...</p>
   </div>
 
   <section class="learning-philosophy">
     <SectionHeader title="My Learning Philosophy" />
     <div class="philosophy-content">
       <p class="philosophy-statement">
-        Curiosity is the engine behind pretty much everything I do — I learn things because
+        Curiosity is the engine behind pretty much everything I do - I learn things because
         I can't leave a question alone. And one of the things that makes me happiest is
-        realizing I'm better at something than I was before — continuous learning is what
+        realizing I'm better at something than I was before - continuous learning is what
         keeps that happening.
       </p>
       <blockquote class="philosophy-quote">
-        “The beautiful thing about learning is that nobody can take it away from you.”
-        <cite>— B.B. King</cite>
+        "The beautiful thing about learning is that nobody can take it away from you."
+        <cite>- B.B. King</cite>
       </blockquote>
     </div>
   </section>
@@ -36,50 +61,28 @@ import SectionHeader from "../components/SectionHeader.astro";
   <section class="posts-section">
     <SectionHeader title="Latest Posts" />
     <div class="writing-list">
-      <a href="/talks/scalable-systems.html" class="entry">
-        <div class="entry-body">
-          <span class="entry-meta">Interactive Presentation · System Design · Architecture</span>
-          <h3 class="entry-title">Scalable Software Systems</h3>
-          <p class="entry-excerpt">
-            A story-driven talk following Hope building a social platform from 2003 to now — each act introduces a real pain point, then shows what technology the world invented to solve it.
-          </p>
-        </div>
-        <span class="entry-arrow" aria-hidden="true">→</span>
-      </a>
-
-      <a href="/growth/bad-experiences-job-interview" class="entry">
-        <div class="entry-body">
-          <span class="entry-meta">Aug 5, 2024 · Career · Interviews</span>
-          <h3 class="entry-title">Bad experiences teach us better than good ones</h3>
-          <p class="entry-excerpt">
-            A personal story about a job interview that taught me valuable lessons about interviewing and company culture — what not to do when interviewing candidates, from my own awkward experience.
-          </p>
-        </div>
-        <span class="entry-arrow" aria-hidden="true">→</span>
-      </a>
-
-      <div class="entry is-disabled">
-        <div class="entry-body">
-          <span class="entry-meta">Unpublished · Books · Productivity</span>
-          <h3 class="entry-title">Book Notes: Atomic Habits</h3>
-          <p class="entry-excerpt">
-            My notes and takeaways from James Clear's “Atomic Habits” — how small changes compound into remarkable results, and how to build systems that make good habits inevitable.
-          </p>
-        </div>
-        <span class="entry-soon">Coming soon</span>
-      </div>
-
-      <div class="entry is-disabled">
-        <div class="entry-body">
-          <span class="entry-meta">Unpublished · Books · Minimalism</span>
-          <h3 class="entry-title">Review Book: The Joy of Less</h3>
-          <p class="entry-excerpt">
-            Reflections and key takeaways from a practical minimalism book — on decluttering, simplifying, and focusing on what truly matters in daily life.
-          </p>
-        </div>
-        <span class="entry-soon">Coming soon</span>
-      </div>
-    </div>
+      {entries.map(entry => {
+        if (entry.type === 'coming-soon') return (
+          <div class="entry is-disabled">
+            <div class="entry-body">
+              <span class="entry-meta">{entry.meta}</span>
+              <h3 class="entry-title">{entry.title}</h3>
+              <p class="entry-excerpt">{entry.description}</p>
+            </div>
+            <span class="entry-soon">Coming soon</span>
+          </div>
+        );
+        return (
+          <a href={entry.href} class="entry">
+            <div class="entry-body">
+              <span class="entry-meta">{entry.meta}</span>
+              <h3 class="entry-title">{entry.title}</h3>
+              <p class="entry-excerpt">{entry.description}</p>
+            </div>
+            <span class="entry-arrow" aria-hidden="true">→</span>
+          </a>
+        );
+      })}
   </section>
 
 </MainLayout>

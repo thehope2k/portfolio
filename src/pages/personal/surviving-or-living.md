@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 title: Surviving or Living
 date: 2025-12-19
-category: Personal
+category: Reflection
 description: A short story about a Russian wanderer, a question that stuck with me, and the thin line between surviving and living.
 ---
 

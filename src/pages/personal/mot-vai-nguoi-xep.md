@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 title: Một (vài) người xếp
 date: 2025-03-06
-category: Personal
+category: Tản văn
 description: Một câu chuyện nhỏ về một (vài) người xếp.
 ---
 

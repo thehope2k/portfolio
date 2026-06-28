@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPostLayout.astro
 title: Không lạ, cũng không đại trà!
 subtitle: Lang thang một góc "Gạt tàn đời"
 date: 2026-06-28
-category: Personal
+category: Tản văn
 description: Lang thang một góc "Gạt tàn đời" — một quán nhỏ ở Đà Lạt, nơi không lạ nhưng cũng chẳng đại trà.
 image: /gat-tan-doi.png
 ---

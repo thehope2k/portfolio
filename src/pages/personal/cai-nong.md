@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 title: Cái nóng
 date: 2024-04-26
-category: Personal
+category: Tản văn
 description: Một tản văn về những ngày nắng nóng và những suy nghĩ dịu lại giữa mùa hạ ở Hà Nội.
 ---
 

@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 title: Một bữa no
 date: 2024-04-06
-category: Personal
+category: Tản văn
 description: Một tản văn về một bữa cơm gia đình bình dị khiến tôi chợt nhận ra mình "giàu" theo một cách khác.
 ---
 

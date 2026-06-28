@@ -10,11 +10,11 @@ image: /gat-tan-doi.png
 
 ![Gạt tàn đời, Đà Lạt](/gat-tan-doi.png)
 
-Hôm nay có mưa không nhỉ?
-
-Chắc phải nhìn ngoài trời mới biết được ạ!
-
-Tranh thủ đi dạo chút trước khi mưa. *(Lời độc thoại)*
+> — Hôm nay có mưa không nhỉ?
+>
+> — Chắc phải nhìn ngoài trời mới biết được ạ!
+>
+> — Tranh thủ đi dạo chút trước khi mưa.
 
 Nhưng trời vẫn chưa mưa, và có lẽ sẽ không mưa hôm nay, dù có vẻ rất muốn mưa. Hương quế vương lên từ ly trà, thoang thoảng và thơm nhè nhẹ. Ấy là ly nước thứ hai của mình ở quán, một góc nhỏ ở Đà Lạt. Mình tình cờ biết tới quán qua một mẩu tản văn nhỏ về nhạc Trịnh, nhưng tìm được nó không dễ như sự tình cờ. Mình phải hỏi thăm sau khi đi xung quanh vài vòng để tìm được chiếc cầu thang nhỏ xuống quán. Chiếc cầu thang gỗ nhỏ chỉ đủ cho hai người đi. Phía trước cầu thang là một bảng hiệu, treo chỉ cao hơn đầu người, bị che lấp gần hết bởi một gốc hoa giấy nhỏ, đề tên "Gạt tàn đời". Bước hết chiếc cầu thang là một giàn hoa giấy lớn, gần như ôm trọn lấy góc quán.
 

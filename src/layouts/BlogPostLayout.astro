@@ -9,6 +9,7 @@ interface Props {
     date: string;
     category: string;
     description: string;
+    subtitle?: string;
     image?: string;
   };
 }
@@ -36,6 +37,7 @@ const backText = `All ${section.charAt(0).toUpperCase() + section.slice(1)}`;
     <div class="post-header">
       <a href={backUrl} class="back-link" aria-label={`Return to ${backText}`}>← {backText}</a>
       <h1>{frontmatter.title}</h1>
+      {frontmatter.subtitle && <p class="post-subtitle">{frontmatter.subtitle}</p>}
       <div class="post-meta">
         <time datetime={new Date(frontmatter.date).toISOString()} class="post-date">{formattedDate}</time>
         <Tag text={frontmatter.category} variant="secondary" class="post-category" />
@@ -102,6 +104,16 @@ const backText = `All ${section.charAt(0).toUpperCase() + section.slice(1)}`;
     gap: var(--space-sm);
     color: var(--color-secondary);
     font-size: var(--fs-small);
+  }
+
+  .post-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--color-text-muted);
+    font-weight: 300;
+    font-style: italic;
+    margin: calc(var(--space-xs) * -1) 0 var(--space-sm);
+    line-height: 1.5;
+    letter-spacing: 0.01em;
   }
 
   .post-date {

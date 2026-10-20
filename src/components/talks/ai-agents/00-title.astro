@@ -1,0 +1,88 @@
+<!-- Title -->
+<section class="slide center" data-chapter="Title">
+  <div class="kicker">A talk by Hope</div>
+  <h1 class="h1">The Engineering<br />of <em>AI Agents</em></h1>
+  <p class="lead">From one prompt to a production AI system.</p>
+  <p class="small mono" style="margin-top:40px">→ / space to advance · M for chapters · F fullscreen</p>
+</section>
+
+<!-- The overwhelm -->
+<section class="slide center" data-chapter="Context">
+  <div class="kicker">Every week, a new word</div>
+  <div class="cloud">
+    <span class="xl">AI Agents</span><span class="lg">RAG</span><span class="md">MCP</span>
+    <span class="sm">Embeddings</span><span class="lg">Vector DB</span><span class="md">Function Calling</span>
+    <span class="sm">ReAct</span><span class="xl">Multi-agent</span><span class="md">Memory</span>
+    <span class="lg">Context Engineering</span><span class="sm">Reranking</span><span class="md">Guardrails</span>
+    <span class="sm">Compaction</span><span class="lg">Evals</span><span class="sm">Prompt Caching</span>
+    <span class="md">Sub-agents</span><span class="sm">LLM-as-judge</span><span class="sm">Prompt Injection</span>
+    <span class="md">Orchestrator</span><span class="sm">Skills</span><span class="sm">A2A</span>
+  </div>
+  <p class="lead" data-step="1" style="max-width:760px">
+    Each of these exists because something simpler <b>broke</b>.<br />
+    Know what broke — and you'll know when you need the fix.
+  </p>
+</section>
+
+<!-- The scenario -->
+<section class="slide center" data-chapter="Meet KickBox">
+  <div class="kicker">Our product for today</div>
+  <h2 class="h2">Hope opened <em>KickBox</em>,<br />an online sneaker store.</h2>
+  <div class="stats" data-step="1">
+    <div><b>800</b><span>support tickets / day</span></div>
+    <div><b>2</b><span>people answering them</span></div>
+    <div><b>11h</b><span>to first reply</span></div>
+  </div>
+  <p class="lead" data-step="2">“Let's just add AI.”</p>
+</section>
+
+<!-- The method -->
+<section class="slide center">
+  <div class="kicker">How we'll build it</div>
+  <h2 class="h2">Start small. Let it break. Add <em>only what's needed</em>.</h2>
+  <svg class="d" viewBox="0 0 960 230" style="width:960px;margin-top:12px">
+    <g data-step="1">
+      <rect class="n" x="10" y="40" width="200" height="72" rx="12" />
+      <text x="110" y="72" text-anchor="middle" class="b">What we have</text>
+      <text x="110" y="94" text-anchor="middle" class="s">the current system</text>
+    </g>
+    <g data-step="2">
+      <path class="e" d="M212 76 H 254" />
+      <rect class="n r" x="256" y="40" width="200" height="72" rx="12" />
+      <text x="356" y="72" text-anchor="middle" class="b fr">What breaks</text>
+      <text x="356" y="94" text-anchor="middle" class="s">a real customer problem</text>
+    </g>
+    <g data-step="3">
+      <path class="e" d="M458 76 H 500" />
+      <rect class="n a" x="502" y="40" width="200" height="72" rx="12" />
+      <text x="602" y="72" text-anchor="middle" class="b fa">What we add</text>
+      <text x="602" y="94" text-anchor="middle" class="s">one new component</text>
+    </g>
+    <g data-step="4">
+      <path class="e" d="M704 76 H 746" />
+      <rect class="n k" x="748" y="40" width="200" height="72" rx="12" />
+      <text x="848" y="72" text-anchor="middle" class="b w">What we have now</text>
+      <text x="848" y="94" text-anchor="middle" class="s wm">a stronger system</text>
+    </g>
+    <g data-step="5">
+      <path class="e a" d="M848 114 V 168 Q 848 186 830 186 H 128 Q 110 186 110 168 V 116" />
+      <text x="480" y="214" text-anchor="middle" class="m fa">repeat × 6</text>
+    </g>
+  </svg>
+</section>
+
+<style>
+  .cloud {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+    gap: 6px 26px; max-width: 980px; line-height: 1.35;
+  }
+  .cloud span { font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; }
+  .cloud .sm { font-size: 20px; color: #b4b4ac; }
+  .cloud .md { font-size: 28px; color: var(--muted); }
+  .cloud .lg { font-size: 38px; color: var(--ink-2); }
+  .cloud .xl { font-size: 50px; color: var(--ink); }
+  .stats { display: flex; gap: 72px; margin-top: 16px; }
+  .stats div { display: flex; flex-direction: column; gap: 4px; }
+  .stats b { font-size: 64px; font-weight: 600; letter-spacing: -0.04em; }
+  .stats span { font-size: 15px; color: var(--muted); }
+</style>

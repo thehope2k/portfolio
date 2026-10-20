@@ -1,0 +1,125 @@
+<!-- Stage 4 · pain card: same as last time -->
+<section class="slide chapter" data-chapter="Stage 4 · Memory">
+  <div class="chapter-l">
+    <div class="chapter-num">04</div>
+    <div class="kicker">Stage 4 · <b>Memory</b></div>
+    <h2 class="h2">“Same problem as last time.”</h2>
+    <p class="note" data-step="1">Every chat starts from zero.<br />Customers hate repeating themselves.</p>
+  </div>
+  <div class="chapter-r">
+    <div class="chat">
+      <div class="chat-head"><span class="dot"></span>KickBox Support<span class="who">AI assistant</span></div>
+      <div class="chat-body">
+        <div class="msg u">Hi again — same issue as last month, the sole is coming off. 😩</div>
+        <div class="msg a bad">Sorry to hear that! Could you share your order number and describe the issue?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stage 4 · beat: short-term memory -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 4 · Memory</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="3">Long chats outgrow<br />the <em class="r">window</em>.</h2>
+      <h2 class="h2" data-step="3">Short-term:<br />keep the <em>desk</em> clean.</h2>
+    </div>
+    <p class="note" data-step="3">Long chats outgrow the window and early details get lost. Summarize what's already decided, keep notes, keep only what the next step needs.</p>
+    <div class="tags" data-step="4"><span>Compaction</span><span>Summarization</span><span>Scratchpad</span></div>
+  </div>
+  <div class="beat-r">
+    <div class="bars">
+      <div class="bar-row"><span class="lbl">message 5</span><div class="bar"><i style="width:18%"></i></div></div>
+      <div class="bar-row" data-step="1"><span class="lbl">message 25</span><div class="bar"><i style="width:68%"></i></div></div>
+      <div class="bar-row" data-step="2"><span class="lbl">message 40</span><div class="bar over"><i style="width:100%"></i></div></div>
+      <p class="lost" data-step="2">✗ forgot the customer already agreed to voucher</p>
+
+      <div class="bar-row" data-step="3"><span class="lbl c-acc">compacted</span><div class="bar"><b style="width:12%">summary</b><i style="width:24%"></i></div></div>
+      <div class="notes" data-step="4">
+        <span class="mono small">notes.md</span>
+        <span>✓ voucher agreed · ✓ size 42.5 · ⏳ waiting on photo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stage 4 · beat: long-term memory -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 4 · Memory</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="1">March and April<br />are <em class="r">strangers</em>.</h2>
+      <h2 class="h2" data-step="1">Long-term:<br />a <em>notebook</em> that<br />keeps it all.</h2>
+    </div>
+    <div class="code" data-step="2"><span class="new">memory = recall(customer)</span><span>…</span><span class="new">save(customer, what_we_learned)</span></div>
+    <ul class="pc" data-step="2">
+      <li class="y">Feels personal, fewer questions</li>
+      <li class="n">Wrong memories stay</li>
+      <li class="n">Privacy: what should it forget?</li>
+    </ul>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <rect class="n" x="0" y="10" width="250" height="130" rx="14" />
+      <text x="20" y="40" class="cap">MARCH · CHAT #1</text>
+      <text x="20" y="74">Sole coming off on Air Run</text>
+      <text x="20" y="98" class="s">→ sent a replacement pair</text>
+
+      <rect class="n" x="400" y="10" width="260" height="220" rx="14" />
+      <text x="420" y="40" class="cap">APRIL · NEW CHAT</text>
+      <text x="420" y="74">“Same issue as last time.”</text>
+
+      <g data-step="1">
+      <rect class="n a dash" x="110" y="280" width="440" height="230" rx="16" />
+      <text x="130" y="310" class="cap" style="fill:var(--accent)">LONG-TERM MEMORY</text>
+      <text x="130" y="356" class="b">Profile</text>
+      <text x="130" y="420" class="b">History</text>
+      <text x="130" y="484" class="b">Playbooks</text>
+      <text x="130" y="374" class="s">facts</text>
+      <text x="130" y="438" class="s">past chats</text>
+      <text x="130" y="502" class="s">guides</text>
+      </g>
+
+      <g data-step="1">
+        <path class="e a" d="M125 142 V 278" />
+        <text x="135" y="220" class="m fa">save</text>
+        <text x="260" y="360" class="m">size 42.5 · prefers voucher</text>
+        <text x="260" y="424" class="m">Mar 12 · sole came off · replaced</text>
+        <text x="260" y="488" class="m">broken item → ask photo → replace</text>
+      </g>
+      <g data-step="2">
+        <path class="e a" d="M530 278 V 232" />
+        <text x="540" y="262" class="m fa">recall</text>
+        <rect class="n g" x="414" y="92" width="232" height="126" rx="10" />
+        <text x="428" y="118" class="fg b">Welcome back! Sorry —</text>
+        <text x="428" y="140">we replaced that pair on</text>
+        <text x="428" y="162">Mar 12. Replacement or</text>
+        <text x="428" y="184">voucher this time?</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .bars { width: 100%; display: flex; flex-direction: column; gap: 18px; }
+  .bar-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 16px; }
+  .bar-row .lbl { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .bar {
+    position: relative; display: flex; height: 44px; border-radius: 10px;
+    border: 1.5px solid var(--ink); overflow: hidden; background: var(--surface);
+  }
+  .bar i { display: block; height: 100%; background: var(--accent-soft); }
+  .bar b {
+    display: flex; align-items: center; justify-content: center; height: 100%;
+    background: var(--ink); color: #fff; font-family: var(--mono); font-size: 12px; font-weight: 500;
+  }
+  .bar.over { border-color: var(--red); }
+  .bar.over i { background: var(--red-soft); }
+  .lost { font-size: 15px; color: var(--red); margin: -6px 0 10px 136px; }
+  .notes {
+    margin-left: 136px; display: flex; flex-direction: column; gap: 6px;
+    padding: 14px 16px; border: 1px dashed var(--line-2); border-radius: 10px; background: var(--surface);
+    font-size: 16px;
+  }
+</style>

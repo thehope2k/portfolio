@@ -1,0 +1,150 @@
+<!-- Stage 3 · pain card: the swap -->
+<section class="slide chapter" data-chapter="Stage 3 · The agent loop">
+  <div class="chapter-l">
+    <div class="chapter-num">03</div>
+    <div class="kicker">Stage 3 · <b>Autonomy</b></div>
+    <h2 class="h2">“Wrong size.<br />Swap for a 42.”</h2>
+    <p class="note" data-step="1">One tool call answered one question.<br />The job needed <b>six</b> — and each depends on the last.</p>
+  </div>
+  <div class="chapter-r">
+    <div class="chat">
+      <div class="chat-head"><span class="dot"></span>KickBox Support<span class="who">AI assistant</span></div>
+      <div class="chat-body">
+        <div class="msg u">Got a 41, I need a 42. Can I swap?</div>
+        <div class="msg a">Your order #4821 was delivered on Thursday. 📦</div>
+        <div class="msg u">…ok? Can I swap it?</div>
+        <div class="msg sys">→ transferred to a human agent · queue: 3h 40m</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stage 3 · beat: the loop -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 3 · Autonomy</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="4">Six steps.<br />How does it <em>keep going</em>?</h2>
+      <h2 class="h2" data-step="4">Put the model<br />in a <em>loop</em>.</h2>
+    </div>
+    <div class="code" data-step="4"><span class="new"><b class="k">while</b> not done:</span><span class="new">  step = llm(goal + history)</span><span class="new">  result = run(step)</span><span class="new">  history += result</span></div>
+    <p class="note" data-step="4">Same tools as before. The only new thing is <b>letting it go again</b> — after seeing what happened.</p>
+    <div class="tags" data-step="5"><span>Agent loop</span><span>ReAct</span><span>Tool use</span></div>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <rect class="n a" x="0" y="10" width="190" height="64" rx="12" />
+      <text x="18" y="38" class="b fa">Goal</text>
+      <text x="18" y="58" class="s">swap size 41 → 42</text>
+      <path class="e" d="M192 50 Q 250 56 268 112" />
+
+      <g data-step="1">
+        <rect class="n k" x="250" y="116" width="170" height="72" rx="14" />
+        <text x="335" y="148" text-anchor="middle" class="b w">Think</text>
+        <text x="335" y="169" text-anchor="middle" class="s wm">LLM picks the next step</text>
+      </g>
+      <g data-step="2">
+        <path class="e a" d="M422 160 Q 520 180 520 316" />
+        <rect class="n" x="440" y="320" width="170" height="72" rx="14" />
+        <text x="525" y="352" text-anchor="middle" class="b">Act</text>
+        <text x="525" y="373" text-anchor="middle" class="s">call a tool</text>
+      </g>
+      <g data-step="3">
+        <path class="e a" d="M440 370 Q 335 430 232 372" />
+        <rect class="n" x="60" y="320" width="170" height="72" rx="14" />
+        <text x="145" y="352" text-anchor="middle" class="b">Observe</text>
+        <text x="145" y="373" text-anchor="middle" class="s">read the result</text>
+      </g>
+      <g data-step="4">
+        <path class="e a" d="M145 318 Q 150 180 248 160" />
+        <text x="335" y="262" text-anchor="middle" class="m fa">↻ repeat until done</text>
+        <path class="e g dash" d="M422 130 Q 520 120 540 74" />
+        <rect class="n g" x="470" y="10" width="190" height="64" rx="12" />
+        <text x="488" y="38" class="b fg">Done</text>
+        <text x="488" y="58" class="s">reply to the customer</text>
+      </g>
+      <g data-step="5">
+        <text x="330" y="470" text-anchor="middle" class="b lg">Agent = LLM + tools + a loop</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- Stage 3 · beat: a real trace -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 3 · Autonomy</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="8">Watch one<br />swap <em>happen</em>.</h2>
+      <h2 class="h2" data-step="8">Nobody scripted<br />these <em>steps</em>.</h2>
+    </div>
+    <p class="note" data-step="4">Each step is chosen from what it just saw. Size 42 sold out? It changes plan — and asks.</p>
+  </div>
+  <div class="beat-r">
+    <div class="trace">
+      <div class="row" data-step="1"><span class="i">1</span><code>get_order(4821)</code><span>delivered Thu · size 41</span></div>
+      <div class="row" data-step="2"><span class="i">2</span><code>check_return_policy(4821)</code><span>can return · 9 days left</span></div>
+      <div class="row warn" data-step="3"><span class="i">3</span><code>check_stock("Air Run", 42)</code><span>sold out</span></div>
+      <div class="row" data-step="4"><span class="i">4</span><code>check_stock("Air Run", 42.5)</code><span>3 left</span></div>
+      <div class="row ask" data-step="5"><span class="i">?</span><code>ask_customer(…)</code><span>“42.5 instead?” → “yes”</span></div>
+      <div class="row" data-step="6"><span class="i">5</span><code>create_exchange(4821, 42.5)</code><span>exchange EX-311 created</span></div>
+      <div class="row" data-step="7"><span class="i">6</span><code>create_return_label(4821)</code><span>label emailed</span></div>
+      <div class="reply" data-step="8">“All set! Your return label is in your inbox. The 42.5 ships as soon as we scan the return.”</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stage 3 · beat: the price of freedom -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 3 · Autonomy</div>
+    <h2 class="h2">Freedom has<br />a <em class="r">price</em>.</h2>
+    <p class="note">A loop decides for itself how long to run. That's the point — and the problem.</p>
+  </div>
+  <div class="beat-r">
+    <div class="trio">
+      <div class="card" data-step="1">
+        <div class="ico">∞</div>
+        <div class="h3">When does it stop?</div>
+        <p class="note">The shipping API stops responding. The agent retries. And retries.</p>
+        <p class="small mono">→ step limits · timeouts</p>
+      </div>
+      <div class="card" data-step="2">
+        <div class="ico">6×</div>
+        <div class="h3">Every round costs</div>
+        <p class="note">Six steps = six LLM calls. Money and waiting time grow each round.</p>
+        <p class="small mono">→ budgets · faster models</p>
+      </div>
+      <div class="card" data-step="3">
+        <div class="ico fillbar"><i></i></div>
+        <div class="h3">The window fills up</div>
+        <p class="note">Every result is added to the history. Long chats overflow.</p>
+        <p class="small mono c-acc">→ Stage 4</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trace { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+  .row {
+    display: grid; grid-template-columns: 28px 300px 1fr; align-items: center; gap: 14px;
+    padding: 11px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    font-size: 15px; color: var(--ink-2);
+  }
+  .row .i { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .row code { font-family: var(--mono); font-size: 14px; color: var(--accent); }
+  .row.warn { border-color: var(--amber); background: var(--amber-soft); }
+  .row.warn span:last-child { color: var(--amber); font-weight: 600; }
+  .row.ask { border-style: dashed; }
+  .reply {
+    margin-top: 6px; padding: 14px 18px; border-radius: 12px;
+    background: var(--green-soft); color: var(--ink); font-size: 16px; line-height: 1.45;
+  }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; width: 100%; }
+  .trio .card { display: flex; flex-direction: column; gap: 12px; min-height: 330px; }
+  .trio .note { font-size: 16px; flex: 1; }
+  .ico { font-family: var(--mono); font-size: 44px; font-weight: 500; letter-spacing: -0.04em; height: 56px; }
+  .fillbar { display: flex; align-items: center; }
+  .fillbar i { display: block; width: 100%; height: 18px; border-radius: 9px; border: 1.5px solid var(--ink); background: linear-gradient(90deg, var(--accent-soft) 85%, var(--red-soft) 85%); }
+</style>

@@ -1,0 +1,166 @@
+---
+// Shared shell for talk decks: scales a fixed 1280×720 canvas to the screen,
+// handles step-by-step reveals, progress, and a chapter menu built from
+// `data-chapter` attributes on slides (no hard-coded slide indices).
+import './deck.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Shared arrow markers (zero-size rather than display:none so markers still render) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" fill="#d0d0c9" /></marker>
+        <marker id="ar-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" fill="#2f5bff" /></marker>
+        <marker id="ar-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" fill="#e5484d" /></marker>
+        <marker id="ar-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" fill="#2a9d68" /></marker>
+      </defs>
+    </svg>
+
+    <main id="stage">
+      <slot />
+    </main>
+
+    <div id="nav">
+      <span id="nav-chapter"></span>
+      <div id="nav-track"><div id="nav-fill"></div></div>
+      <span id="nav-count"></span>
+    </div>
+
+    <div id="menu">
+      <div id="menu-list"></div>
+      <div id="menu-hint">← → / space · M chapters · F fullscreen · Esc close</div>
+    </div>
+
+    <script is:inline>
+      (() => {
+        const stage = document.getElementById('stage');
+        const slides = Array.from(stage.querySelectorAll('.slide'));
+        const fill = document.getElementById('nav-fill');
+        const count = document.getElementById('nav-count');
+        const chapterLabel = document.getElementById('nav-chapter');
+        const menu = document.getElementById('menu');
+        const menuList = document.getElementById('menu-list');
+
+        // A slide's step count is the highest data-step / data-out inside it.
+        const stepCounts = slides.map((s) => {
+          let max = 0;
+          s.querySelectorAll('[data-step],[data-out]').forEach((el) => {
+            max = Math.max(max, +(el.dataset.step || 0), +(el.dataset.out || 0));
+          });
+          return max;
+        });
+        const totalSteps = stepCounts.reduce((a, n) => a + n + 1, 0);
+
+        const chapters = slides
+          .map((s, i) => ({ i, label: s.dataset.chapter }))
+          .filter((c) => c.label);
+
+        let cur = 0;
+        let step = 0;
+
+        function fit() {
+          const k = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+          stage.style.setProperty('--k', String(k));
+        }
+
+        function apply() {
+          slides.forEach((s, i) => s.classList.toggle('active', i === cur));
+          slides[cur].querySelectorAll('[data-step]').forEach((el) => {
+            const from = +el.dataset.step;
+            const to = el.dataset.out ? +el.dataset.out : Infinity;
+            el.classList.toggle('on', step >= from && step < to);
+          });
+          let done = step;
+          for (let i = 0; i < cur; i++) done += stepCounts[i] + 1;
+          fill.style.width = (done / Math.max(1, totalSteps - 1)) * 100 + '%';
+          count.textContent = cur + 1 + ' / ' + slides.length;
+          const ch = chapters.filter((c) => c.i <= cur).pop();
+          chapterLabel.textContent = ch ? ch.label : '';
+          menuList.querySelectorAll('button').forEach((b) =>
+            b.classList.toggle('cur', ch && +b.dataset.i === ch.i)
+          );
+          history.replaceState(null, '', '#' + (cur + 1));
+        }
+
+        function go(i, s) {
+          cur = Math.max(0, Math.min(slides.length - 1, i));
+          step = s === 'end' ? stepCounts[cur] : s || 0;
+          apply();
+        }
+        function next() {
+          if (step < stepCounts[cur]) { step++; apply(); }
+          else if (cur < slides.length - 1) go(cur + 1, 0);
+        }
+        function prev() {
+          if (step > 0) { step--; apply(); }
+          else if (cur > 0) go(cur - 1, 'end');
+        }
+
+        chapters.forEach((c, n) => {
+          const b = document.createElement('button');
+          b.dataset.i = String(c.i);
+          b.innerHTML = '<span>' + String(n).padStart(2, '0') + '</span>' + c.label;
+          b.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.remove('open');
+            go(c.i, 0);
+          });
+          menuList.appendChild(b);
+        });
+
+        document.addEventListener('keydown', (e) => {
+          const k = e.key;
+          if (menu.classList.contains('open')) {
+            if (k === 'Escape' || k === 'm' || k === 'M') menu.classList.remove('open');
+            return;
+          }
+          if (['ArrowRight', 'ArrowDown', ' ', 'PageDown', 'Enter'].includes(k)) { e.preventDefault(); next(); }
+          else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
+          else if (k === 'Home') go(0, 0);
+          else if (k === 'End') go(slides.length - 1, 'end');
+          else if (k === 'm' || k === 'M') menu.classList.add('open');
+          else if (k === 'f' || k === 'F') {
+            if (document.fullscreenElement) document.exitFullscreen();
+            else document.documentElement.requestFullscreen?.();
+          }
+        });
+        stage.addEventListener('click', next);
+        menu.addEventListener('click', (e) => { if (e.target === menu) menu.classList.remove('open'); });
+
+        let tx = 0;
+        document.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
+        document.addEventListener('touchend', (e) => {
+          const dx = e.changedTouches[0].clientX - tx;
+          if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+        });
+
+        window.addEventListener('resize', fit);
+        fit();
+        const fromHash = parseInt(location.hash.slice(1), 10);
+        go(Number.isFinite(fromHash) ? fromHash - 1 : 0, 0);
+      })();
+    </script>
+  </body>
+</html>

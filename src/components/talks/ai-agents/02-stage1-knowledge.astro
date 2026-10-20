@@ -1,0 +1,203 @@
+<!-- Stage 1 · pain card: invented policy -->
+<section class="slide chapter" data-chapter="Stage 1 · Knowledge">
+  <div class="chapter-l">
+    <div class="chapter-num">01</div>
+    <div class="kicker">Stage 1 · <b>Knowledge</b></div>
+    <h2 class="h2">The bot invented a policy.</h2>
+    <p class="note" data-step="1">It didn't know. So it guessed —<br />confidently, in your brand's voice.</p>
+  </div>
+  <div class="chapter-r">
+    <div class="chat">
+      <div class="chat-head"><span class="dot"></span>KickBox Support<span class="who">AI assistant</span></div>
+      <div class="chat-body">
+        <div class="msg u">What's your return window?</div>
+        <div class="msg a bad">You can return any item within 30 days — and returns are always free! 🎉</div>
+      </div>
+    </div>
+    <div class="stamp" data-step="1">Actual policy: 14 days · $5 return fee</div>
+    <div class="real" data-step="2">
+      <span class="lbl">Real world · Feb 2024</span>
+      <span class="txt">A court made Air Canada pay for a refund policy its chatbot made up. Its excuse — “the chatbot is responsible for its own actions” — was rejected.</span>
+    </div>
+  </div>
+</section>
+
+<!-- Stage 1 · beat: paste it in -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 1 · Knowledge</div>
+    <h2 class="h2">Just paste the<br /><em>handbook</em> in.</h2>
+    <div class="code"><span>answer = llm(<b class="k">policy +</b> question)</span></div>
+    <ul class="pc">
+      <li class="y">Correct answers, right away</li>
+      <li class="n" data-step="1">The window has a size limit</li>
+      <li class="n" data-step="1">You pay for every token, on every message</li>
+    </ul>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <rect class="n" x="0" y="60" width="180" height="96" rx="12" />
+      <text x="18" y="90" class="m b">return-policy.md</text>
+      <rect x="18" y="104" width="130" height="6" rx="3" fill="#e4e4de" />
+      <rect x="18" y="118" width="110" height="6" rx="3" fill="#e4e4de" />
+      <text x="18" y="144" class="s">14 days · $5 fee</text>
+
+      <rect class="n" x="0" y="186" width="180" height="60" rx="12" />
+      <text x="18" y="212" class="s">customer</text>
+      <text x="18" y="232">“Return window?”</text>
+
+      <path class="e" d="M182 108 Q 205 108 210 135" />
+      <path class="e" d="M182 216 Q 205 216 210 190" />
+
+      <rect class="n dash" x="212" y="96" width="130" height="122" rx="12" />
+      <text x="277" y="88" text-anchor="middle" class="cap">PROMPT</text>
+      <rect class="n a" x="226" y="112" width="102" height="44" rx="6" />
+      <text x="277" y="139" text-anchor="middle" class="s fa">policy</text>
+      <rect class="n" x="226" y="162" width="102" height="40" rx="6" />
+      <text x="277" y="187" text-anchor="middle" class="s">question</text>
+
+      <path class="e" d="M344 157 H 378" />
+      <rect class="n k" x="380" y="122" width="100" height="70" rx="14" />
+      <text x="430" y="163" text-anchor="middle" class="b w">LLM</text>
+      <path class="e" d="M482 157 H 508" />
+      <rect class="n g" x="510" y="122" width="150" height="70" rx="12" />
+      <text x="585" y="152" text-anchor="middle" class="b fg">“14 days,</text>
+      <text x="585" y="172" text-anchor="middle" class="b fg">$5 fee.” ✓</text>
+
+      <g data-step="1">
+        <text x="0" y="318" class="cap">BUT KICKBOX HAS…</text>
+        <text x="0" y="356" class="b lg">400</text><text x="0" y="378" class="s">help articles</text>
+        <text x="170" y="356" class="b lg">3,000</text><text x="170" y="378" class="s">products</text>
+        <text x="340" y="356" class="b lg">weekly</text><text x="340" y="378" class="s">rule changes</text>
+        <rect x="0" y="420" width="660" height="40" rx="8" fill="#fdeded" />
+        <rect x="0" y="420" width="400" height="40" rx="8" fill="#e9eeff" />
+        <rect x="0" y="420" width="400" height="40" rx="8" fill="none" stroke="#0f0f12" stroke-width="1.5" />
+        <text x="16" y="445" class="m">context window</text>
+        <text x="644" y="445" text-anchor="end" class="m fr">doesn't fit →</text>
+        <text x="0" y="488" class="s">and filling it up makes answers slower, more expensive — and worse.</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- Stage 1 · beat: retrieval -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 1 · Knowledge</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="2">Too big to paste.<br />So <em>which page</em>?</h2>
+      <h2 class="h2" data-step="2">Don't paste the library.<br /><em>Fetch the page.</em></h2>
+    </div>
+    <div class="code" data-step="2"><span class="new">docs = search(question)</span><span>answer = llm(docs + question)</span></div>
+    <p class="note" data-step="3">“Retrieval-Augmented Generation” sounds fancy. It's just: <b>search first, then prompt.</b></p>
+    <div class="tags" data-step="3"><span>RAG</span><span>Embeddings</span><span>Vector DB</span><span>Hybrid search</span><span>Reranking</span></div>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <g data-step="1">
+        <text x="0" y="40" class="cap">AHEAD OF TIME</text>
+        <rect class="n" x="0" y="58" width="140" height="74" rx="12" />
+        <text x="70" y="90" text-anchor="middle" class="b">Help center</text>
+        <text x="70" y="110" text-anchor="middle" class="s">catalog · shipping</text>
+        <path class="e" d="M142 95 H 176" />
+        <rect class="n" x="178" y="58" width="120" height="74" rx="12" />
+        <text x="238" y="90" text-anchor="middle" class="b">Chunk</text>
+        <text x="238" y="110" text-anchor="middle" class="s">into small pieces</text>
+        <path class="e" d="M300 95 H 334" />
+        <rect class="n" x="336" y="58" width="130" height="74" rx="12" />
+        <text x="401" y="90" text-anchor="middle" class="b">Embed</text>
+        <text x="401" y="110" text-anchor="middle" class="s">meaning → numbers</text>
+        <path class="e" d="M468 95 H 502" />
+        <rect class="n a" x="504" y="58" width="156" height="74" rx="12" />
+        <text x="582" y="90" text-anchor="middle" class="b fa">Vector DB</text>
+        <text x="582" y="110" text-anchor="middle" class="s">search by meaning</text>
+      </g>
+
+      <g data-step="2">
+        <text x="0" y="214" class="cap">EVERY QUESTION</text>
+        <rect class="n" x="0" y="232" width="150" height="80" rx="12" />
+        <text x="16" y="262">“Can I return</text>
+        <text x="16" y="284">worn shoes?”</text>
+        <path class="e" d="M152 272 H 186" />
+        <rect class="n a" x="188" y="232" width="116" height="80" rx="12" />
+        <text x="246" y="266" text-anchor="middle" class="b fa">Search</text>
+        <text x="246" y="286" text-anchor="middle" class="s">top 3 pieces</text>
+        <path class="e a" d="M582 134 V 180 H 246 V 230" />
+        <path class="e" d="M306 272 H 340" />
+        <rect class="n k" x="342" y="232" width="100" height="80" rx="14" />
+        <text x="392" y="277" text-anchor="middle" class="b w">LLM</text>
+        <path class="e" d="M444 272 H 478" />
+        <rect class="n g" x="480" y="232" width="180" height="80" rx="12" />
+        <text x="496" y="262" class="b fg">“Unworn only,</text>
+        <text x="496" y="282" class="b fg">within 14 days.”</text>
+        <text x="496" y="301" class="s">source: Returns §2</text>
+      </g>
+
+      <g data-step="3">
+        <rect class="n" x="0" y="372" width="660" height="118" rx="14" />
+        <text x="24" y="412" class="m">“worn shoes”</text>
+        <text x="150" y="412" class="m fa">≈</text>
+        <text x="176" y="412" class="m">“used items may not be returned”</text>
+        <text x="24" y="444">Matches by <tspan class="b">meaning</tspan>, not exact words.</text>
+        <text x="24" y="470" class="s">Only 3 pieces go into the prompt — not 400 articles.</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- Stage 1 · beat: context engineering -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 1 · Knowledge</div>
+    <h2 class="h2">The context window<br />is a <em>budget</em>.</h2>
+    <p class="note" data-step="5">Prompt engineering is <b>how you ask</b>.<br />Context engineering is <b>what it gets to see</b>.</p>
+    <div class="tags" data-step="5"><span>Context Engineering</span><span>System prompt</span><span>Few-shot examples</span></div>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <text x="0" y="60" class="cap">EVERYTHING THE MODEL SEES FOR ONE REPLY</text>
+      <rect class="n ghost" x="0" y="80" width="660" height="96" rx="12" />
+      <g data-step="1">
+        <rect x="0" y="80" width="110" height="96" rx="12" fill="#0f0f12" />
+        <text x="55" y="124" text-anchor="middle" class="s w b">Role &amp;</text>
+        <text x="55" y="142" text-anchor="middle" class="s w b">rules</text>
+      </g>
+      <g data-step="2">
+        <rect x="114" y="80" width="96" height="96" rx="12" fill="#45454d" />
+        <text x="162" y="124" text-anchor="middle" class="s w">Tone</text>
+        <text x="162" y="142" text-anchor="middle" class="s w">examples</text>
+      </g>
+      <g data-step="3">
+        <rect x="214" y="80" width="210" height="96" rx="12" fill="#e9eeff" stroke="#2f5bff" stroke-width="1.5" />
+        <text x="319" y="124" text-anchor="middle" class="b fa">Retrieved docs</text>
+        <text x="319" y="144" text-anchor="middle" class="s">the 3 pieces</text>
+      </g>
+      <g data-step="4">
+        <rect x="428" y="80" width="120" height="96" rx="12" fill="#ffffff" stroke="#d0d0c9" stroke-width="1.5" />
+        <text x="488" y="124" text-anchor="middle" class="s b">Chat</text>
+        <text x="488" y="142" text-anchor="middle" class="s">so far</text>
+        <text x="604" y="124" text-anchor="middle" class="s">room to</text>
+        <text x="604" y="142" text-anchor="middle" class="s">answer</text>
+      </g>
+
+      <g data-step="5">
+        <rect class="n r" x="0" y="250" width="200" height="130" rx="14" />
+        <text x="20" y="286" class="b fr">Too little</text>
+        <text x="20" y="316">it guesses</text>
+        <text x="20" y="340" class="s">invented policies</text>
+
+        <rect class="n y" x="230" y="250" width="200" height="130" rx="14" />
+        <text x="250" y="286" class="b" style="fill:var(--amber)">Too much</text>
+        <text x="250" y="316">it gets lost</text>
+        <text x="250" y="340" class="s">slower · costlier · confused</text>
+
+        <rect class="n g" x="460" y="250" width="200" height="130" rx="14" />
+        <text x="480" y="286" class="b fg">Just right</text>
+        <text x="480" y="316">it's accurate</text>
+        <text x="480" y="340" class="s">fast · cheap · correct</text>
+
+        <text x="330" y="440" text-anchor="middle" class="lg b">What goes in decides what comes out.</text>
+      </g>
+    </svg>
+  </div>
+</section>

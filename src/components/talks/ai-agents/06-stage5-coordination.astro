@@ -1,0 +1,201 @@
+<!-- Stage 5 · pain card: Black Friday -->
+<section class="slide chapter" data-chapter="Stage 5 · Coordination">
+  <div class="chapter-l">
+    <div class="chapter-num">05</div>
+    <div class="kicker">Stage 5 · <b>Coordination</b></div>
+    <h2 class="h2">Black Friday.</h2>
+    <p class="note" data-step="1">One agent. Too many jobs.<br />Every new feature made all the others a little worse.</p>
+  </div>
+  <div class="chapter-r">
+    <div class="log">
+      <span class="dim">kickbox-support · 09:00 · 4,812 open chats</span>
+      <span class="dim">agent: 1 · tools: 41 · instructions: 9 pages</span>
+      <span class="dim">──────────────────────────────────────────</span>
+      <span class="warn">! #2201 product question → offered a $20 refund</span>
+      <span class="warn">! #2207 refund request → recommended a jacket</span>
+      <span class="err">! wrong tool picked in 1 of 8 calls</span>
+      <span class="err">! “I'm late, it's damaged, and I moved” → lost track</span>
+    </div>
+  </div>
+</section>
+
+<!-- Stage 5 · beat: planning -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 5 · Coordination</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="1">Three problems.<br /><em class="r">One message.</em></h2>
+      <h2 class="h2" data-step="1">Messy requests<br />need a <em>plan</em>.</h2>
+    </div>
+    <div class="code" data-step="1"><span class="new">plan = llm("break down: " + request)</span><span><b class="k">for</b> task <b class="k">in</b> plan:</span><span>  run_agent(task)</span></div>
+    <p class="note" data-step="2">Write the to-do list first, then work through it — and update it when things change.</p>
+    <div class="tags" data-step="5"><span>Planning</span><span>Task decomposition</span><span>Re-planning</span></div>
+  </div>
+  <div class="beat-r">
+    <div class="plan">
+      <div class="msg-card">“Order A is late, order B arrived damaged, and I just moved — new address is 12 Lê Lợi.”</div>
+      <div class="stack">
+        <ol class="todo" data-step="1" data-out="2">
+          <li><i></i>Refund the damaged item (order B)</li>
+          <li><i></i>Check on the late package (order A)</li>
+          <li><i></i>Update the address</li>
+        </ol>
+        <ol class="todo" data-step="2">
+          <li class="moved"><i><span data-step="3">✓</span></i>Update address on order A <small>— it hasn't shipped yet!</small></li>
+          <li><i><span data-step="4">✓</span></i>Refund the damaged item (order B)</li>
+          <li><i><span data-step="5">✓</span></i>Ship order A faster, to the new address</li>
+        </ol>
+      </div>
+      <p class="replan" data-step="2">↻ re-planned after <code>get_order(A)</code>: “not shipped” — address first, or it goes to the old address.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stage 5 · beat: specialists -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 5 · Coordination</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="2">One agent.<br />41 tools. 9 pages<br />of <em class="r">rules</em>.</h2>
+      <h2 class="h2" data-step="2">One front desk.<br />Many <em>specialists</em>.</h2>
+    </div>
+    <p class="note" data-step="3">Each agent sees only its job: a shorter prompt, fewer tools, its own permissions.</p>
+    <ul class="pc" data-step="4">
+      <li class="y">Focused, safer, testable one by one</li>
+      <li class="n">More moving parts, more tokens</li>
+      <li class="i">Start with one agent. Split when it gets confused.</li>
+    </ul>
+    <div class="tags" data-step="4"><span>Orchestrator</span><span>Sub-agents</span><span>Human hand-off</span></div>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <rect class="n" x="0" y="226" width="110" height="64" rx="12" />
+      <text x="55" y="263" text-anchor="middle" class="b">Customer</text>
+      <g data-step="1">
+        <path class="e" d="M112 258 H 146" />
+        <rect class="n a" x="148" y="208" width="140" height="100" rx="14" />
+        <text x="218" y="246" text-anchor="middle" class="b fa">Triage</text>
+        <text x="218" y="268" text-anchor="middle" class="s">reads the request,</text>
+        <text x="218" y="286" text-anchor="middle" class="s">routes the chat</text>
+      </g>
+
+      <g data-step="2">
+        <path class="e" d="M290 240 Q 330 100 368 90" />
+        <path class="e" d="M290 258 H 368" />
+        <path class="e" d="M290 276 Q 330 416 368 426" />
+
+        <rect class="n" x="370" y="40" width="290" height="100" rx="14" />
+        <text x="390" y="72" class="b">Orders agent</text><text x="640" y="72" text-anchor="end" class="m fm">↻</text>
+        <text x="390" y="96" class="m fa">get_order · track_shipment</text>
+
+        <rect class="n" x="370" y="208" width="290" height="100" rx="14" />
+        <text x="390" y="240" class="b">Returns agent</text><text x="640" y="240" text-anchor="end" class="m fm">↻</text>
+        <text x="390" y="264" class="m fa">create_return · refund</text>
+
+        <rect class="n" x="370" y="376" width="290" height="100" rx="14" />
+        <text x="390" y="408" class="b">Product expert</text><text x="640" y="408" text-anchor="end" class="m fm">↻</text>
+        <text x="390" y="432" class="m fa">search_catalog · size_guide</text>
+      </g>
+      <g data-step="3">
+        <text x="390" y="122" class="s">🔒 read-only</text>
+        <text x="390" y="290" class="s">🔒 refunds up to $100</text>
+        <text x="390" y="458" class="s">🔒 no money tools at all</text>
+      </g>
+      <g data-step="4">
+        <path class="e dash" d="M218 310 V 396" />
+        <path class="e dash" d="M368 300 Q 320 380 290 420" />
+        <rect class="n dash" x="148" y="398" width="140" height="80" rx="14" />
+        <text x="218" y="432" text-anchor="middle" class="b">Human team</text>
+        <text x="218" y="454" text-anchor="middle" class="s">rare cases · &gt; $100</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- Stage 5 · beat: the whole system -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">The system so far</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="5">One LLM.<br />What did it <em>need</em>?</h2>
+      <h2 class="h2" data-step="5">We didn't memorize this.<br />We <em>derived</em> it.</h2>
+    </div>
+    <p class="note" data-step="5">Every box is here because a real customer had a real problem without it.</p>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <rect class="n" x="0" y="226" width="96" height="64" rx="12" />
+      <text x="48" y="263" text-anchor="middle" class="b">Customer</text>
+      <path class="e" d="M98 258 H 258" data-step="0" data-out="5" />
+
+      <rect class="n" x="260" y="110" width="250" height="290" rx="18" />
+      <text x="280" y="140" class="cap">SPECIALIST AGENT</text>
+      <rect class="n k" x="300" y="164" width="170" height="64" rx="14" />
+      <text x="385" y="202" text-anchor="middle" class="b w">LLM</text>
+      <text x="385" y="258" text-anchor="middle" class="s">stage 0</text>
+
+      <g data-step="1">
+        <path class="e" d="M512 330 H 534" />
+        <rect class="n" x="536" y="290" width="124" height="90" rx="14" />
+        <text x="552" y="318" class="b">Knowledge</text>
+        <text x="552" y="340" class="s">RAG · help center</text>
+        <text x="552" y="366" class="m fa">stage 1</text>
+      </g>
+      <g data-step="2">
+        <path class="e" d="M512 170 H 534" />
+        <path class="e" d="M534 196 H 512" />
+        <rect class="n" x="536" y="110" width="124" height="130" rx="14" />
+        <text x="552" y="138" class="b">Tools · MCP</text>
+        <text x="552" y="160" class="s">Shopify · shipping</text>
+        <text x="552" y="180" class="s">Stripe · helpdesk</text>
+        <text x="552" y="222" class="m fa">stage 2</text>
+      </g>
+      <g data-step="3">
+        <text x="385" y="300" text-anchor="middle" class="m fa">↻ think → act → observe</text>
+        <text x="385" y="322" text-anchor="middle" class="m fa">stage 3</text>
+      </g>
+      <g data-step="4">
+        <path class="e" d="M385 402 V 424" />
+        <rect class="n" x="260" y="426" width="250" height="84" rx="14" />
+        <text x="280" y="456" class="b">Memory</text>
+        <text x="280" y="478" class="s">notes · profile · history</text>
+        <text x="490" y="456" text-anchor="end" class="m fa">stage 4</text>
+      </g>
+      <g data-step="5">
+        <path class="e" d="M98 258 H 116" />
+        <rect class="n a" x="118" y="214" width="112" height="88" rx="14" />
+        <text x="174" y="252" text-anchor="middle" class="b fa">Triage</text>
+        <text x="174" y="276" text-anchor="middle" class="m fa">stage 5</text>
+        <path class="e" d="M232 258 H 258" />
+        <path class="e dash" d="M174 304 V 424" />
+        <rect class="n dash" x="110" y="426" width="128" height="84" rx="14" />
+        <text x="174" y="472" text-anchor="middle" class="b">Human</text>
+        <text x="300" y="100" class="s">+ more specialists behind triage</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .plan { width: 100%; display: flex; flex-direction: column; gap: 22px; }
+  .msg-card {
+    align-self: flex-end; max-width: 520px; padding: 14px 18px;
+    background: var(--ink); color: #fff; border-radius: 16px 16px 4px 16px; font-size: 17px; line-height: 1.45;
+  }
+  .stack { display: grid; }
+  .stack > .todo { grid-area: 1 / 1; }
+  .todo { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .todo li {
+    display: flex; align-items: baseline; gap: 14px; font-size: 18px;
+    padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  }
+  .todo li i {
+    font-style: normal; font-family: var(--mono); font-size: 13px; color: var(--green);
+    width: 20px; height: 20px; flex-shrink: 0; align-self: center;
+    display: grid; place-items: center; border: 1.5px solid var(--line-2); border-radius: 6px;
+  }
+  .todo li small { font-size: 14px; color: var(--amber); }
+  .todo li.moved { border-color: var(--amber); }
+  .replan { font-size: 15px; color: var(--ink-2); }
+  .replan code { font-family: var(--mono); color: var(--accent); }
+</style>

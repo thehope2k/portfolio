@@ -1,0 +1,129 @@
+<!-- Stage 2 · pain card: where's my order -->
+<section class="slide chapter" data-chapter="Stage 2 · Capability">
+  <div class="chapter-l">
+    <div class="chapter-num">02</div>
+    <div class="kicker">Stage 2 · <b>Capability</b></div>
+    <h2 class="h2">“Where's my order?”</h2>
+    <p class="note" data-step="1">It knows everything now.<br />It still can't <b>do</b> anything.</p>
+  </div>
+  <div class="chapter-r">
+    <div class="chat">
+      <div class="chat-head"><span class="dot"></span>KickBox Support<span class="who">AI assistant</span></div>
+      <div class="chat-body">
+        <div class="msg u">Where's my order #4821? It's been 6 days.</div>
+        <div class="msg a bad">I'm sorry, I don't have access to order information. Please email support@kickbox.shop.</div>
+      </div>
+    </div>
+    <div class="bigstat" data-step="2"><b>62%</b><span>of all tickets are “where is my order?”</span></div>
+  </div>
+</section>
+
+<!-- Stage 2 · beat: tool calling -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 2 · Capability</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="2">It can't touch<br />your <em class="r">systems</em>.</h2>
+      <h2 class="h2" data-step="2">It can't act.<br />But it can <em>ask</em>.</h2>
+    </div>
+    <div class="code" data-step="4"><span class="new">call = llm(question, tools)</span><span class="new">result = run(call)  <i class="cm"># your code</i></span><span>answer = llm(question + result)</span></div>
+    <p class="note" data-step="3">The model never touches your systems. It writes a <b>request</b> — your code decides whether to run it.</p>
+    <div class="tags" data-step="4"><span>Tool calling</span><span>Function calling</span><span>Structured output</span></div>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <rect class="n k" x="20" y="10" width="130" height="50" rx="12" />
+      <text x="85" y="41" text-anchor="middle" class="b w">LLM</text>
+      <rect class="n" x="255" y="10" width="150" height="50" rx="12" />
+      <text x="330" y="41" text-anchor="middle" class="b">Your code</text>
+      <rect class="n" x="510" y="10" width="140" height="50" rx="12" />
+      <text x="580" y="41" text-anchor="middle" class="b">Shopify API</text>
+      <path class="e x thin dash" d="M85 62 V 510" />
+      <path class="e x thin dash" d="M330 62 V 510" />
+      <path class="e x thin dash" d="M580 62 V 510" />
+
+      <g data-step="1">
+        <path class="e" d="M326 104 H 92" />
+        <text x="208" y="94" text-anchor="middle" class="s">question + tool menu</text>
+        <text x="208" y="126" text-anchor="middle" class="m fm">get_order · track_shipment · …</text>
+      </g>
+      <g data-step="2">
+        <path class="e a" d="M89 176 H 323" />
+        <text x="208" y="166" text-anchor="middle" class="s fa">a request — not an action</text>
+        <rect class="n a" x="110" y="188" width="196" height="50" rx="8" />
+        <text x="122" y="208" class="m">get_order(</text>
+        <text x="122" y="226" class="m">  id = 4821 )</text>
+      </g>
+      <g data-step="3">
+        <path class="e" d="M334 290 H 573" />
+        <text x="455" y="280" text-anchor="middle" class="s">runs it (if allowed)</text>
+        <path class="e" d="M576 340 H 337" />
+        <text x="455" y="330" text-anchor="middle" class="m">shipped · ETA Thu</text>
+      </g>
+      <g data-step="4">
+        <path class="e" d="M326 400 H 92" />
+        <text x="208" y="390" text-anchor="middle" class="s">result</text>
+        <rect class="n g" x="20" y="430" width="300" height="60" rx="12" />
+        <text x="38" y="456" class="b fg">“Shipped Monday —</text>
+        <text x="38" y="476" class="b fg">arriving Thursday.” 📦</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- Stage 2 · beat: tools + MCP -->
+<section class="slide beat">
+  <div class="beat-l">
+    <div class="kicker">Stage 2 · Capability</div>
+    <div class="swap">
+      <h2 class="h2" data-step="0" data-out="1">Every app connects<br />every system <em class="r">by hand</em>.</h2>
+      <h2 class="h2" data-step="1">Plug in once.<br /><em>Use everywhere.</em></h2>
+    </div>
+    <p class="note">Anything you can wrap in a function is a tool: APIs, databases, search, email, even RAG itself.</p>
+    <p class="note" data-step="1"><b>MCP</b> is a standard plug for tools — the USB-C of AI apps.</p>
+    <div class="callout r" data-step="2">Now it can touch real systems.<br />…and break them. We'll come back to that.</div>
+    <div class="tags" data-step="2"><span>MCP</span><span>Tools</span><span>Integrations</span></div>
+  </div>
+  <div class="beat-r">
+    <svg class="d" viewBox="0 0 660 520">
+      <text x="0" y="24" class="cap">AI APPS</text>
+      <text x="660" y="24" text-anchor="end" class="cap">SYSTEMS</text>
+      <rect class="n" x="0" y="70" width="170" height="60" rx="12" /><text x="85" y="105" text-anchor="middle" class="b">Support bot</text>
+      <rect class="n" x="0" y="210" width="170" height="60" rx="12" /><text x="85" y="245" text-anchor="middle" class="b">Slack assistant</text>
+      <rect class="n" x="0" y="350" width="170" height="60" rx="12" /><text x="85" y="385" text-anchor="middle" class="b">Internal copilot</text>
+
+      <rect class="n" x="500" y="50" width="160" height="54" rx="12" /><text x="580" y="82" text-anchor="middle" class="b">Shopify</text>
+      <rect class="n" x="500" y="160" width="160" height="54" rx="12" /><text x="580" y="192" text-anchor="middle" class="b">Shipping</text>
+      <rect class="n" x="500" y="270" width="160" height="54" rx="12" /><text x="580" y="302" text-anchor="middle" class="b">Stripe</text>
+      <rect class="n" x="500" y="380" width="160" height="54" rx="12" /><text x="580" y="412" text-anchor="middle" class="b">Helpdesk</text>
+
+      <g data-step="0" data-out="1">
+        <path class="e x r thin" d="M172 100 L 498 77 M172 100 L 498 187 M172 100 L 498 297 M172 100 L 498 407" />
+        <path class="e x r thin" d="M172 240 L 498 77 M172 240 L 498 187 M172 240 L 498 297 M172 240 L 498 407" />
+        <path class="e x r thin" d="M172 380 L 498 77 M172 380 L 498 187 M172 380 L 498 297 M172 380 L 498 407" />
+        <text x="330" y="490" text-anchor="middle" class="b fr">3 apps × 4 systems = 12 custom integrations</text>
+      </g>
+
+      <g data-step="1">
+        <path class="e a" d="M172 100 L 278 220" />
+        <path class="e a" d="M172 240 H 278" />
+        <path class="e a" d="M172 380 L 278 262" />
+        <rect class="n a" x="280" y="180" width="110" height="120" rx="16" />
+        <text x="335" y="236" text-anchor="middle" class="b lg fa">MCP</text>
+        <text x="335" y="258" text-anchor="middle" class="s">one protocol</text>
+        <path class="e a" d="M392 210 L 498 77" />
+        <path class="e a" d="M392 230 L 498 187" />
+        <path class="e a" d="M392 250 L 498 297" />
+        <path class="e a" d="M392 270 L 498 407" />
+        <text x="330" y="490" text-anchor="middle" class="b fa">3 + 4 = 7 · build a tool once, every app can use it</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .bigstat { display: flex; align-items: baseline; gap: 14px; }
+  .bigstat b { font-size: 56px; font-weight: 600; letter-spacing: -0.04em; }
+  .bigstat span { font-size: 17px; color: var(--ink-2); }
+  .code i { font-style: normal; }
+</style>

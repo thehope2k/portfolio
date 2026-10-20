@@ -33,6 +33,14 @@ export const growthEntries: GrowthEntry[] = [
       'A story-driven talk following Hope building a social platform from 2003 to now — each act introduces a real pain point, then shows what technology the world invented to solve it.',
     meta: 'Interactive Presentation · System Design · Architecture',
   },
+  {
+    type: 'external',
+    href: '/talks/ai-agents',
+    title: 'The Engineering of AI Agents',
+    description:
+      'A story-driven talk following Hope building a support AI for an online sneaker store — from one prompt to a production agent system, each piece added only when something real breaks.',
+    meta: 'Interactive Presentation · AI Engineering · Agents',
+  },
   { type: 'post', slug: 'bad-experiences-job-interview' },
   {
     type: 'coming-soon',
